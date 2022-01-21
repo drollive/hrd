@@ -4,7 +4,7 @@ include("includes/header.php");
 ?>
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4">House Owner's</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>
@@ -44,7 +44,6 @@ include("includes/header.php");
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
-    
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div id="layoidenav_nav">
+<div id="layoutSidenav_nav">
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
@@ -65,5 +65,5 @@
             <div class="small">Logged in as:</div>
             Start Bootstrap
         </div>
-    </nav> 
+    </nav>
 </div>
