@@ -10,6 +10,7 @@ include("includes/navbar.php");
         <div class="row">
             <div class="col-md-12">
                 <h3> Elysium </h3>
+                <button class="btn btn-primary">Login</button>
             </div>
         </div>
     </div>
