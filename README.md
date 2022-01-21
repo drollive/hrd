@@ -29,3 +29,6 @@ Legends:
 
 L - landlord
 T - tenant
+
+Must visit sites:
+https://startbootstrap.com/
