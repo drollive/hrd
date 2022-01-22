@@ -2,13 +2,13 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "hrd";
+$database = "hrdrtt";
 
 # For connection
 $conn = mysqli_connect("$host","$username","$password","$database");
 
 if(!$conn){
-    header("Location: errors/dberror.php");
+    header("Location: ../errors/dberror.php");
     die();
 }
 ?>
