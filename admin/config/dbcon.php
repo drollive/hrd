@@ -1,13 +1,15 @@
 <?php
+
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "hrdrtt";
+$database = "hrd";
 
 # For connection
-$conn = mysqli_connect("$host","$username","$password","$database");
+$con = mysqli_connect("$host","$username","$password","$database");
 
-if(!$conn){
+if(!$con)
+{
     header("Location: ../errors/dberror.php");
     die();
 }
