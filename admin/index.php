@@ -1,5 +1,5 @@
 <?php
-include("config/dbcon.php");
+include("config/db_con.php");
 include("includes/header.php");
 ?>
 
