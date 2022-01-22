@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("includes/header.php");
 include("includes/navbar.php");
 ?>
@@ -9,32 +9,39 @@ include("includes/navbar.php");
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5">
+                <?php include("message.php"); ?>
+
                 <div class="card">
                     <div class="card-header">
                         <h4>Register</h4>
                     </div>
 
                     <div class="card-body">
-
-                        <div class="form-group mb-3">
-                            <label>First Name</label>
-                            <input type="text" placeholder="Enter First Name" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label>Last Name</label>
-                            <input type="text" placeholder="Enter Last Name" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label>Email ID</label>
-                            <input type="email" placeholder="Enter Email Address" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label>Password</label>
-                            <input type="password" placeholder="Enter Password" class="form-control">
-                        </div>
-                        <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                        <form action="register_code.php" method="POST">
+                            <div class="form-group mb-3">
+                                <label>First Name</label>
+                                <input required type="text" name="fname" placeholder="Enter First Name" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Last Name</label>
+                                <input required type="text" name="lname"  placeholder="Enter Last Name" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Email ID</label>
+                                <input required type="email" name="email" placeholder="Enter Email Address" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Password</label>
+                                <input required type="password" name="password" placeholder="Enter Password" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Confirm Password</label>
+                                <input required type="password" name="confirm_password"  placeholder="Enter Confirm Password" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <button type="submit" name="register_btn" class="btn btn-primary">Register Now</button>
+                            </div>
+                        </form>
 
                     </div> 
                     
