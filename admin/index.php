@@ -1,10 +1,11 @@
 <?php
 include("config/db_con.php");
+include("authentication.php");
 include("includes/header.php");
 ?>
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">House Owner's</h1>
+    <h1 class="mt-4">House Owner</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("config/db_con.php");
 # To check if user is logged in or not
 
 if(!isset($_SESSION["auth"]))
@@ -10,7 +11,12 @@ if(!isset($_SESSION["auth"]))
 }
 else
 {
-
+    if($_SESSION['auth_role'] != 1)
+    {
+        $_SESSION["message"] = "You are not authorized as Admin";
+        header("Location: ../login.php");
+        exit(0);
+    }
 }
 
 ?>

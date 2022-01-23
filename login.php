@@ -1,5 +1,17 @@
 <?php
 session_start();
+
+# This is for an user trying to access login.php
+# but still logged in to an account
+if(isset($_SESSION["auth"]))
+{
+    if(!isset($_SESSION["message"]))
+    {
+        $_SESSION["message"] = "You are already logged in!";
+    }
+    header("Location: index.php");
+    exit(0);
+}
 include("includes/header.php");
 include("includes/navbar.php");
 ?>

@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+# This is for an user trying to access login.php
+# but still trying to access the file 
+if(isset($_SESSION["auth"]))
+{
+    $_SESSION["message"] = "You are already logged in!";
+    header("Location: index.php");
+    exit(0);
+}
 include("includes/header.php");
 include("includes/navbar.php");
 ?>
