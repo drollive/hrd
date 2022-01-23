@@ -2,7 +2,8 @@
 session_start();
 include("admin/config/db_con.php");
 
-if(isset($_POST['login_btn']))
+#if the login is clicked
+if(isset($_POST['login_btn'])) 
 {
 
     $email = mysqli_real_escape_string($con, $_POST["email"]);
@@ -11,6 +12,7 @@ if(isset($_POST['login_btn']))
     $login_query = "SELECT * FROM users WHERE email='$email' AND password='$password' LIMIT 1";
     $login_query_run = mysqli_query($con, $login_query);
 
+    #normal user
     if(mysqli_num_rows($login_query_run) > 0)
     {
         foreach($login_query_run as $data)
@@ -29,13 +31,14 @@ if(isset($_POST['login_btn']))
             "user_email"=>$user_email
         ];
 
-        #redirect to normal user
+        #redirect to dashboard
         if($_SESSION['auth_role'] == 1) # if the user is an admin
         {
             $_SESSION["message"] = "Welcome to Dashboard";
             header("Location: admin/index.php");
             exit(0);
         }
+        #redirect to normal user
         elseif($_SESSION['auth_role'] == 0) # if the user is normal
         {
             $_SESSION["message"] = "You are logged in!";

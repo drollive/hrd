@@ -15,15 +15,21 @@
         </li>
 
         <?php if(isset($_SESSION['auth_user'])) : ?>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            <?= $_SESSION['auth_user']['user_name']; ?>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">My Profile</a></li>
-            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-          </ul>
-        </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <?= $_SESSION['auth_user']['user_name']; ?>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li>
+                  <form action="all_code.php" method="POST">
+                    <button type="submit" name="logout_btn" class="dropdown-item">Logout</button>
+
+                  </form>
+                </li>
+              </ul>
+            </li>
+
         <?php else : ?>
         <li class="nav-item">
           <a class="nav-link" href="login.php">Login</a>

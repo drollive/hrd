@@ -25,10 +25,6 @@ Sample Queries
 •	Notification of the payment
 
 
-Legends: 
-
-L - landlord
-T - tenant
 
 Must visit sites:
 https://startbootstrap.com/
