@@ -41,6 +41,12 @@ include("includes/navbar.php");
                             <div class="form-group mb-3">
                                 <button type="submit" name="login_btn" class="btn btn-primary">Login Now</button>
                             </div>
+                            <div class="form-group mb-3">
+                                <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                                <label class="form-check-label" for="autoSizingCheck">
+                                    Remember me
+                                </label>
+                            </div>
                         </form>
                     </div> 
                     

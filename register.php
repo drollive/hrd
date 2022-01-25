@@ -40,6 +40,10 @@ include("includes/navbar.php");
                                 <input required type="email" name="email" placeholder="Enter Email Address" class="form-control">
                             </div>
                             <div class="form-group mb-3">
+                                <label>Phone Number</label>
+                                <input required type="tel" name="cp_number" placeholder="Enter Phone Number" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
                                 <label>Password</label>
                                 <input required type="password" name="password" placeholder="Enter Password" class="form-control">
                             </div>

@@ -29,7 +29,7 @@ if(isset($_POST['register_btn']))
         }
         else
         {
-            $user_query = "INSERT INTO users (fname,lname,email,password) VALUES ('$fname','$lname','$email','$password')";
+            $user_query = "INSERT INTO users (fname,lname,email,phone,password) VALUES ('$fname','$lname','$email','phone','$password')";
             $user_query_run = mysqli_query($con, $user_query);
             
             if($user_query_run)
