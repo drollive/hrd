@@ -13,7 +13,9 @@ include("includes/header.php");
             <?php include("message.php"); ?>
             <div class="card">
                 <div class="card-header">
-                    <h4>Registered Users</h4>
+                    <h4>Registered Users
+                        <a href="add-admin.php" class= "btn btn-primary float-end" >Add Admin</a>
+                    </h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -63,7 +65,11 @@ include("includes/header.php");
                                             <!--ex. id=1, then only the user has id=1-->
                                             <!--will appear to be modify-->
                                             <td><a href="edit-register.php?id=<?=$row['id'];?>" class="btn btn-success">Edit</a></td>
-                                            <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                            <td>
+                                                <form action="code.php" method="POST">
+                                                    <button type="submit" name="delete_user" value="<?= $row['id'];?>" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         <?php
                                     }
