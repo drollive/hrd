@@ -2,10 +2,6 @@
 include("authentication.php");
 include("includes/header.php");
 
-if(!isset($_SESSION['objLogin'])){
-	header("Location: " . WEB_URL . "logout.php");
-	die();
-}
 ?>
 
 <div class="container-fluid px-4">

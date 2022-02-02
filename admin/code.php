@@ -2,6 +2,7 @@
 
 include("authentication.php");
 
+# To delete user
 if(isset($_POST['delete_user']))
 {
     $user_id = $_POST['delete_user'];

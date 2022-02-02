@@ -1,9 +1,9 @@
 <?php
-session_start();
-include("config/db_con.php");
-# To check if user is logged in or not
+session_start(); # To store information to be used across multiple pages
+                 # Unlike a cookie, the information is not stored on the users computer.
+include("config/db_con.php"); # To check data in database
 
-if(!isset($_SESSION["auth"]))
+if(!isset($_SESSION['auth'])) # To check if user is logged in or not
 {
     $_SESSION["message"] = "Login to Access Dashboard";
     header("Location: ../login.php");

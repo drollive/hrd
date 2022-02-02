@@ -1,15 +1,17 @@
 <?php
 session_start();
-include("admin/config/db_con.php");
+include("admin/config/db_con.php"); # Path where database locates
 
-#if the login is clicked
+#if login button is clicked
 if(isset($_POST['login_btn'])) 
 {
-
-    $email = mysqli_real_escape_string($con, $_POST["email"]);
+    # mysqli_real_escape_string()
+    # used to escape all special characters for use in an SQL query
+    # Escape special characters, if any
+    $email = mysqli_real_escape_string($con, $_POST["email"]); #
     $password = mysqli_real_escape_string($con, $_POST["password"]);
 
-    $login_query = "SELECT * FROM users WHERE email='$email' AND password='$password' LIMIT 1";
+    $login_query = "SELECT * FROM users WHERE email='$email' AND password='$password' LIMIT 1"; # limits 1 to return
     $login_query_run = mysqli_query($con, $login_query);
 
     #normal user
@@ -23,7 +25,7 @@ if(isset($_POST['login_btn']))
             $role_as = $data['role_as'];
         }
         $_SESSION['auth'] = true;
-        #determine what role: 1-admin, 0-user
+        #determine what role: 1-house owner, 0-tenant
         $_SESSION['auth_role'] = "$role_as";
         $_SESSION['auth_user'] = [
             "user_id"=>$user_id,
@@ -31,18 +33,18 @@ if(isset($_POST['login_btn']))
             "user_email"=>$user_email
         ];
 
-        #redirect to dashboard
-        if($_SESSION['auth_role'] == 1) # if the user is an admin
+        #redirect to house owner's  dashboard
+        if($_SESSION['auth_role'] == 1) # if the user is the house owner
         {
             $_SESSION["message"] = "Welcome to Dashboard";
             header("Location: admin/index.php");
             exit(0);
         }
-        #redirect to normal user
-        elseif($_SESSION['auth_role'] == 0) # if the user is normal
+        #redirect to tenant's dashboard
+        elseif($_SESSION['auth_role'] == 0) # if the user is tenant
         {
             $_SESSION["message"] = "You are logged in!";
-            header("Location: index.php");
+            header("Location: tenant/tenant.php");
             exit(0);
 
         }

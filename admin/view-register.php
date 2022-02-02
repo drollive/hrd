@@ -26,6 +26,7 @@ include("includes/header.php");
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
+                                <th>Password</th>
                                 <th>Roles</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -47,6 +48,7 @@ include("includes/header.php");
                                             <td><?= $row['lname']; ?></td>
                                             <td><?= $row['email']; ?></td>
                                             <td><?= $row['phone']; ?></td>
+                                            <td><?= $row['password']; ?></td>
                                             <td>
                                                 <?php
                                                 if($row['role_as'] == 1) # Admin

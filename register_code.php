@@ -1,9 +1,8 @@
 <?php
 session_start();
-#ob_start();
 include('admin/config/db_con.php');
 
-#check if the button is clicked or not
+#check if the button is clicked
 if(isset($_POST['register_btn']))
 {
     $fname = mysqli_real_escape_string($con, $_POST['fname']);
@@ -49,7 +48,7 @@ if(isset($_POST['register_btn']))
     #This for not same password input
     else
     {
-        $_SESSION["message"]= "password and Confirm password doesn't match!";
+        $_SESSION["message"]= "Password and Confirm password doesn't match!";
         header("Location: register.php");
         exit(0);
     }
@@ -59,10 +58,8 @@ if(isset($_POST['register_btn']))
 #if someone will access outside:
 else
 {
-    #include("register.php");
     header(Location: "register.php");
     exit(0);
 }
-#ob_end_flush();
 
 ?>

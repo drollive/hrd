@@ -1,9 +1,10 @@
 <?php
-session_start();
+session_start(); # To store information to be used across multiple pages
+                 # Unlike a cookie, the information is not stored on the users computer.
 
 # This is for an user trying to access login.php
-# but still logged in to an account
-if(isset($_SESSION["auth"]))
+# but still but already logged in
+if(isset($_SESSION['auth']))
 {
     if(!isset($_SESSION["message"]))
     {
