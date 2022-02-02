@@ -2,6 +2,33 @@
 
 include("authentication.php");
 
+if(isset($_POST['add_house']))
+{
+	$house_add = $_POST['house_address'];
+	$house_desc = $_POST['house_desc'];
+	
+	$house_status = $_POST['house_status'] == true ? '1':'0';
+	$house_avail = $_POST['house_status'] == true ? '1':'0';
+	
+	$query = "INSERT INTO house (house_address, house_desc,house_status,house_avail) 
+				VALUES ('$house_add ', '$house_desc', '$house_status', '$house_avail')";
+				
+	$query_run = mysqli_query($con,$query);
+
+   if($query_run)
+    {
+        $_SESSION['message'] = "House added Successfully";
+        header("Location: house_add.php");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Something Went Wrong!";
+        header("Location: house_add.php");
+        exit(0);
+    }
+}
+
 # To delete user
 if(isset($_POST['delete_user']))
 {
@@ -12,7 +39,7 @@ if(isset($_POST['delete_user']))
 
     if($query_run)
     {
-        $_SESSION['message'] = "User Deleted Successfully";
+        $_SESSION['message'] = "User Deleted Successfully!";
         header("Location: view-register.php");
         exit(0);
     }

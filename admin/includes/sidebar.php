@@ -13,13 +13,19 @@
                     Registered Users
                 </a>
 				
-				<a class="nav-link" href="house_view.php">
+				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseHouse" aria-expanded="false" aria-controls="collapseHouse">
                     <div class="sb-nav-link-icon"><i class="fa fa-home"></i></div>
-                    Houses
+                    House
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
+                <div class="collapse" id="collapseHouse" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="house_add.php">Add House</a>
+                        <a class="nav-link" href="house_view.php">View House</a>
+                    </nav>
+                </div>
 
-
-                <a class="nav-link collapsed" href="rent/add_rent.php" data-bs-toggle="collapse" data-bs-target="#collapseTenants" aria-expanded="false" aria-controls="collapseTenants">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTenants" aria-expanded="false" aria-controls="collapseTenants">
                     <div class="sb-nav-link-icon"><i class="fa fa-user-plus"></i></div>
                     Tenants
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
