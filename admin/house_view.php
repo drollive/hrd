@@ -27,6 +27,7 @@ include("includes/header.php");
                             <tr>
                                 <th>ID</th>
                                 <th>Address</th>
+                                <th>Price</th>
                                 <th>Status</th>
                                 <th>Availability</th>
                                 <th>Edit</th>
@@ -50,9 +51,10 @@ include("includes/header.php");
                                         <tr>
                                             <td><?= $home['house_id'] ?></td>
                                             <td><?= $home['house_address'] ?></td>
+                                            <td><?= $home['house_price'] ?></td>
                                             <td>
                                                 <?php 
-                                                    if($home['house_status'] == '1') { echo 'Hidden'; } else { echo 'Visible'; }
+                                                    if($home['house_status'] == '1') { echo 'Visible'; } else { echo 'Hidden'; }
                                                 
                                                 ?>
                                             </td>
@@ -62,7 +64,8 @@ include("includes/header.php");
                                                 ?>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-info">Edit</a>
+                                                <! --- pass the parameter id to edit a row --->
+                                                <a href="house_edit.php?id=<?= $home['house_id'] ?>" class="btn btn-info">Edit</a>
                                             </td>
                                             <td>
                                                 <a href="" class="btn btn-danger">Delete</a>
