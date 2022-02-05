@@ -4,17 +4,16 @@ include("authentication.php");
 
 if(isset($_POST['update_house']))
 {
-
+    
     $house_id = $_POST['house_id'];
     $house_add = $_POST['house_address'];
-	$house_desc = $_POST['house_desc'];
-    $house_price = $_POST['house_price'];
-	
+    $house_price = (is_numeric($_POST['house_price']) ? (int)$_POST['house_price'] : 0);
+    $house_desc = $_POST['house_desc'];
 	$house_status = $_POST['house_status'] == true ? '1':'0';
 	$house_avail = $_POST['house_avail'] == true ? '1':'0';
 	
-	$query = "UPDATE house SET house_address='$house_add', house_price='$house_price, house_desc='$house_desc', house_status='$house_status', 
-                house_avail='$house_avail' WHERE id='$house_id' ";
+	$query = "UPDATE house SET house_address='$house_add', house_price='$house_price', house_desc='$house_desc', house_status='$house_status', 
+                house_avail='$house_avail' WHERE house_id='$house_id' ";
     $query_run = mysqli_query($con, $query);
 
     
@@ -38,9 +37,8 @@ if(isset($_POST['update_house']))
 if(isset($_POST['add_house']))
 {
 	$house_add = $_POST['house_address'];
+    $house_price = (is_numeric($_POST['house_price']) ? (int)$_POST['house_price'] : 0);
 	$house_desc = $_POST['house_desc'];
-    $house_price = $_POST['house_price'];
-	
 	$house_status = $_POST['house_status'] == true ? '1':'0';
 	$house_avail = $_POST['house_avail'] == true ? '1':'0';
 	

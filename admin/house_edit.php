@@ -44,7 +44,7 @@ include("includes/header.php");
 
                                 <div class="col-md-12 mb-3">
                                     <label for="">Monthly Rent</label>
-                                    <input type="text" name="house_price" value="<?=$row['house_price'] ?>"  required class="form-control">
+                                    <input type="text" name="house_price" value="<?=$row['house_price'] ?>" required class="form-control">
                                 </div>
                                 
                                 <div class="col-md-12 mb-3">
