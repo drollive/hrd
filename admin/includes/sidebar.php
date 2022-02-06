@@ -47,6 +47,18 @@
                         <a class="nav-link" href="bill/bill_list.php">List of Bills</a>
                     </nav>
                 </div>
+                
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePost" aria-expanded="false" aria-controls="collapsePost">
+                    <div class="sb-nav-link-icon"><i class="fa fa-server"></i></div>
+                    Posts
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapsePost" aria-labelledby="Post" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="post_add.php">Add Post</a>
+                        <a class="nav-link" href="post_view.php">View Post</a>
+                    </nav>
+                </div>
 
                 <a class="nav-link" href="tables.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

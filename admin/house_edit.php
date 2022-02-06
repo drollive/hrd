@@ -49,7 +49,7 @@ include("includes/header.php");
                                 
                                 <div class="col-md-12 mb-3">
                                     <label for="">House Description</label>
-                                    <textarea name="house_desc" required class="form-control" rows="4"><?= $row['house_desc'] ?></textarea>
+                                    <textarea name="house_desc" id="summernote"  class="form-control" rows="4"><?= $row['house_desc'] ?></textarea>
                                 </div>
                                 
                                 

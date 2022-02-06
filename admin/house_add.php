@@ -34,7 +34,7 @@ include("includes/header.php");
                         
                         <div class="col-md-12 mb-3">
                             <label for="">House Description</label>
-                            <textarea name="house_desc" class="form-control" required="required" rows="4"></textarea>
+                            <textarea name="house_desc"  id="summernote" class="form-control" required="required" rows="4"></textarea>
                         </div>
                         
                         

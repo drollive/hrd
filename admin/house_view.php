@@ -39,7 +39,7 @@ include("includes/header.php");
                         <tbody>
                             <?php
                                 # To fetch data from table house
-                                $house = "SELECT * FROM house";
+                                $house = "SELECT * FROM house WHERE house_status != '2' ";
                                 $house_run = mysqli_query($con,$house);
 
                                 #To check each data or table has data
@@ -53,10 +53,7 @@ include("includes/header.php");
                                             <td><?= $home['house_address'] ?></td>
                                             <td><?= $home['house_price'] ?></td>
                                             <td>
-                                                <?php 
-                                                    if($home['house_status'] == '1') { echo 'Visible'; } else { echo 'Hidden'; }
-                                                
-                                                ?>
+                                                <?= $home['house_status'] == '1' ? 'Visible':'Hidden' ?>
                                             </td>
                                             <td>
                                                 <?php 
@@ -64,11 +61,13 @@ include("includes/header.php");
                                                 ?>
                                             </td>
                                             <td>
-                                                <! --- pass the parameter id to edit a row --->
+                                                <! --- Pass the parameter id to edit a row --->
                                                 <a href="house_edit.php?id=<?= $home['house_id'] ?>" class="btn btn-info">Edit</a>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-danger">Delete</a>
+                                                <form action="code.php" method="POST">
+                                                    <button type="submit" name="house_delete" value="<?= $home['house_id'] ?> "href="" class="btn btn-danger">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         <?php
