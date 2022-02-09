@@ -27,7 +27,8 @@ if(isset($_POST['login_btn']))
         $_SESSION['auth'] = true;
         #determine what role: 1-house owner, 0-tenant
         $_SESSION['auth_role'] = "$role_as";
-        $_SESSION['auth_user'] = [
+        $_SESSION['auth_user'] = 
+        [
             "user_id"=>$user_id,
             "user_name"=>$user_name,
             "user_email"=>$user_email
@@ -44,7 +45,7 @@ if(isset($_POST['login_btn']))
         elseif($_SESSION['auth_role'] == 0) # if the user is tenant
         {
             $_SESSION["message"] = "You are logged in!";
-            header("Location: tenant/tenant.php");
+            header("Location: login.php");
             exit(0);
 
         }

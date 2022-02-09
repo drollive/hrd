@@ -20,6 +20,7 @@ include("includes/header.php");
                     <table class="table table-bordered table-stripe">
                         <thead>
                             <th>ID</th>
+                            <th>Post Title</th>
                             <th>House Address</th>
                             <th>Image</th>
                             <th>Status</th>
@@ -27,7 +28,8 @@ include("includes/header.php");
                             <th>Delete</th>
                         </thead>
                         <?php
-                            $post = "SELECT * FROM post WHERE house_status !='2' ";
+                            # $post = "SELECT * FROM post WHERE house_status !='2' ";
+                            $post = "SELECT p.*, h.house_address AS address FROM post p,house h WHERE h.house_id = p.house_id AND p.house_status !='2' ";
                             $post_run = mysqli_query($con, $post);
 
                             if(mysqli_num_rows($post_run) > 0)
@@ -38,8 +40,9 @@ include("includes/header.php");
                                     <tbody>
                                         <tr>
                                             <td><?=$post['post_id']?></td>
-                                            <td><?=$post['house_address']?></td>
-                                            <td><img src="../uploads/posts/<?=$post['image']?>" width="60px" height="60px"></td>
+                                            <td><?=$post['post_name']?></td>
+                                            <td><?=$post['address']?></td>
+                                            <td><img src="../uploads/posts/<?= $post['image'] ?>" alt="Image" width="60px" height="60px"/></td>
                                             <td> 
                                                 <?=$post['house_status'] == '1' ? 'Visible':'Hidden'?>
                                             </td>
@@ -47,7 +50,9 @@ include("includes/header.php");
                                                 <a href="post_edit.php?id=<?=$post['post_id']?>" class="btn btn-success">Edit</a>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-danger">Delete</a>
+                                                <form action="code.php" method="POST">
+                                                    <button type="submit" class="btn btn-danger" value="<?=$post['post_id']?>" name="post_delete">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </tbody>

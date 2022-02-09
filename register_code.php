@@ -45,7 +45,7 @@ if(isset($_POST['register_btn']))
             }
         }
     }
-    #This for not same password input
+    #This is for not same password input
     else
     {
         $_SESSION["message"]= "Password and Confirm password doesn't match!";
