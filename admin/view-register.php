@@ -7,7 +7,6 @@ include("includes/header.php");
     <h4 class="mt-4">Users</h4>
     <div class="row">
         <div class="col-md-12">
-            <?php include("message.php"); ?>
             <div class="card">
                 <div class="card-header">
                     <h4>Registered Users
