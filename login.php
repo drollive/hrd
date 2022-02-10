@@ -46,7 +46,7 @@ include("includes/navbar.php");
                                 </label>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                <a class="small" href="password.php">Forgot Password?</a>
+                                <a class="small" href="forgotpass.php">Forgot Password?</a>
                                 <button type="submit" name="login_btn" class="btn btn-primary">Login Now</button>
                             </div>
                         </form>
