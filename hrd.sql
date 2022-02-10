@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2022 at 10:24 AM
+-- Generation Time: Feb 10, 2022 at 02:50 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `hrd`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bills`
+--
+
+CREATE TABLE `bills` (
+  `bill_id` int(20) NOT NULL,
+  `tenant_id` int(20) NOT NULL,
+  `house_rent_pay` float NOT NULL,
+  `electric_bill` float NOT NULL,
+  `water_bill` float NOT NULL,
+  `other_bill` float NOT NULL,
+  `bill_desc` text DEFAULT NULL,
+  `bill_total` float NOT NULL,
+  `bill_status` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -54,6 +73,21 @@ INSERT INTO `house` (`house_id`, `house_address`, `house_price`, `house_desc`, `
 (10, '01 Elysium St. Paris France ', 100000, '<p><b>House of Zeus</b></p>', 1, 1, '2022-02-07 15:12:36'),
 (11, '02 Elysium St. Paris France ', 10000, '<p>House of Medusa</p>', 1, 1, '2022-02-07 15:13:06'),
 (12, '03 Elysium St. Paris France ', 1000, '<p>House of Athena</p>', 1, 1, '2022-02-07 15:13:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `payment_id` int(11) NOT NULL,
+  `bill_id` int(20) NOT NULL,
+  `tenant_id` int(20) NOT NULL,
+  `payment_desc` text NOT NULL,
+  `payment_status` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -128,17 +162,30 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `phone`, `password`, `role_as`, `status`, `created_at`) VALUES
 (1, 'Chuychuy', 'Mejorada', 'mejoradajudell15@gmail.com', '09774839769', 'Hpotter0615', 1, 1, '2022-01-22 11:59:43'),
 (3, 'Rawr', 'Hotdog', 'mejoradajudell@yahoo.com', '09111111111', 'Hotdog', 0, 1, '2022-01-22 16:17:00'),
-(8, 'Jumbo', 'Hotdog', 'judel@yahoo.com', '0982873217321', 'Hotdog', 0, 0, '2022-02-08 12:39:10');
+(8, 'Jumbo', 'Hotdog', 'judel@yahoo.com', '0982873217321', 'Hotdog', 0, 0, '2022-02-08 12:39:10'),
+(9, 'Loraine', 'Naval', 'meme@gmail.com', 'phone', 'meme', 0, 0, '2022-02-10 13:33:42');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `bills`
+--
+ALTER TABLE `bills`
+  ADD PRIMARY KEY (`bill_id`);
+
+--
 -- Indexes for table `house`
 --
 ALTER TABLE `house`
   ADD PRIMARY KEY (`house_id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`payment_id`);
 
 --
 -- Indexes for table `post`
@@ -164,10 +211,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `bills`
+--
+ALTER TABLE `bills`
+  MODIFY `bill_id` int(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `house`
 --
 ALTER TABLE `house`
   MODIFY `house_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `post`
@@ -185,7 +244,7 @@ ALTER TABLE `tenant`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
