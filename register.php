@@ -27,35 +27,58 @@ include("includes/navbar.php");
 
                     <div class="card-body">
                         <form action="register_code.php" method="POST">
+                            
                             <div class="form-group mb-3">
-                                <label>First Name</label>
-                                <input required type="text" name="fname" placeholder="Enter First Name" class="form-control">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control"  name="fname" id="inputFirstName" required type="text" placeholder="Enter your first name" />
+                                    <label for="inputFirstName">First name</label>
+                                </div>
                             </div>
+
                             <div class="form-group mb-3">
-                                <label>Last Name</label>
-                                <input required type="text" name="lname"  placeholder="Enter Last Name" class="form-control">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control" name="lname" id="inputLastName" required type="text" placeholder="Enter your last name" />
+                                    <label for="inputLastName">Last name</label>
+                                </div>
                             </div>
+
+                            
                             <div class="form-group mb-3">
-                                <label>Email ID</label>
-                                <input required type="email" name="email" placeholder="Enter Email Address" class="form-control">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control" name="email" id="inputEmail" required type="email" placeholder="name@example.com" />
+                                    <label for="inputEmail">Email address</label>
+                                </div>
                             </div>
+
                             <div class="form-group mb-3">
-                                <label>Phone Number</label>
-                                <input required type="tel" name="cp_number" placeholder="Enter Phone Number" class="form-control">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control" name="cp_number" required type="tel" placeholder="Enter your Phone Number" />
+                                    <label for="inputEmail">Phone Number</label>
+                                </div>
                             </div>
+
                             <div class="form-group mb-3">
-                                <label>Password</label>
-                                <input required type="password" name="password" placeholder="Enter Password" class="form-control">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control" name="password" id="inputPassword" required type="password" placeholder="Create a password" />
+                                    <label for="inputPassword">Password</label>
+                                </div>
                             </div>
+
                             <div class="form-group mb-3">
-                                <label>Confirm Password</label>
-                                <input required type="password" name="confirm_password"  placeholder="Enter Confirm Password" class="form-control">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control" name="confirm_password" id="inputPasswordConfirm" required type="password" placeholder="Confirm password" />
+                                    <label for="inputPasswordConfirm">Confirm Password</label>
+                                </div>
                             </div>
+                            
                             <div class="form-group mb-3">
-                                <button type="submit" name="register_btn" class="btn btn-primary">Register Now</button>
+                                <button type="submit" name="register_btn" class="btn btn-primary btn-block">Register Now</button>
                             </div>
                         </form>
-                    </div>            
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <div class="small"><a href="login.php">Have an account? Go to login</a></div>
+                    </div>          
                 </div>
             </div>
         </div>
