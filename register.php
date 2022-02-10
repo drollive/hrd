@@ -55,9 +55,7 @@ include("includes/navbar.php");
                                 <button type="submit" name="register_btn" class="btn btn-primary">Register Now</button>
                             </div>
                         </form>
-
-                    </div> 
-                    
+                    </div>            
                 </div>
             </div>
         </div>

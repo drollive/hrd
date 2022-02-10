@@ -39,7 +39,7 @@
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBills" aria-expanded="false" aria-controls="collapseBills">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Bills
-                    <div class="sb-sidenav-collapse-arrow"><i class="fa fa-folder-openn"></i></div>
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapseBills" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">

@@ -5,9 +5,6 @@ include("includes/header.php");
 
 <div class="container-fluid px-4">
     <h4 class="mt-4">Users</h4>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
     <div class="row">
         <div class="col-md-12">
             <?php include("message.php"); ?>

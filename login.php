@@ -40,15 +40,22 @@ include("includes/navbar.php");
                                 <input required type="password" name="password" placeholder="Enter Password" class="form-control">
                             </div>
                             <div class="form-group mb-3">
-                                <button type="submit" name="login_btn" class="btn btn-primary">Login Now</button>
-                            </div>
-                            <div class="form-group mb-3">
                                 <input class="form-check-input" type="checkbox" id="autoSizingCheck">
                                 <label class="form-check-label" for="autoSizingCheck">
                                     Remember me
                                 </label>
                             </div>
+                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <a class="small" href="password.php">Forgot Password?</a>
+                                <button type="submit" name="login_btn" class="btn btn-primary">Login Now</button>
+                            </div>
                         </form>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <div class="small"><a href="register.php">Need an account? Sign up!</a></div>
+                    </div>
+                                    
+                
                     </div> 
                     
                 </div>
