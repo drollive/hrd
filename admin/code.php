@@ -294,3 +294,20 @@ if(isset($_POST['update_user']))
 }
 
 ?>
+
+<script>
+    function delete()
+    {
+        alert("Are you sure you want to delete the data?")
+    }
+
+    function update()
+    {
+        alert("Are you sure you want to update the data?")
+    }
+
+    function add()
+    {
+        alert("Are you sure you want to add the data?")
+    }
+</script>

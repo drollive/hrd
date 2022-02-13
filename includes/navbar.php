@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="index.php">ELYSIUM</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@
 
         <?php if(isset($_SESSION['auth_user'])) : ?>
             <li class="nav-item">
-               <a class="nav-link" href="tenant/index.php">Dashboard</a>
+               <a class="nav-link" href="t_dashboard.php">Dashboard</a>
             </li>
             <li class="nav-item dropdown">  
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
