@@ -20,28 +20,28 @@ include("includes/header.php");
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="">First Name</label>
-                            <input type="text" name="fname" class="form-control">
+                            <input type="text" name="fname" required class="form-control">
                         </div>
                         
                         <div class="col-md-6 mb-3">
                             <label for="">Last Name</label>
-                            <input type="text" name="lname" class="form-control">
+                            <input type="text" name="lname" required class="form-control">
                         </div>
                         
                         <div class="col-md-6 mb-3">
                             <label for="">Email Address</label>
-                            <input type="text" name="email" class="form-control">
+                            <input type="text" name="email" required class="form-control">
                         </div>
                         
                         
                         <div class="col-md-6 mb-3">
                             <label for="">Phone Number</label>
-                            <input type="text" name="phone"  class="form-control">
+                            <input type="text" name="phone"  required class="form-control">
                         </div>
                         
                         <div class="col-md-6 mb-3">
                             <label for="">Password</label>
-                            <input type="text" name="password"  class="form-control">
+                            <input type="text" name="password"  required class="form-control">
                         </div>
                         
                         <div class="col-md-6 mb-3">
