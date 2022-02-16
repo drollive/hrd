@@ -10,12 +10,10 @@ include("includes/header.php");
         <div class="col-md-12">
 
 			<?php include('message.php'); ?>
-            
             <div class="card">
                 <div class="card-header">
                     <h4>View House/s
                         <a href="house_add.php" class="btn btn-primary float-end">Add House</a>
-
                     </h4>
                 </div>
                 <div class="card-body">

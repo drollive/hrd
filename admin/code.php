@@ -2,6 +2,30 @@
 
 include("authentication.php");
 
+if(isset($_POST['add_tenant']))
+{
+	$users_id = $_POST['id'];
+    $house_id = $_POST['house_id'];
+	$tenant_status = $_POST['tenant_status'] == true ? '1':'0';
+	
+	$query = "INSERT INTO tenant (users_id, house_id, tenant_status)
+				VALUES ('$users_id', '$house_id', '$tenant_status')";
+				
+	$query_run = mysqli_query($con,$query);
+
+   if($query_run)
+    {
+        $_SESSION['message'] = "Tenant added Successfully";
+        header("Location: tenant_view.php");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Something Went Wrong!";
+        header("Location: tenant_add.php");
+        exit(0);
+    }
+}
 if(isset($_POST['post_delete']))
 {
     $post_id = $_POST['post_delete'];
@@ -295,19 +319,3 @@ if(isset($_POST['update_user']))
 
 ?>
 
-<script>
-    function delete()
-    {
-        alert("Are you sure you want to delete the data?")
-    }
-
-    function update()
-    {
-        alert("Are you sure you want to update the data?")
-    }
-
-    function add()
-    {
-        alert("Are you sure you want to add the data?")
-    }
-</script>

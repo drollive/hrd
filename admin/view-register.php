@@ -65,11 +65,13 @@ include("includes/header.php");
                                             </td>
                                             <td>
                                                 <! --- Pass the parameter id to edit a row --->
-                                                <a href="edit-register.php?id=<?= $user['id'] ?>" class="btn btn-info">Edit</a>
+                                                <a href="edit-register.php?id=<?= $user['id'] ?>" onclick="return confirm('Are you sure you want to Edit?')" class="btn btn-info">Edit</a>
                                             </td>
                                             <td>
-                                                <form action="code.php" method="POST">
-                                                    <button type="submit" name="delete_user" value="<?= $user['id'] ?> " href="" class="btn btn-danger">Delete</button>
+                                                <form action="code.php" method="POST" onsubmit="return submitForm(this)">    
+                                                    <button type="submit" name="delete_user" value="<?= $user['id'] ?> " href="" class="btn btn-danger">
+                                                    Delete
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
