@@ -16,13 +16,10 @@ include("includes/header.php");
                         <a href="tenant_view.php" class="btn btn-danger float-end">BACK</a>
                     </h4>
                 </div>
-                <div class="card-body">
-                            
-                                
+                <div class="card-body">           
                     <form action="code.php" enctype="multipart/form-data" method="POST">
-                        
                         <div class="row">
-                        <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="">Registered Users</label>
                                 <?php
                                     $users = "SELECT u.*,concat(u.lname,', ',u.fname) AS name FROM users u WHERE role_as='0' ";
