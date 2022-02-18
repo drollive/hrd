@@ -52,8 +52,8 @@ include("includes/navbar.php");
 
                             <div class="form-group mb-3">
                                 <div class="form-floating mb-3 mb-md-0">
-                                    <input class="form-control" name="cp_number" required type="tel" placeholder="Enter your Phone Number" />
-                                    <label for="inputEmail">Phone Number</label>
+                                    <input class="form-control" name="phone" id="inputPhone" required type="tel" placeholder="Enter your Phone Number" />
+                                    <label for="inputPhone">Phone Number</label>
                                 </div>
                             </div>
 
@@ -70,8 +70,11 @@ include("includes/navbar.php");
                                     <label for="inputPasswordConfirm">Confirm Password</label>
                                 </div>
                             </div>
+
+                            <div class="g-recaptcha" data-sitekey="6LcFHIMeAAAAAI89xQ1-Cf2qGskDmANU8ROJsFBD"></div>
+                            <br>
                             
-                            <div class="form-group mb-3">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="submit" name="register_btn" class="btn btn-primary btn-block">Register Now</button>
                             </div>
                         </form>

@@ -3,13 +3,11 @@ session_start();
 include('admin/config/db_con.php');
 
 #check if the button is clicked
-if(isset($_POST['register_btn']))
+if(isset($_POST['register_btn']) && $_POST['g-recaptcha-response'] != "")
 {
-    $fname = mysqli_real_escape_string($con, $_POST['fname']);
-    $lname = mysqli_real_escape_string($con, $_POST["lname"]);
-    $email = mysqli_real_escape_string($con, $_POST["email"]);
-    $password = mysqli_real_escape_string($con, $_POST["password"]);
-    $confirm_password = mysqli_real_escape_string($con, $_POST["confirm_password"]);
+    $secret = 'secret key';
+    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
+    $responseData = json_decode($verifyResponse);
 
     if($password == $confirm_password)
     {
@@ -19,7 +17,7 @@ if(isset($_POST['register_btn']))
         #to execute query
         $check_email_run = mysqli_query($con, $check_email);
 
-        if(mysqli_num_rows($check_email_run) > 0)
+        if(mysqli_num_rows($check_email_run) > 0 )
         {
             # email input already exist
             $_SESSION["message"] = "Email address already exist";
@@ -28,7 +26,14 @@ if(isset($_POST['register_btn']))
         }
         else
         {
-            $user_query = "INSERT INTO users (fname,lname,email,phone,password) VALUES ('$fname','$lname','$email','phone','$password')";
+            $fname = mysqli_real_escape_string($con, $_POST['fname']);
+            $lname = mysqli_real_escape_string($con, $_POST["lname"]);
+            $email = mysqli_real_escape_string($con, $_POST["email"]);
+            $password = mysqli_real_escape_string($con, $_POST["password"]);
+            $confirm_password = mysqli_real_escape_string($con, $_POST["confirm_password"]);
+            $phone = (is_numeric($_POST['phone']) ? (int)$_POST['phone'] : '');
+            $user_query = "INSERT INTO users (fname,lname,email,phone,password) 
+                            VALUES ('$fname','$lname','$email','$phone','$password')";
             $user_query_run = mysqli_query($con, $user_query);
             
             if($user_query_run)

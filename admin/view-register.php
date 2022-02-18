@@ -29,8 +29,8 @@ include("includes/header.php");
                                 <th>LastName</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Role</th>
                                 <th>Status</th>
+                                <th>Role</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
 
@@ -67,12 +67,10 @@ include("includes/header.php");
                                                 <! --- Pass the parameter id to edit a row --->
                                                 <a href="edit-register.php?id=<?= $user['id'] ?>" onclick="return confirm('Are you sure you want to Edit?')" class="btn btn-info">Edit</a>
                                             </td>
+
                                             <td>
-                                                <form action="code.php" method="POST" onsubmit="return submitForm(this)">    
-                                                    <button type="submit" name="delete_user" value="<?= $user['id'] ?> " href="" class="btn btn-danger">
-                                                    Delete
-                                                    </button>
-                                                </form>
+                                                <input type="hidden" class="delete_id_value" value="<?= $user['id'] ?>"> </input>
+                                                <a href="javascript:void(0)" class="delete_btn_ajax btn btn-danger">Delete</a> 
                                             </td>
                                         </tr>
                                         <?php

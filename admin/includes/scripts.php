@@ -1,16 +1,14 @@
     
-    
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap5.min.js"></script>
 
 
-
     <script>
         $(document).ready( function () 
         {
-            //its in a hash there for I need to call it into id
+            //it's in a hash there for I need to call it into an id
             $('#myDataTable').DataTable();
         } );
     </script>
@@ -37,26 +35,49 @@
     <script src="js/sweetalert.min.js"></script>
 
     <script>
-        function submitForm(form) {
-            swal({
-                title: "Are you sure?",
-                text: "This form will be submitted",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then(function (isOkay) {
-                if (isOkay) {
-                    form.submit();
-                }
+        $(document).ready(function() {
+            $('.delete_btn_ajax').click(function(e){
+            e.preventDefault();
+                // console.log('Hello'); i just checked if this shit is working
+                var deleteid = $(this).closest("tr").find('.delete_id_value').val();
+                //console.log(deleteid);
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this data!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+
+                            $.ajax({
+                                type:"POST",
+                                url:"code.php",
+                                data:{
+                                    "delete_btn_users" : 1,
+                                    "delete_id" : deleteid,
+                                },
+                                success: function (response){
+
+                                    swal("Data Deleted Successfully!", {
+                                        icon:"success",
+                                    }).then((result) =>{
+                                        location.reload();
+                                    });
+
+                                }
+                            });
+                            
+                        } 
+                    });
             });
-            return false;
-        }
+        });
     </script>
 
 
 
-    
+        
 
 
 </body>

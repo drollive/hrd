@@ -236,25 +236,11 @@ if(isset($_POST['add_house']))
 }
 
 # To delete user
-if(isset($_POST['delete_user']))
+if(isset($_POST['delete_btn_users']))
 {
-    $user_id = $_POST['delete_user'];
-
-    $query = "DELETE FROM users WHERE id='$user_id' ";
+    $user_id = $_POST['delete_id'];
+    $query = "UPDATE users SET status = '2' WHERE id='$user_id' LIMIT 1";
     $query_run = mysqli_query($con, $query);
-
-    if($query_run)
-    {
-        $_SESSION['message'] = "User Deleted Successfully!";
-        header("Location: view-register.php");
-        exit(0);
-    }
-    else
-    {
-        $_SESSION['message'] = "Something Went Wrong!";
-        header("Location: view-register.php");
-        exit(0);
-    }
 }
 
 if(isset($_POST['add_user']))
