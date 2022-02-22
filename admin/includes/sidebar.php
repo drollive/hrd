@@ -60,7 +60,7 @@
                 </a>
                 <div class="collapse <?= $page == 'payment_add.php' || $page == 'payment_view.php' || $page == 'payment_edit.php' ? 'show': ''?>" id="collapsePayments" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link <?= $page == 'payment_add.php' ? 'active': ''?>" href="payment_add">Add Payments</a>
+                        <a class="nav-link <?= $page == 'payment_add.php' ? 'active': ''?>" href="payment_add.php">Add Payments</a>
                         <a class="nav-link <?= $page == 'payment_view.php' ? 'active': ''?>" href="payment_view.php">View Payments</a>
                     </nav>
                 </div>

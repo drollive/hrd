@@ -7,8 +7,6 @@
         <meta name="description" content="" />
         <meta name="author" content="Elysium" />
 
-
-        <title>Dashboard</title>
         
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/jquery.datables.min.css" rel="stylesheet" />

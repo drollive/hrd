@@ -3,8 +3,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="assets/demo/chart-pie-demo.js"></script>
 
-
+    <!-- Data Table -->
     <script>
         $(document).ready( function () 
         {
@@ -34,6 +38,7 @@
 
     <script src="js/sweetalert.min.js"></script>
 
+     <!-- Delete User -->
     <script>
         $(document).ready(function() {
             $('.delete_btn_ajax').click(function(e){
@@ -56,6 +61,90 @@
                                 url:"code.php",
                                 data:{
                                     "delete_btn_users" : 1,
+                                    "delete_id" : deleteid,
+                                },
+                                success: function (response){
+
+                                    swal("Data Deleted Successfully!", {
+                                        icon:"success",
+                                    }).then((result) =>{
+                                        location.reload();
+                                    });
+
+                                }
+                            });
+                            
+                        } 
+                    });
+            });
+        });
+    </script>
+
+     <!-- Delete House-->
+    <script>
+        $(document).ready(function() {
+            $('.delete_btn_ajax').click(function(e){
+            e.preventDefault();
+                // console.log('Hello'); i just checked if this shit is working
+                var deleteid = $(this).closest("tr").find('.delete_id_value').val();
+                //console.log(deleteid);
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this data!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+
+                            $.ajax({
+                                type:"POST",
+                                url:"code.php",
+                                data:{
+                                    "delete_btn_users" : 1,
+                                    "delete_id" : deleteid,
+                                },
+                                success: function (response){
+
+                                    swal("Data Deleted Successfully!", {
+                                        icon:"success",
+                                    }).then((result) =>{
+                                        location.reload();
+                                    });
+
+                                }
+                            });
+                            
+                        } 
+                    });
+            });
+        });
+    </script>
+    
+    <!-- Delete Bill-->
+    <script>
+        $(document).ready(function() {
+            $('.delete_btn_ajax').click(function(e){
+            e.preventDefault();
+                // console.log('Hello'); i just checked if this shit is working
+                var deleteid = $(this).closest("tr").find('.delete_id_value').val();
+                //console.log(deleteid);
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this data!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+
+                            $.ajax({
+                                type:"POST",
+                                url:"code.php",
+                                data:{
+                                    "delete_btn_bill" : 1,
                                     "delete_id" : deleteid,
                                 },
                                 success: function (response){

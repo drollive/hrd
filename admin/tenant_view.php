@@ -11,7 +11,7 @@ include("includes/header.php");
 			<?php include('message.php'); ?>
             <div class="card">
                 <div class="card-header">
-                    <h4>View Post
+                    <h4>View Tenants
                         <a href="tenant_add.php" class="btn btn-primary float-end">Add Tenant</a>
                     </h4>
                 </div>
@@ -32,11 +32,14 @@ include("includes/header.php");
                             $tenant = "SELECT t.*,concat(u.lname,', ',u.fname) AS name, h.house_price, h.house_address
                                         FROM tenant t 
                                         INNER JOIN house h ON h.house_id = t.house_id
-                                        INNER JOIN users u ON u.id = t.users_id";
+                                        INNER JOIN users u ON u.id = t.users_id
+                                        INNER JOIN bills b ON b.tenant_id = t.tenant_id";
                             $tenant_run = mysqli_query($con, $tenant);
 
                             if(mysqli_num_rows($tenant_run) > 0)
                             {
+                                $balance = 0;
+
                                 foreach($tenant_run as $tenant)
                                 {
                                     ?>
@@ -46,6 +49,7 @@ include("includes/header.php");
                                             <td><?=$tenant['name']?></td>
                                             <td><?=$tenant['house_address']?></td>
                                             <td><?=$tenant['house_price']?></td>
+                                            <td><?=$balance?></td>
                                             <td> 
                                                 <?=$tenant['tenant_status'] == '1' ? 'Renting':'Not Renting'?>
                                             </td>
@@ -76,6 +80,8 @@ include("includes/header.php");
                             }
                         ?>
                         </tbody>
+
+        
                     </table>
                 </div>
 

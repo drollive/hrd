@@ -61,10 +61,10 @@ include("includes/header.php");
                                                 <! --- Pass the parameter id to edit a row --->
                                                 <a href="house_edit.php?id=<?= $home['house_id'] ?>" class="btn btn-info">Edit</a>
                                             </td>
+                                            
                                             <td>
-                                                <form action="code.php" method="POST">
-                                                    <button type="submit" name="house_delete" value="<?= $home['house_id'] ?> "href="" class="btn btn-danger">Delete</button>
-                                                </form>
+                                                <input type="hidden" class="delete_id_house" value="<?= $home['house_id'] ?>"> </input>
+                                                <a href="javascript:void(0)" class="delete_btn_ajax btn btn-danger">Delete</a> 
                                             </td>
                                         </tr>
                                         <?php

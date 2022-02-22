@@ -14,15 +14,14 @@ include("includes/navbar.php");
 ?>
 
 
-<div class="py-5">
+<div class="py-4">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <?php include("message.php"); ?>
 
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Register</h4>
+                    <div class="card-header"><h3 class="text-center font-weight-light my-3">Register</h3>
                     </div>
 
                     <div class="card-body">
