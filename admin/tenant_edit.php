@@ -7,122 +7,161 @@ include("includes/header.php");
 <div class="container-fluid px-4">
 
     <div class="row mt-4">
-        <div class="col-md-12">
+        <div class="col-md-5">
 		
 			<?php include('message.php'); ?>
             <div class="card">
                 <div class="card-header">
-                    <h4>Edit Post
-                        <a href="post_view.php" class="btn btn-danger float-end">BACK</a>
+                    <h4>Edit Tenant
+                        <a href="tenant_view.php" class="btn btn-danger float-end">BACK</a>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    
+                <?php
+                # This is to check if the id is available or not
+                if(isset($_GET['id']))
+                {
+                    $tenant_id = $_GET['id'];
+                    $tenant= "SELECT * FROM tenant WHERE tenant_status != '2' ";
+                    $tenant_run = mysqli_query($con,$tenant);
+
+                    #To check if the data is available inside the query
+                    if(mysqli_num_rows($tenant_run) > 0)
+                    {
+                        $row = mysqli_fetch_array($tenant_run);
+                        ?>
+
+                        <form action="code.php" method="POST">
+                            
+                            <input type ="hidden" name= "tenant_id" value="<?=$row['tenant_id'] ?>"> </input>
+                            <div class="row">
+                                
+                                <div class="col-md-12 mb-3">
+                                    <label for="">House List</label>
+                                    <?php
+                                        $house = "SELECT * FROM house WHERE house_status= 1 ";
+                                        $house_run = mysqli_query($con, $house);
+                                        if(mysqli_num_rows($house_run) > 0)
+                                        {
+                                            ?>
+                                            <select name="house_id" required class="form-control">
+                                                <option value="<?=$row['house_id']?>"><?=$row['house_id']?></option>
+                                                <?php 
+                                                    foreach($house_run as $rent_home)
+                                                    {
+                                                        ?>
+                                                        <option value="<?=$rent_home['house_id']?>"><?=$rent_home['house_address'] ?></option>
+                                                        <?php
+                                                    }
+                                                ?>
+                                        
+                                            </select>
+
+                                            <?php
+                                        }
+                                        else
+                                        {
+                                            ?>
+                                            <h5>No House Available</h5>
+                                            <?php
+                                        }
+                                    ?>
+                            
+                                </div>
+                            
+                                <div class="col-md-12 mb-3">
+                                    <label for="">Status</label> <br/>
+                                    <input type="checkbox" name="tenant_status" <?= $row['tenant_status'] == '1' ? 'checked':'' ?> width="70px" height="70px">
+                                    <label for="checkbox">Check this box if tenant is active</label>
+                                </div>
+                
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="submit" name="update_tenant" class="btn btn-primary">Update Tenant</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                        
+                        <?php 
+
+                    }
+                    # if the data is not available
+                    else
+                    {
+                        ?>
+                        <h4> No Record Found</h4>
+                        <?php
+                    }
+                }
+
+                ?>
+
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <h4>View House/s
+                        <a href="house_view.php" class="btn btn-primary float-end">House</a>
                     </h4>
                 </div>
                 <div class="card-body">
 
-                <?php
-                    if(isset($_GET['id']))
-                    {
-                        $post_id = $_GET['id'];
-                        $post_query ="SELECT * FROM post WHERE post_id='$post_id' LIMIT 1"; 
-                        $post_query_run = mysqli_query($con, $post_query);
+                <div class="table-responsive">
+                    <table id="myDataTable" class="table table-bordered table-stripe">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Address</th>
+                                <th class="text-center">Status</th>
 
-                        if(mysqli_num_rows($post_query_run) > 0)
-                        {
-                            $post_row = mysqli_fetch_array($post_query_run);
-                            ?>
-                            <form action="code.php" enctype="multipart/form-data" method="POST">
-                                
-                                <input type="hidden" name="post_id" value="<?= $post_row['post_id']?>" />
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="">House List</label>
-                                        <?php
-                                            $house = "SELECT * FROM house WHERE house_status='1' ";
-                                            $house_run = mysqli_query($con, $house);
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <?php
+                                # To fetch data from table house
+                                $house = "SELECT * FROM house WHERE house_status != '2' ";
+                                $house_run = mysqli_query($con,$house);
 
-                                            if(mysqli_num_rows($house_run) > 0)
-                                            {
-                                                ?>
-                                                <select name="house_id" required class="form-control">
-                                                    <option value="">Select House ID</option>
-                                                    <?php
-                                                        foreach($house_run as $rent_home)
-                                                        {
-                                                        ?>
-                                                        <option value="<?=$rent_home['house_id']?>" 
-                                                            <?=$rent_home['house_id'] == $post_row['house_id'] ? 'selected':'' ?> >
-                                                            <?=$rent_home['house_id'] ?>
-                                                        </option>
-                                                        <?php
-
-                                                        }
-                                                    ?>
-                                            
-                                                </select>
-
-                                                <?php
-                                            }
-                                            else
-                                            {
-                                                ?>
-                                                <h5>No House Available</h5>
-                                                <?php
-
-                                            }
+                                #To check each data or table has data
+                                if(mysqli_num_rows($house_run) > 0 )
+                                {
+                                    foreach($house_run as $home)
+                                    {
                                         ?>
-                                    
+                                        <tr>
+                                            <td class="text-center"><?= $home['house_id'] ?></td>
+                                            <td class="text-center"><?= $home['house_address'] ?></td>
+                                            <td class="text-center">
+                                                <?= $home['house_status'] == '1' ? 'Available':'Unavailable' ?>
+                                            </td>
+                                        </tr>
+                                        <?php
 
-                                    </div>
-                                    
-                    
-                                    <div class="col-md-12 mb-3">
-                                        <label for="">Post Title</label>
-                                        <input type="text" name="post_name"  value="<?= $post_row['post_name']?>" required class="form-control">
-                                    </div>
-
-                                    <div class="col-md-12 mb-3">
-                                        <label for="">Monthly Rent</label>
-                                        <input type="text" name="house_price"  value="<?= $post_row['house_price']?>" class="form-control">
-                                    </div>
-                                    
-                                    <div class="col-md-12 mb-3">
-                                        <label for="">House Description</label>
-                                        <textarea name="house_desc"  id="summernote" class="form-control" rows="4"><?= $post_row['house_desc']?></textarea>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label for="">Status</label>
-                                        <input type="checkbox" name ="house_status"  <?= $post_row['house_status'] == '1' ? 'checked': '' ?>   width="70px" height="70px">
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label for="">Image</label>
-                                        <input type="hidden" name="old_image" value="<?= $post_row['image']?>" />
-                                        <input type="file" name="image" class="form-control">
-                                    </div>
-                                    
-                                    
-                                    
-                                    <div class="col-md-6 mb-3">
-                                        <button type="submit" name="update_post" class="btn btn-primary">Update Post</button>
-                                    </div>
-                                    
-                                </div>
-                            </form>
-
-                            <?php
-
-                        }
-                        else
-                        {
+                                    }
+                                }
+                                else
+                                {
+                                    ?>
+                                    <tr>
+                                            <td colspan="6"> No Record Found</td>
+                                    </tr>
+                                    <?php
+                                
+                                }
+                                
                             ?>
-                            <h4>No Record found</h4>
+                        </tbody>
 
-                            <?php
-                        }
-                    }
-                ?>
+                    </table>
+                </div>
 
-                
+
                 </div>
             </div>
         </div>
@@ -133,5 +172,4 @@ include("includes/header.php");
 
 include("includes/footer.php");
 include("includes/scripts.php");
-
 ?>

@@ -2,14 +2,69 @@
 
 include("authentication.php");
 
+# Payment's table CRUD
+if(isset($_POST['delete_btn_payment']))
+{
+    $bill_id = $_POST['delete_id'];
+    $query ="UPDATE bills SET bill_status= 2 WHERE bill_id='$bill_id' LIMIT 1 ";
+    $query_run = mysqli_query($con, $query);
+
+}
+if(isset($_POST['update_payment']))
+{
+    $payment_id = $_POST['payment_id'];
+    $payment_total = (is_numeric($_POST['total_payment']) ? (int)$_POST['total_payment'] : 0);
+    $payment_desc = $_POST['payment_desc'];
+	$payment_date = date('Y-m-d', strtotime($_POST['date']));
+
+	$query = "INSERT INTO bills (payment_id, payment_total, payment_desc, payment_date) 
+                VALUES ('$payment_id', '$payment_total', '$payment_desc', '$payment_date')";
+	$query_run = mysqli_query($con,$query);
+
+   if($query_run)
+    {
+        $_SESSION['message'] = "Bill added Successfully";
+        header("Location: bill_view.php");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Something Went Wrong!";
+        header("Location: bill_add.php");
+        exit(0);
+    }
+}
+if(isset($_POST['add_payment']))
+{
+    $payment_id = $_POST['payment_id'];
+    $payment_total = (is_numeric($_POST['total_payment']) ? (int)$_POST['total_payment'] : 0);
+    $payment_desc = $_POST['payment_desc'];
+	$payment_date = date('Y-m-d', strtotime($_POST['date']));
+
+	$query = "INSERT INTO bills (payment_id, payment_total, payment_desc, payment_date) 
+                VALUES ('$payment_id', '$payment_total', '$payment_desc', '$payment_date')";
+	$query_run = mysqli_query($con,$query);
+
+   if($query_run)
+    {
+        $_SESSION['message'] = "Bill added Successfully";
+        header("Location: bill_view.php");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Something Went Wrong!";
+        header("Location: bill_add.php");
+        exit(0);
+    }
+}
 
 # Bill's table CRUD 
 if(isset($_POST['delete_btn_bill']))
 {
     $bill_id = $_POST['delete_id'];
-    $query ="UPDATE bills SET bill_status='2' WHERE bill_id='$bill_id' LIMIT 1 ";
+    $query ="UPDATE bills SET bill_status=2 WHERE bill_id='$bill_id' LIMIT 1 ";
     $query_run = mysqli_query($con, $query);
-
 }
 if(isset($_POST['update_bill']))
 {
@@ -20,9 +75,12 @@ if(isset($_POST['update_bill']))
     $other_bill = (is_numeric($_POST['other_bill']) ? (int)$_POST['other_bill'] : 0);
     $bill_desc = $_POST['bill_desc'];
 	$bill_status = $_POST['bill_status'] == true ? '1':'0';
+    $due_date = date('Y-m-d', strtotime($_POST['date']));
+
+    $total_bill = $electric_bill + $water_bill + $other_bill;
 	
-	$query = "INSERT INTO bills (tenant_id,house_rent_pay,electric_bill, water_bill,other_bill,bill_desc,bill_status) 
-                VALUES ('$tenant_id', '$house_rent_pay','$electric_bill','$water_bill', '$other_bill','$bill_desc','$bill_status')";
+	$query = "INSERT INTO bills (tenant_id,house_rent_pay,electric_bill, water_bill,other_bill,bill_desc,bill_status, due_date, bill_total) 
+                VALUES ('$tenant_id', '$house_rent_pay','$electric_bill','$water_bill', '$other_bill','$bill_desc','$bill_status','$due_date', '$total_bill')";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
@@ -47,9 +105,12 @@ if(isset($_POST['add_bill']))
     $other_bill = (is_numeric($_POST['other_bill']) ? (int)$_POST['other_bill'] : 0);
     $bill_desc = $_POST['bill_desc'];
 	$bill_status = $_POST['bill_status'] == true ? '1':'0';
-	
-	$query = "INSERT INTO bills (tenant_id,house_rent_pay,electric_bill, water_bill,other_bill,bill_desc,bill_status) 
-                VALUES ('$tenant_id', '$house_rent_pay','$electric_bill','$water_bill', '$other_bill','$bill_desc','$bill_status')";
+	$due_date = date('Y-m-d', strtotime($_POST['date']));
+
+    $total_bill = $house_rent_pay + $electric_bill + $water_bill + $other_bill;
+
+	$query = "INSERT INTO bills (tenant_id,house_rent_pay,electric_bill, water_bill,other_bill,bill_desc,bill_status, due_date, bill_total) 
+                VALUES ('$tenant_id', '$house_rent_pay','$electric_bill','$water_bill', '$other_bill','$bill_desc','$bill_status', '$due_date', '$total_bill')";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
@@ -68,20 +129,27 @@ if(isset($_POST['add_bill']))
 
 
 # Tenant's table CRUD 
+if(isset($_POST['delete_btn_tenant']))
+{
+    $tenant_id = $_POST['delete_id'];
+    $query ="UPDATE tenant SET tenant_status=2 WHERE tenant_id='$tenant_id' LIMIT 1 ";
+    $query_run = mysqli_query($con, $query);
+
+}
 if(isset($_POST['update_tenant']))
 {
-	$users_id = $_POST['id'];
+    $tenant_id = $_POST['tenant_id'];
     $house_id = $_POST['house_id'];
 	$tenant_status = $_POST['tenant_status'] == true ? '1':'0';
 	
-	$query = "INSERT INTO tenant (users_id, house_id, tenant_status)
-				VALUES ('$users_id', '$house_id', '$tenant_status')";
+	$query = "UPDATE tenant SET house_id='$house_id', tenant_status='$tenant_status'
+                WHERE tenant_id='$tenant_id'";
 				
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
     {
-        $_SESSION['message'] = "Tenant added Successfully";
+        $_SESSION['message'] = "Tenant Updated Successfully";
         header("Location: tenant_view.php");
         exit(0);
     }

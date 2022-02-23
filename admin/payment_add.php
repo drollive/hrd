@@ -61,14 +61,12 @@ include("includes/header.php");
                             <label for="">Payment Description</label>
                             <textarea name="payment_desc"  id="summernote" class="form-control" rows="4"></textarea>
                         </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label for="">Status</label> <br/>
-                            <input type="checkbox" name = "payment_status"  width="70px" height="70px">
+                        <div class="col-md-12 mb-3">
+                            <label class="control-label" for="date">Payment Date</label>
+                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date"/>
                         </div>
-                        
 						
-                        <div class="col-md-6 mb-3">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" name="add_payment" class="btn btn-primary">Add Payment</button>
                         </div>
                         
@@ -122,7 +120,7 @@ include("includes/header.php");
                                             <td class="text-center"><?= $bill['name']?></td>
                                             <td class="text-center"><?= $bill['bill_total'] ?></td>
                                             <td class="text-center">
-                                                <?= $bill['bill_status'] == '1' ? 'Paid':'Not Paid' ?>
+                                                <?= $bill['bill_status'] == '1' ? 'Paid':'Unpaid' ?>
                                             </td>
                                         
                                         </tr>

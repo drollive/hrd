@@ -22,13 +22,12 @@ include("includes/header.php");
                     <table id="myDataTable" class="table table-bordered table-stripe">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Address</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Availability</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Address</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Edit</th>
+                                <th class="text-center">Delete</th>
 
                             </tr>
                         </thead>
@@ -46,17 +45,13 @@ include("includes/header.php");
                                     {
                                         ?>
                                         <tr>
-                                            <td><?= $home['house_id'] ?></td>
-                                            <td><?= $home['house_address'] ?></td>
-                                            <td><?= $home['house_price'] ?></td>
-                                            <td>
-                                                <?= $home['house_status'] == '1' ? 'Visible':'Hidden' ?>
+                                            <td class="text-center"><?= $home['house_id'] ?></td>
+                                            <td class="text-center"><?= $home['house_address'] ?></td>
+                                            <td class="text-center"><?= $home['house_price'] ?></td>
+                                            <td class="text-center">
+                                                <?= $home['house_status'] == '1' ? 'Available':'Unavailable' ?>
                                             </td>
-                                            <td>
-                                                <?php 
-                                                    if($home['house_avail'] == '1') { echo 'Available'; } else { echo 'Not Available'; }
-                                                ?>
-                                            </td>
+                                        
                                             <td>
                                                 <! --- Pass the parameter id to edit a row --->
                                                 <a href="house_edit.php?id=<?= $home['house_id'] ?>" class="btn btn-info">Edit</a>

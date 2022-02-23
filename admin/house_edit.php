@@ -34,7 +34,7 @@ include("includes/header.php");
 
                         <form action="code.php" method="POST">
                             
-                            <input type ="hidden" name= "house_id" value="<?=$row['house_id'] ?>">
+                            <input type ="hidden" name= "house_id" value="<?=$row['house_id'] ?>"> </input>
                             <div class="row">
                 
                                 <div class="col-md-12 mb-3">
@@ -58,10 +58,6 @@ include("includes/header.php");
                                     <input type="checkbox" name = "house_status" <?= $row['house_status'] == '1' ? 'checked':'' ?> width="70px" height="70px">
                                 </div>
                                 
-                                <div class="col-md-6 mb-3">
-                                    <label for="">Availability</label> <br/>
-                                    <input type="checkbox" name = "house_avail" <?= $row['house_avail'] == '1' ? 'checked':'' ?>  width="70px" height="70px">
-                                </div>
                                 
                                 <div class="col-md-6 mb-3">
                                     <button type="submit" name="update_house" class="btn btn-primary">Update House</button>

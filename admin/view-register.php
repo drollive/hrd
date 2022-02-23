@@ -15,7 +15,6 @@ include("includes/header.php");
                 <div class="card-header">
                     <h4>View Registered Users
                         <a href="add-admin.php" class="btn btn-primary float-end">Add Admin</a>
-
                     </h4>
                 </div>
                 <div class="card-body">
@@ -24,15 +23,15 @@ include("includes/header.php");
                     <table id="myDataTable" class="table table-bordered table-stripe">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>FirstName</th>
-                                <th>LastName</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Status</th>
-                                <th>Role</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">FirstName</th>
+                                <th class="text-center">LastName</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Phone</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Role</th>
+                                <th class="text-center">Edit</th>
+                                <th class="text-center">Delete</th>
 
                             </tr>
                         </thead>
@@ -50,25 +49,25 @@ include("includes/header.php");
                                     {
                                         ?>
                                         <tr>
-                                            <td><?= $user['id'] ?></td>
-                                            <td><?= $user['fname'] ?></td>
-                                            <td><?= $user['lname'] ?></td>
-                                            <td><?= $user['email'] ?></td>
-                                            <td><?= $user['phone'] ?></td>
-                                            <td>
-                                                <?= $user['status'] == '1' ? 'Visible':'Hidden' ?>
+                                            <td class="text-center"><?= $user['id'] ?></td>
+                                            <td class="text-center"><?= $user['fname'] ?></td>
+                                            <td class="text-center"><?= $user['lname'] ?></td>
+                                            <td class="text-center"><?= $user['email'] ?></td>
+                                            <td class="text-center"><?= $user['phone'] ?></td>
+                                            <td class="text-center">
+                                                <?= $user['status'] == '1' ? 'Active':'Inactive' ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?php 
                                                     if($user['role_as'] == '1') { echo 'Landlord'; } else { echo 'Tenant'; }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <! --- Pass the parameter id to edit a row --->
                                                 <a href="edit-register.php?id=<?= $user['id'] ?>" onclick="return confirm('Are you sure you want to Edit?')" class="btn btn-info">Edit</a>
                                             </td>
 
-                                            <td>
+                                            <td class="text-center">
                                                 <input type="hidden" class="delete_id_value" value="<?= $user['id'] ?>"> </input>
                                                 <a href="javascript:void(0)" class="delete_btn_ajax btn btn-danger">Delete</a> 
                                             </td>

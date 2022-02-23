@@ -41,14 +41,11 @@ include("includes/header.php");
                         <div class="col-md-6 mb-3">
                             <label for="">Status</label> <br/>
                             <input type="checkbox" name = "house_status"  width="70px" height="70px">
+                            <label for="checkbox">Check this box if the bill is paid</label>
                         </div>
                         
-						<div class="col-md-6 mb-3">
-                            <label for="">Availability</label> <br/>
-                            <input type="checkbox" name = "house_avail"  width="70px" height="70px">
-                        </div>
 						
-                        <div class="col-md-6 mb-3">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" name="add_house" class="btn btn-primary">Add House</button>
                         </div>
                         

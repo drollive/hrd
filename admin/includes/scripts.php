@@ -164,7 +164,96 @@
         });
     </script>
 
+    <!-- Delete Tenant-->
+    <script>
+        $(document).ready(function() {
+            $('.delete_btn_ajax').click(function(e){
+            e.preventDefault();
+                // console.log('Hello'); i just checked if this shit is working
+                var deleteid = $(this).closest("tr").find('.delete_id_value').val();
+                //console.log(deleteid);
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this data!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
 
+                            $.ajax({
+                                type:"POST",
+                                url:"code.php",
+                                data:{
+                                    "delete_btn_tenant" : 1,
+                                    "delete_id" : deleteid,
+                                },
+                                success: function (response){
+
+                                    swal("Data Deleted Successfully!", {
+                                        icon:"success",
+                                    }).then((result) =>{
+                                        location.reload();
+                                    });
+
+                                }
+                            });
+                            
+                        } 
+                    });
+            });
+        });
+    </script>
+
+    <!-- Delete Payment-->
+    <script>
+        $(document).ready(function() {
+            $('.delete_btn_ajax').click(function(e){
+            e.preventDefault();
+                // console.log('Hello'); i just checked if this shit is working
+                var deleteid = $(this).closest("tr").find('.delete_id_value').val();
+                //console.log(deleteid);
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this data!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+
+                            $.ajax({
+                                type:"POST",
+                                url:"code.php",
+                                data:{
+                                    "delete_btn_payment" : 1,
+                                    "delete_id" : deleteid,
+                                },
+                                success: function (response){
+
+                                    swal("Data Deleted Successfully!", {
+                                        icon:"success",
+                                    }).then((result) =>{
+                                        location.reload();
+                                    });
+
+                                }
+                            });
+                            
+                        } 
+                    });
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <!-- Date Picker-->
+    <script type="text/javascript">
+        $(function() {
+            $('#datepicker').datepicker();
+        });
+    </script>
 
         
 

@@ -22,6 +22,7 @@ include("includes/header.php");
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Name</th>
                                     <th class="text-center">Total Bill</th>
+                                    <th class="text-center">Due Date</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Edit</th>
                                     <th class="text-center">Delete</th>
@@ -50,8 +51,9 @@ include("includes/header.php");
                                             <td class="text-center"><?= $bill['bill_id'] ?> </td>
                                             <td class="text-center"><?= $bill['name']?></td>
                                             <td class="text-center"><?= $bill['bill_total'] ?></td>
+                                            <td class="text-center"><?= $bill['due_date']?></td>
                                             <td class="text-center">
-                                                <?= $bill['bill_status'] == '1' ? 'Paid':'Not Paid' ?>
+                                                <?= $bill['bill_status'] == '1' ? 'Paid':'Unpaid' ?>
                                             </td>
                                         
                                             <td class="text-center">
@@ -59,7 +61,7 @@ include("includes/header.php");
                                                 <a href="bill_edit.php?id=<?= $bill['bill_id'] ?>" class="btn btn-info">Edit</a>
                                             </td>
                                         
-                                            <td>
+                                            <td class="text-center">
                                                 <input type="hidden" class="delete_id_value" value="<?= $bill['bill_id'] ?>"> </input>
                                                 <a href="javascript:void(0)" class="delete_btn_ajax btn btn-danger">Delete</a> 
                                             </td>
