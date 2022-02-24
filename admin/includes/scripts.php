@@ -17,6 +17,15 @@
         } );
     </script>
 
+    <script>
+        $(document).ready( function () 
+        {
+            //it's in a hash there for I need to call it into an id
+            $('#myDataTable2').DataTable();
+        } );
+    </script>
+
+
     <script src="js/scripts.js"></script>
     
     <!-- Summernote JS - CDN Link -->

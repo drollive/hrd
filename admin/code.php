@@ -142,11 +142,12 @@ if(isset($_POST['delete_btn_tenant']))
 }
 if(isset($_POST['update_tenant']))
 {
+    $users_id = $_POST['id'];
     $tenant_id = $_POST['tenant_id'];
     $house_id = $_POST['house_id'];
 	$tenant_status = $_POST['tenant_status'] == true ? '1':'0';
 	
-	$query = "UPDATE tenant SET house_id='$house_id', tenant_status='$tenant_status'
+	$query = "UPDATE tenant SET users_id= '$users_id', house_id='$house_id', tenant_status='$tenant_status'
                 WHERE tenant_id='$tenant_id'";
 				
 	$query_run = mysqli_query($con,$query);
