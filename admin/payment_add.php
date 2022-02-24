@@ -29,7 +29,7 @@ include("includes/header.php");
                                 if(mysqli_num_rows($bills_run ) > 0)
                                 {
                                     ?>
-                                    <select name="id" required class="form-control">
+                                    <select name="bill_id" required class="form-control">
                                         <option value="">Select Unpaid Bills to Pay</option>
                                         <?php
                                             foreach($bills_run as $bills)

@@ -35,10 +35,36 @@ include("includes/header.php");
                         <form action="code.php" method="POST">
                             
                             <div class="row">
-                
+                    
                                 <div class="col-md-12 mb-3">
-                                    <label for="">Bill ID</label>
-                                    <input type="text" name="bill_id" required="required" class="form-control">
+                                    <label for="">Unpaid Bills</label>
+                                    <?php
+                                        $bills = "SELECT * FROM bills WHERE bill_status = 0 ";
+                                        $bills_run = mysqli_query($con, $bills);
+                                        if(mysqli_num_rows($bills_run ) > 0)
+                                        {
+                                            ?>
+                                            <select name="id" disabled="" required class="form-control">
+                                                <option value="<?=$row['bill_id']?>"><?=$row['bill_id']?></option>
+                                                <?php
+                                                    foreach($bills_run as $bills)
+                                                    {
+                                                        ?>
+                                                        <option value="<?=$bills['bill_id']?>"><?=$bills['bill_id']?></option>
+                                                        <?php
+                                                    }
+                                                ?>
+                                            </select>
+                                            <?php
+                                        }
+                                        else
+                                        {
+                                            ?>
+                                            <h5>No Unpaid Bills</h5>
+                                            <?php
+                                        }
+                                    ?>
+                        
                                 </div>
 
                                 <div class="col-md-12 mb-3">

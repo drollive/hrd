@@ -52,7 +52,7 @@ include("includes/header.php");
                                                 <?= $home['house_status'] == '1' ? 'Available':'Unavailable' ?>
                                             </td>
                                         
-                                            <td>
+                                            <td class="text-center">
                                                 <! --- Pass the parameter id to edit a row --->
                                                 <a href="house_edit.php?id=<?= $home['house_id'] ?>" class="btn btn-info">Edit</a>
                                             </td>

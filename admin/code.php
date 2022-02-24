@@ -12,49 +12,51 @@ if(isset($_POST['delete_btn_payment']))
 }
 if(isset($_POST['update_payment']))
 {
-    $payment_id = $_POST['payment_id'];
+    $bill_id = $_POST['bill_id'];
     $payment_total = (is_numeric($_POST['total_payment']) ? (int)$_POST['total_payment'] : 0);
     $payment_desc = $_POST['payment_desc'];
 	$payment_date = date('Y-m-d', strtotime($_POST['date']));
 
-	$query = "INSERT INTO bills (payment_id, payment_total, payment_desc, payment_date) 
-                VALUES ('$payment_id', '$payment_total', '$payment_desc', '$payment_date')";
+	$query = "UPDATE payments SET bill_id = '$bill_id', payment_total = '$payment_total', 
+                payment_desc = '$payment_desc', payment_date = '$payment_date' 
+                WHERE $payment_id='$payment_id'";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
     {
         $_SESSION['message'] = "Bill added Successfully";
-        header("Location: bill_view.php");
+        header("Location: payment_view.php");
         exit(0);
     }
     else
     {
         $_SESSION['message'] = "Something Went Wrong!";
-        header("Location: bill_add.php");
+        header("Location: payment_add.php");
         exit(0);
     }
 }
 if(isset($_POST['add_payment']))
 {
-    $payment_id = $_POST['payment_id'];
+    $bill_id = $_POST['bill_id'];
+    # To check input if it's a number
     $payment_total = (is_numeric($_POST['total_payment']) ? (int)$_POST['total_payment'] : 0);
     $payment_desc = $_POST['payment_desc'];
 	$payment_date = date('Y-m-d', strtotime($_POST['date']));
 
-	$query = "INSERT INTO bills (payment_id, payment_total, payment_desc, payment_date) 
-                VALUES ('$payment_id', '$payment_total', '$payment_desc', '$payment_date')";
+	$query = "INSERT INTO payments (bill_id, payment_total, payment_desc, payment_date) 
+                VALUES ('$bill_id', '$payment_total', '$payment_desc', '$payment_date')";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
     {
-        $_SESSION['message'] = "Bill added Successfully";
-        header("Location: bill_view.php");
+        $_SESSION['message'] = "Payment added Successfully";
+        header("Location: payment_view.php");
         exit(0);
     }
     else
     {
         $_SESSION['message'] = "Something Went Wrong!";
-        header("Location: bill_add.php");
+        header("Location: payment_add.php");
         exit(0);
     }
 }
@@ -79,13 +81,15 @@ if(isset($_POST['update_bill']))
 
     $total_bill = $electric_bill + $water_bill + $other_bill;
 	
-	$query = "INSERT INTO bills (tenant_id,house_rent_pay,electric_bill, water_bill,other_bill,bill_desc,bill_status, due_date, bill_total) 
-                VALUES ('$tenant_id', '$house_rent_pay','$electric_bill','$water_bill', '$other_bill','$bill_desc','$bill_status','$due_date', '$total_bill')";
+	$query = "UPDATE bills SET tenant_id='$tenant_id',house_rent_pay = '$house_rent_pay',
+                electric_bill = '$electric_bill', water_bill = '$water_bill',
+                other_bill = '$other_bill', bill_desc = '$bill_desc', bill_status ='$bill_status', 
+                due_date = '$due_date', bill_total = '$total_bill'";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
     {
-        $_SESSION['message'] = "Bill added Successfully";
+        $_SESSION['message'] = "Bill Updated Successfully";
         header("Location: bill_view.php");
         exit(0);
     }

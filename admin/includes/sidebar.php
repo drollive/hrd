@@ -77,8 +77,15 @@
                         <a class="nav-link <?= $page == 'post_view.php' ? 'active': ''?>" href="post_view.php">View Post</a>
                     </nav>
                 </div>
+
+                <a class="nav-link <?= $page == 'reports.php' ? 'active': ''?>" href="reports.php">
+                    <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
+                    Reports    
+                </a>
+
             </div>
         </div>
+        <!--To determine the name of user in landlord page -->
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
             <?php if(isset($_SESSION['auth_user'])) : ?>

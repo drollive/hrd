@@ -24,6 +24,7 @@ include("includes/header.php");
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Name</th>
                                 <th class="text-center">Total Payment</th>
+                                <th class="text-center">Payment Date</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Edit</th>
                                 <th class="text-center">Delete</th>
@@ -33,7 +34,13 @@ include("includes/header.php");
                         <tbody>
                             <?php
                                 # To fetch data from table house
-                                $payment = "SELECT * FROM payments WHERE payment_status != '2' ";
+                                $payment = "SELECT payments.*, concat(users.fname,' ',users.lname) AS name 
+                                            FROM payments
+                                            INNER JOIN bills
+                                            INNER JOIN tenant
+                                            INNER JOIN users
+                                            ON payments.bill_id = bills.bill_id AND bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
+                                            WHERE payment_status != '2' ";
                                 $payment_run = mysqli_query($con,$payment);
 
                                 #To check each data or table has data
@@ -45,7 +52,8 @@ include("includes/header.php");
                                         <tr>
                                             <td class="text-center"><?= $pay['payment_id'] ?></td>
                                             <td class="text-center"><?= $pay['name'] ?></td>
-                                            <td class="text-center"><?= $pay['house_price'] ?></td>
+                                            <td class="text-center"><?= $pay['payment_total'] ?></td>
+                                            <td class="text-center"><?= $pay['payment_date'] ?></td>
                                             <td class="text-center">
                                                 <?= $pay['payment_status'] == '1' ? 'Visible':'Hidden' ?>
                                             </td class="text-center">
