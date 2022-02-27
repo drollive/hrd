@@ -51,7 +51,7 @@ include("includes/header.php");
                                 else
                                 {
                                     ?>
-                                    <h5>No House Available</h5>
+                                    <h5>No Tenant Available</h5>
                                     <?php
                                 }
                             ?>

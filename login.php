@@ -4,6 +4,7 @@ session_start(); # To store information to be used across multiple pages
 
 # This is for an user trying to access login.php
 # but still but already logged in
+
 if(isset($_SESSION['auth']))
 {
     if(!isset($_SESSION["message"]))
@@ -13,12 +14,13 @@ if(isset($_SESSION['auth']))
     header("Location: index.php");
     exit(0);
 }
+
 include("includes/header.php");
 include("includes/navbar.php");
 ?>
 
 
-<div class="py-4">
+<div class="py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">

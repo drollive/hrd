@@ -27,6 +27,8 @@
     
     </head>
 
+    
+
 <body class="sb-nav-fixed">
     <?php include("includes/navbar-top.php"); ?>
     <div id="layoutSidenav">

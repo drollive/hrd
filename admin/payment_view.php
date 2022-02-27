@@ -60,7 +60,7 @@ include("includes/header.php");
                                             
                                             <td class="text-center">
                                                 <! --- Pass the parameter id to edit a row --->
-                                                <a href="payment_edit.php?id=<?= $home['house_id'] ?>" class="btn btn-info">Edit</a>
+                                                <a href="payment_edit.php?id=<?= $pay['payment_id'] ?>" class="btn btn-info">Edit</a>
                                             </td>
                                             <td class="text-center">
                                                 <input type="hidden" class="delete_id_payment" value="<?= $pay['payment_id'] ?>"> </input>

@@ -94,13 +94,13 @@ include("includes/header.php");
                                 
                                 <div class="col-md-12 mb-3">
                                     <label for="">Other Bill Description</label>
-                                    <textarea name="bill_desc"  id="summernote" class="form-control" rows="4"><?=$row['other_bill']?></textarea>
+                                    <textarea name="bill_desc"  id="summernote" class="form-control" rows="4"><?=$row['bill_desc']?></textarea>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="control-label" for="date">Due Date</label>
                                     <div class="col-sm-12">
                                         <div class="input-group date" id="datepicker">
-                                            <input type="text" class="form-control" value="<?=$row['due']?>">
+                                            <input name="due_date" type="text" class="form-control" value="<?=$row['due']?>">
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white d-block">
                                                     <i class="fa fa-calendar"></i>

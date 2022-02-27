@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('admin/config/db_con.php');
+include('config/db_con.php');
 
 #check if the button is clicked
 if(isset($_POST['register_btn']) && $_POST['g-recaptcha-response'] != "")
@@ -63,7 +63,7 @@ if(isset($_POST['register_btn']) && $_POST['g-recaptcha-response'] != "")
 #if someone will access outside:
 else
 {
-    header(Location: "register.php");
+    header("Location: register.php");
     exit(0);
 }
 

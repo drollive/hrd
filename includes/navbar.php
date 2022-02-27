@@ -14,7 +14,7 @@
           <a class="nav-link" href="about_us.php">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="house_post.php">Houses</a>
+          <a class="nav-link" href="house.php">Houses</a>
         </li>
 
         <?php if(isset($_SESSION['auth_user'])) : ?>
@@ -26,11 +26,9 @@
                 <?= $_SESSION['auth_user']['user_name']; ?>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="#">My Profile</a></li>
                 <li>
                   <form action="all_code.php" method="POST">
                     <button type="submit" name="logout_btn" class="dropdown-item">Logout</button>
-
                   </form>
                 </li>
               </ul>

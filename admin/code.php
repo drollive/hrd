@@ -71,20 +71,22 @@ if(isset($_POST['delete_btn_bill']))
 if(isset($_POST['update_bill']))
 {
     $tenant_id = $_POST['tenant_id'];
+    $bill_id = $_POST['bill_id'];
     $house_rent_pay = (is_numeric($_POST['house_rent_pay']) ? (int)$_POST['house_rent_pay'] : 0);
     $electric_bill = (is_numeric($_POST['electric_bill']) ? (int)$_POST['electric_bill'] : 0);
     $water_bill = (is_numeric($_POST['water_bill']) ? (int)$_POST['water_bill'] : 0);
     $other_bill = (is_numeric($_POST['other_bill']) ? (int)$_POST['other_bill'] : 0);
     $bill_desc = $_POST['bill_desc'];
 	$bill_status = $_POST['bill_status'] == true ? '1':'0';
-    $due_date = date('Y-m-d', strtotime($_POST['date']));
+    $due_date = date('Y-m-d', strtotime($_POST['due_date']));
 
     $total_bill = $electric_bill + $water_bill + $other_bill;
 	
 	$query = "UPDATE bills SET tenant_id='$tenant_id',house_rent_pay = '$house_rent_pay',
                 electric_bill = '$electric_bill', water_bill = '$water_bill',
                 other_bill = '$other_bill', bill_desc = '$bill_desc', bill_status ='$bill_status', 
-                due_date = '$due_date', bill_total = '$total_bill'";
+                due_date = '$due_date', bill_total = '$total_bill'
+                WHERE bill_id='$bill_id'";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
@@ -209,10 +211,9 @@ if(isset($_POST['update_house']))
     $house_price = (is_numeric($_POST['house_price']) ? (int)$_POST['house_price'] : 0);
     $house_desc = $_POST['house_desc'];
 	$house_status = $_POST['house_status'] == true ? '1':'0';
-	$house_avail = $_POST['house_avail'] == true ? '1':'0';
 	
-	$query = "UPDATE house SET house_address='$house_add', house_price='$house_price', house_desc='$house_desc', house_status='$house_status', 
-                house_avail='$house_avail' WHERE house_id='$house_id' ";
+	$query = "UPDATE house SET house_address='$house_add', house_price='$house_price', house_desc='$house_desc', house_status='$house_status'
+                WHERE house_id='$house_id' ";
     $query_run = mysqli_query($con, $query);
 
     
@@ -237,10 +238,9 @@ if(isset($_POST['add_house']))
     $house_price = (is_numeric($_POST['house_price']) ? (int)$_POST['house_price'] : 0);
 	$house_desc = $_POST['house_desc'];
 	$house_status = $_POST['house_status'] == true ? '1':'0';
-	$house_avail = $_POST['house_avail'] == true ? '1':'0';
 	
-	$query = "INSERT INTO house (house_address, house_price, house_desc,house_status,house_avail) 
-				VALUES ('$house_add ', '$house_price', '$house_desc', '$house_status', '$house_avail')";
+	$query = "INSERT INTO house (house_address, house_price, house_desc,house_status) 
+				VALUES ('$house_add ', '$house_price', '$house_desc', '$house_status')";
 				
 	$query_run = mysqli_query($con,$query);
 
@@ -303,11 +303,10 @@ if(isset($_POST['update_user']))
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $password = $_POST['password'];
     $role_as = $_POST['role_as'];
     $status = $_POST['status'] == true ? '1':'0';
 
-    $query = "UPDATE users SET fname='$fname', lname='$lname', email='$email', phone='$phone', password='$password', role_as='$role_as', status='$status'
+    $query = "UPDATE users SET fname='$fname', lname='$lname', email='$email', phone='$phone', role_as='$role_as', status='$status'
                 WHERE id='$user_id' ";
  
     $query_run = mysqli_query($con, $query);

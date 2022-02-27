@@ -57,10 +57,6 @@ include("includes/header.php");
                                         <input type="text" name="phone" value= "<?=$user['phone'];?>" class="form-control">
                                     </div>
                                     
-                                    <div class="col-md-6 mb-3">
-                                        <label for="">Password</label>
-                                        <input type="text" name="password" value= "<?=$user['password'];?>" class="form-control">
-                                    </div>
                                     
                                     <div class="col-md-6 mb-3">
                                         <label for="">Role</label>

@@ -264,6 +264,28 @@
         });
     </script>
 
+    <script>
+        $('#print').click(function(){
+            var _style = $('noscript').clone()
+            var _content = $('#report').clone()
+            var nw = window.open("","_blank","width=800,height=700");
+            nw.document.write(_style.html())
+            nw.document.write(_content.html())
+            nw.document.close()
+            nw.print()
+            setTimeout(function(){
+            nw.close()
+            },500)
+        })
+        $('#filter-report').submit(function(e){
+            e.preventDefault()
+            location.href = 'index.php?page=payment_report&'+$(this).serialize()
+        })
+    </script>
+
+
+
+
         
 
 

@@ -79,11 +79,9 @@ include("includes/header.php");
                                 }
                                 
                             ?>
-                        </tbody>
-                        <table>
-                        
+                            </tbody>
+
                         </table>
-                    </table>
                 </div>
 
 

@@ -65,7 +65,19 @@
                     </nav>
                 </div>
                 
-                <div class="sb-sidenav-menu-heading">Add Ons</div>
+                
+                <a class="nav-link collapsed <?= $page == 'monthly_report.php' || $page == 'balance_report.php' ? 'active': ''?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
+                    <div class="sb-nav-link-icon"><i class="fa fa-server"></i></div>
+                    Reports
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse <?= $page == 'monthly_report.php' || $page == 'balance_report.php' || $page == 'post_edit.php' ? 'show': ''?>" id="collapseReports" aria-labelledby="Reports" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link <?= $page == 'monthly_report.php' ? 'active': ''?>" href="monthly_report.php">Monthly Report</a>
+                        <a class="nav-link <?= $page == 'balance_report.php' ? 'active': ''?>" href="balance_report.php">Balance Report</a>
+                    </nav>
+                </div>
+
                 <a class="nav-link collapsed <?= $page == 'post_add.php' || $page == 'post_view.php' || $page == 'post_edit.php' ? 'active': ''?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePost" aria-expanded="false" aria-controls="collapsePost">
                     <div class="sb-nav-link-icon"><i class="fa fa-server"></i></div>
                     Posts
@@ -78,10 +90,6 @@
                     </nav>
                 </div>
 
-                <a class="nav-link <?= $page == 'reports.php' ? 'active': ''?>" href="reports.php">
-                    <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
-                    Reports    
-                </a>
 
             </div>
         </div>

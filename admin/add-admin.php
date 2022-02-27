@@ -56,6 +56,7 @@ include("includes/header.php");
                         <div class="col-md-6 mb-3">
                             <label for="">Status</label> <br/>
                             <input type="checkbox" name = "status"  width="70px" height="70px">
+                            <label for="checkbox">Active User</label>
                         </div>
                         
                         <div class="col-md-6 mb-3">
