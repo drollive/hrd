@@ -68,8 +68,8 @@ include("includes/header.php");
                                             </td>
 
                                             <td class="text-center">
-                                                <input type="hidden" class="delete_id_value" value="<?= $user['id'] ?>"> </input>
-                                                <a href="javascript:void(0)" class="delete_btn_ajax btn btn-danger">Delete</a> 
+                                                <input type="hidden" class="delete_id_value" value="<?php echo $user['id'] ?>"> </input>
+                                                <a href="javascript:void(0)" class="delete_user btn btn-danger">Delete</a> 
                                             </td>
                                         </tr>
                                         <?php
@@ -98,6 +98,7 @@ include("includes/header.php");
         </div>
     </div>
 </div>
+
 
 <?php
 

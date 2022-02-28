@@ -19,8 +19,7 @@ include("includes/header.php");
 include("includes/navbar.php");
 ?>
 
-
-<div class="py-5">
+<div class="py-4">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">

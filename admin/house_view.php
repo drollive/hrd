@@ -48,7 +48,7 @@ include("includes/header.php");
                                         <tr>
                                             <td class="text-center"><?= $home['house_id'] ?></td>
                                             <td class="text-center"><?= $home['house_address'] ?></td>
-                                            <td class="text-center"><?= $home['house_price'] ?></td>
+                                            <td class="text-center"><?= '₱'.$home['house_price'] ?></td>
                                             <td class="text-center"><?= $home['house_desc'] ?></td>
                                             <td class="text-center">
                                                 <?= $home['house_status'] == '1' ? 'Available':'Unavailable' ?>
@@ -61,7 +61,7 @@ include("includes/header.php");
                                             
                                             <td>
                                                 <input type="hidden" class="delete_id_house" value="<?= $home['house_id'] ?>"> </input>
-                                                <a href="javascript:void(0)" class="delete_btn_ajax btn btn-danger">Delete</a> 
+                                                <a href="javascript:void(0)" class="delete_house btn btn-danger">Delete</a> 
                                             </td>
                                         </tr>
                                         <?php

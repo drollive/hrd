@@ -61,10 +61,20 @@ include("includes/header.php");
                             <label for="">Payment Description</label>
                             <textarea name="payment_desc"  id="summernote" class="form-control" rows="4"></textarea>
                         </div>
+                        
                         <div class="col-md-12 mb-3">
                             <label class="control-label" for="date">Payment Date</label>
-                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date"/>
-                        </div>
+                            <div class="col-sm-12">
+                                <div class="input-group date" id="datepicker">
+                                    <input name="payment_date" type="text" class="form-control">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text bg-white d-block">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>    
 						
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" name="add_payment" class="btn btn-primary">Add Payment</button>

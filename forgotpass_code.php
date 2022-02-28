@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("admin/config/db_con.php"); # Path where database locates
+include("config/db_con.php"); # Path where database locates
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -36,7 +36,7 @@ function send_password_reset($get_fname, $get_email, $token)
 
     $email_template ="
         <h2> Hello </h2>
-        <h2> You received this email because tou are trying to recover your account on ELYSIUM </h2>
+        <h2> You received this email because tou are trying to recover your account</h2>
         <br></br>
         <a href= 'http://localhost/hrd/password_change.php?token=$token&email=$get_email'> Click this!</a>
     ";

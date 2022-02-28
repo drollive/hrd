@@ -1,12 +1,13 @@
     
     <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    <script src="assets/demo/chart-pie-demo.js"></script>
+    <script src="js/scripts.js"></script>
+
 
     <!-- Data Table -->
     <script>
@@ -45,14 +46,16 @@
         });
     </script>
 
-    <script src="js/sweetalert.min.js"></script>
+
+
+
 
      <!-- Delete User -->
     <script>
         $(document).ready(function() {
-            $('.delete_btn_ajax').click(function(e){
+            $('.delete_user').click(function(e){
             e.preventDefault();
-                // console.log('Hello'); i just checked if this shit is working
+                //console.log('Hello'); 
                 var deleteid = $(this).closest("tr").find('.delete_id_value').val();
                 //console.log(deleteid);
                 swal({
@@ -92,7 +95,7 @@
      <!-- Delete House-->
     <script>
         $(document).ready(function() {
-            $('.delete_btn_ajax').click(function(e){
+            $('.delete_house').click(function(e){
             e.preventDefault();
                 // console.log('Hello'); i just checked if this shit is working
                 var deleteid = $(this).closest("tr").find('.delete_id_value').val();
@@ -111,7 +114,7 @@
                                 type:"POST",
                                 url:"code.php",
                                 data:{
-                                    "delete_btn_users" : 1,
+                                    "delete_btn_house" : 1,
                                     "delete_id" : deleteid,
                                 },
                                 success: function (response){
@@ -134,7 +137,7 @@
     <!-- Delete Bill-->
     <script>
         $(document).ready(function() {
-            $('.delete_btn_ajax').click(function(e){
+            $('.delete_bill').click(function(e){
             e.preventDefault();
                 // console.log('Hello'); i just checked if this shit is working
                 var deleteid = $(this).closest("tr").find('.delete_id_value').val();
@@ -176,7 +179,7 @@
     <!-- Delete Tenant-->
     <script>
         $(document).ready(function() {
-            $('.delete_btn_ajax').click(function(e){
+            $('.delete_tenant').click(function(e){
             e.preventDefault();
                 // console.log('Hello'); i just checked if this shit is working
                 var deleteid = $(this).closest("tr").find('.delete_id_value').val();
@@ -218,7 +221,7 @@
     <!-- Delete Payment-->
     <script>
         $(document).ready(function() {
-            $('.delete_btn_ajax').click(function(e){
+            $('.delete_payment').click(function(e){
             e.preventDefault();
                 // console.log('Hello'); i just checked if this shit is working
                 var deleteid = $(this).closest("tr").find('.delete_id_value').val();
@@ -256,32 +259,15 @@
             });
         });
     </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <!-- Date Picker-->
+        <!-- Date Picker-->
     <script type="text/javascript">
         $(function() {
             $('#datepicker').datepicker();
         });
     </script>
 
-    <script>
-        $('#print').click(function(){
-            var _style = $('noscript').clone()
-            var _content = $('#report').clone()
-            var nw = window.open("","_blank","width=800,height=700");
-            nw.document.write(_style.html())
-            nw.document.write(_content.html())
-            nw.document.close()
-            nw.print()
-            setTimeout(function(){
-            nw.close()
-            },500)
-        })
-        $('#filter-report').submit(function(e){
-            e.preventDefault()
-            location.href = 'index.php?page=payment_report&'+$(this).serialize()
-        })
-    </script>
 
 
 

@@ -60,7 +60,7 @@ include("includes/header.php");
                                 
                                 
                                 <div class="col-md-6 mb-3">
-                                    <button type="submit" name="update_house" class="btn btn-primary">Update House</button>
+                                    <button type="submit" name="update_house"  onclick="return confirm('Are you sure you want to Edit?')" class="btn btn-primary">Update House</button>
                                 </div>
                                 
                             </div>

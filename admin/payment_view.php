@@ -24,8 +24,9 @@ include("includes/header.php");
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Name</th>
                                 <th class="text-center">Total Payment</th>
-                                <th class="text-center">Payment Date</th>
-                                <th class="text-center">Status</th>
+                                <th class="text-center">Total Balance</th>
+                                <th class="text-center">Payment Description</th>
+                                <th class="text-center">Date</th>
                                 <th class="text-center">Edit</th>
                                 <th class="text-center">Delete</th>
                             </tr>
@@ -34,38 +35,44 @@ include("includes/header.php");
                         <tbody>
                             <?php
                                 # To fetch data from table house
-                                $payment = "SELECT payments.*, concat(users.fname,' ',users.lname) AS name 
-                                            FROM payments
-                                            INNER JOIN bills
-                                            INNER JOIN tenant
-                                            INNER JOIN users
-                                            ON payments.bill_id = bills.bill_id AND bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                            WHERE payment_status != '2' ";
+                                $balance = 0;
+                                $bills = 0;
+                                $paid = 0;
+                                $payment = "SELECT p.*, concat(u.fname,' ',u.lname) AS name, b.bill_total,
+                                            DATE_FORMAT(p.payment_date, '%M %e, %Y') AS pay
+                                            FROM payments p 
+                                            INNER JOIN bills b 
+                                            INNER JOIN tenant t 
+                                            INNER JOIN users u 
+                                            ON p.bill_id = b.bill_id AND b.tenant_id = t.tenant_id AND t.users_id = u.id 
+                                            WHERE payment_status != '2'";
                                 $payment_run = mysqli_query($con,$payment);
-
+                                $row = mysqli_fetch_array($payment_run);
+                                
                                 #To check each data or table has data
                                 if(mysqli_num_rows($payment_run) > 0 )
                                 {
+                                    $paid = $row['payment_total'];
+                                    $bills = $row['bill_total'];
+                                    $balance = $row['bill_total'] - $row['payment_total'];
                                     foreach($payment_run as $pay)
-                                    {
+                                    { 
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $pay['payment_id'] ?></td>
                                             <td class="text-center"><?= $pay['name'] ?></td>
-                                            <td class="text-center"><?= $pay['payment_total'] ?></td>
-                                            <td class="text-center"><?= $pay['payment_date'] ?></td>
+                                            <td class="text-center"><?= '₱'.$pay['payment_total'] ?></td>
+                                            <td class="text-center"><?php echo '₱'.$balance ?></td>
+                                            <td class="text-center"><?= $pay['payment_desc'] ?></td>
+                                            <td class="text-center"><?= $pay['pay'] ?></td>
                                             <td class="text-center">
-                                                <?= $pay['payment_status'] == '1' ? 'Visible':'Hidden' ?>
-                                            </td class="text-center">
+                                                <a href="payment_edit.php?id=<?=$pay['payment_id']?>" class="btn btn-info">Edit</a>
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="hidden" class="delete_id_value" value="<?= $pay['payment_id'] ?>"> </input>
+                                                <a href="javascript:void(0)" class="delete_payment btn btn-danger">Delete</a> 
+                                            </td>
                                             
-                                            <td class="text-center">
-                                                <! --- Pass the parameter id to edit a row --->
-                                                <a href="payment_edit.php?id=<?= $pay['payment_id'] ?>" class="btn btn-info">Edit</a>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="hidden" class="delete_id_payment" value="<?= $pay['payment_id'] ?>"> </input>
-                                                <a href="javascript:void(0)" class="delete_btn_ajax btn btn-danger">Delete</a> 
-                                            </td>
                                         </tr>
                                         <?php
 

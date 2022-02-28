@@ -55,7 +55,7 @@ include("includes/header.php");
                                             <td class="text-center"><?=$tenant['email']?></td>
                                             <td class="text-center"><?=$tenant['phone']?></td>
                                             <td class="text-center"><?=$tenant['house_address']?></td>
-                                            <td class="text-center"><?=$tenant['house_price']?></td>
+                                            <td class="text-center">₱<?=$tenant['house_price']?></td>
                         
                                             <td class="text-center"> 
                                                 <?=$tenant['tenant_status'] == '1' ? 'Renting':'Not Renting'?>
@@ -65,7 +65,7 @@ include("includes/header.php");
                                             </td>
                                             <td class="text-center">
                                                 <input type="hidden" class="delete_id_value" value="<?= $tenant['tenant_id'] ?>"> </input>
-                                                <a href="javascript:void(0)" class="delete_btn_ajax btn btn-danger">Delete</a> 
+                                                <a href="javascript:void(0)" class="delete_tenant btn btn-danger">Delete</a> 
                                             </td>
 
                                         </tr>

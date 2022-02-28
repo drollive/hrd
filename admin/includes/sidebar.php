@@ -4,7 +4,7 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <div class="sb-sidenav-menu-heading">Main</div>
+                <div class="sb-sidenav-menu-heading"></div>
                 
                 <a class="nav-link <?= $page == 'index.php' ? 'active': ''?>" href="index.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -65,30 +65,6 @@
                     </nav>
                 </div>
                 
-                
-                <a class="nav-link collapsed <?= $page == 'monthly_report.php' || $page == 'balance_report.php' ? 'active': ''?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
-                    <div class="sb-nav-link-icon"><i class="fa fa-server"></i></div>
-                    Reports
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse <?= $page == 'monthly_report.php' || $page == 'balance_report.php' || $page == 'post_edit.php' ? 'show': ''?>" id="collapseReports" aria-labelledby="Reports" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link <?= $page == 'monthly_report.php' ? 'active': ''?>" href="monthly_report.php">Monthly Report</a>
-                        <a class="nav-link <?= $page == 'balance_report.php' ? 'active': ''?>" href="balance_report.php">Balance Report</a>
-                    </nav>
-                </div>
-
-                <a class="nav-link collapsed <?= $page == 'post_add.php' || $page == 'post_view.php' || $page == 'post_edit.php' ? 'active': ''?>" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePost" aria-expanded="false" aria-controls="collapsePost">
-                    <div class="sb-nav-link-icon"><i class="fa fa-server"></i></div>
-                    Posts
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse <?= $page == 'post_add.php' || $page == 'post_view.php' || $page == 'post_edit.php' ? 'show': ''?>" id="collapsePost" aria-labelledby="Post" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link <?= $page == 'post_add.php' ? 'active': ''?>" href="post_add.php">Add Post</a>
-                        <a class="nav-link <?= $page == 'post_view.php' ? 'active': ''?>" href="post_view.php">View Post</a>
-                    </nav>
-                </div>
 
 
             </div>

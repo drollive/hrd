@@ -23,19 +23,18 @@ include("includes/header.php");
                 if(isset($_GET['id']))
                 {
                     $payment_id = $_GET['id'];
-                    $payment_edit = "SELECT * FROM payments WHERE payment_id='$payment_id' LIMIT 1";
-                    $payment_edit_run = mysqli_query($con, $payment_edit); 
+                    $payment_edit = "SELECT *, DATE_FORMAT(payment_date, '%m/%d/%Y') AS pay FROM payments WHERE payment_id='$payment_id' LIMIT 1";
+                    $payment_run = mysqli_query($con, $payment_edit); 
 
                     #To check if the data is available inside the query
-                    if(mysqli_num_rows($payment_edit_run) > 0)
+                    if(mysqli_num_rows($payment_run) > 0)
                     {
-                        $row = mysqli_fetch_array($payment_edit_run);
+                        $row = mysqli_fetch_array($payment_run);
                         ?>
 
                         <form action="code.php" method="POST">
-                            
+                            <input type ="hidden" name= "payment_id" value="<?=$row['payment_id'] ?>"> </input>
                             <div class="row">
-                    
                                 <div class="col-md-12 mb-3">
                                     <label for="">Unpaid Bills</label>
                                     <?php
@@ -44,7 +43,7 @@ include("includes/header.php");
                                         if(mysqli_num_rows($bills_run ) > 0)
                                         {
                                             ?>
-                                            <select name="id" disabled="" required class="form-control">
+                                            <select name="bill_id" required class="form-control">
                                                 <option value="<?=$row['bill_id']?>"><?=$row['bill_id']?></option>
                                                 <?php
                                                     foreach($bills_run as $bills)
@@ -68,31 +67,32 @@ include("includes/header.php");
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">Name</label>
-                                    <input type="text" name="house_price" placeholder="Please input the price" required="required" class="form-control">
-                                </div>
-
-                                <div class="col-md-12 mb-3">
                                     <label for="">Payment Total</label>
-                                    <input type="text" name="payment_total" placeholder="Please input the price" required="required" class="form-control">
+                                    <input type="text" name="total_payment" value="<?=$row['payment_total']?>" placeholder="Please input the price" required="required" class="form-control">
                                 </div>
 
                                 <div class="col-md-12 mb-3">
                                     <label for="">Payment Description</label>
-                                    <textarea name="house_desc" id="summernote"  class="form-control" rows="4"><?= $row['house_desc'] ?></textarea>
+                                    <textarea name="payment_desc" id="summernote" class="form-control" rows="4"><?= $row['payment_desc'] ?></textarea>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label class="control-label" for="date">Payment Date</label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group date" id="datepicker">
+                                            <input name="payment_date" type="text" class="form-control" value="<?=$row['pay']?>">
+                                            <span class="input-group-append">
+                                                <span class="input-group-text bg-white d-block">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                                     
-                                
-                                <div class="col-md-6 mb-3">
-                                    <label for="">Payment Status</label> <br/>
-                                    <input type="checkbox" name = "payment_status"  width="70px" height="70px">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="submit" name="update_payment"  onclick="return confirm('Are you sure you want to Edit?')" class="btn btn-primary">Update Payment</button>
                                 </div>
-                                
-                        
-                                <div class="col-md-6 mb-3">
-                                    <button type="submit" name="add_payment" class="btn btn-primary">Add Payment</button>
-                                </div>
-                                
                             </div>
                         </form>
                         

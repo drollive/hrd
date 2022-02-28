@@ -31,7 +31,9 @@ include("includes/header.php");
                                     {
                                        # To fetch data from table house
                                        $user_id = $_SESSION['auth_user']['user_id'];
-                                        $bill = "SELECT *, concat(users.fname,' ',users.lname) AS name, users.id
+                                        $bill = "SELECT concat(users.fname,' ',users.lname) AS name, users.id,
+                                                    DATE_FORMAT(bills.due_date, '%M %e, %Y') AS due, bills.bill_status,
+                                                    bills.bill_id, bills.bill_total
                                                     FROM bills
                                                     INNER JOIN tenant
                                                     INNER JOIN users
@@ -48,8 +50,8 @@ include("includes/header.php");
                                                 <tr>
                                                     <td class="text-center"><?= $bill['bill_id'] ?> </td>
                                                     <td class="text-center"><?= $bill['name']?></td>
-                                                    <td class="text-center"><?= $bill['bill_total'] ?></td>
-                                                    <td class="text-center"><?= $bill['due_date']?></td>
+                                                    <td class="text-center">₱<?=$bill['bill_total'] ?></td>
+                                                    <td class="text-center"><?= $bill['due']?></td>
                                                     <td class="text-center">
                                                         <?= $bill['bill_status'] == '1' ? 'Paid':'Unpaid' ?>
                                                     </td>
@@ -62,7 +64,7 @@ include("includes/header.php");
                                         {
                                             ?>
                                             <tr>
-                                                <td colspan="6"> No Record Found</td>
+                                                <td colspan="9"> No Record Found</td>
                                             </tr>
                                             <?php
                                         }
