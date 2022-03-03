@@ -25,7 +25,7 @@ include("includes/header.php");
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Address</th>
                                 <th class="text-center">Price</th>
-                                <th class="text-center">House Desc</th>
+                                <th class="text-center">House Description</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Edit</th>
                                 <th class="text-center">Delete</th>

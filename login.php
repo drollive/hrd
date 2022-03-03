@@ -19,9 +19,10 @@ include("includes/header.php");
 include("includes/navbar.php");
 ?>
 
-<div class="py-4">
-    <div class="container">
-        <div class="row justify-content-center">
+<div id="intro" class="bg-image shadow-2-strong">
+    <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+          <div class="row justify-content-center">
             <div class="col-md-4">
                 <?php include("message.php"); ?>
                 <div class="card">

@@ -38,7 +38,7 @@ if(isset($_POST['login_btn']))
         #redirect to tenant's dashboard
         if($_SESSION['auth_role'] == '1') # if the user is tenant
         {
-            $_SESSION["message"] = "You are logged in!";
+            $_SESSION["message"] = "Welcome to Dashboard";
             header('Location: admin/index.php');
             exit(0);
         }
@@ -46,7 +46,7 @@ if(isset($_POST['login_btn']))
         #redirect to house owner's  dashboard
         elseif($_SESSION['auth_role'] == '0') # if the user is the house owner
         {
-            $_SESSION["message"] = "Welcome to Dashboard";
+            $_SESSION["message"] = "You are logged in!";
             header('Location: tenant/index.php');
             exit(0);
         }

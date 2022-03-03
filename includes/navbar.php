@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-  <a class="navbar-brand ps-3 " href="index.php"><img src=assets/images/logo.png alt="" width="100" height="100"></a>
+  <a class="navbar-brand ps-3 " href="index.php"><img src=images/logo.png alt="" width="100" height="100"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,7 +19,7 @@
 
         <?php if(isset($_SESSION['auth_user'])) : ?>
             <li class="nav-item">
-               <a class="nav-link" href="tenant_dashboard.php">Dashboard</a>
+               <a class="nav-link" href="tenant/index.php">Dashboard</a>
             </li>
             <li class="nav-item dropdown">  
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -13,7 +13,7 @@ $con = mysqli_connect("$host","$username","$password","$database");
 
 # For connection failed
 if (!$con) 
-{   header("Location: ../errors/db_error.php");
+{   
     die();
   }
 ?>

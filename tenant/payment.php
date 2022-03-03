@@ -9,7 +9,7 @@ include("includes/header.php");
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Bill Records
+                    <h4>Payment Records
                     </h4>
                 </div>
                 <div class="card-body">
@@ -20,6 +20,7 @@ include("includes/header.php");
                                         <th class="text-center">ID</th>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Total Payment</th>
+                                        <th class="text-center">Payment Description</th>
                                         <th class="text-center">Payment Date</th>
                                     </tr>
                                 </thead> 
@@ -28,7 +29,8 @@ include("includes/header.php");
                                     <?php
                                     if(isset($_SESSION['auth_user']))
                                     {
-                                       # To fetch data from table house
+                                       # To fetch data from table 
+                                       $user_id = $_SESSION['auth_user']['user_id'];
                                        $payment = "SELECT payments.*, concat(users.fname,' ',users.lname) AS name,
                                                     DATE_FORMAT(payments.payment_date, '%M %e, %Y') AS pay
                                                     FROM payments
@@ -36,7 +38,7 @@ include("includes/header.php");
                                                     INNER JOIN tenant
                                                     INNER JOIN users
                                                     ON payments.bill_id = bills.bill_id AND bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                                    WHERE payment_status != '2' ";
+                                                    WHERE payment_status != '2'AND users.id={$user_id} ";
                                         $payment_run = mysqli_query($con,$payment);
                                         #To check each data or table has data
                                         if(mysqli_num_rows($payment_run) > 0 )
@@ -48,6 +50,7 @@ include("includes/header.php");
                                                     <td class="text-center"><?= $pay['payment_id'] ?></td>
                                                     <td class="text-center"><?= $pay['name'] ?></td>
                                                     <td class="text-center">₱<?=$pay['payment_total'] ?></td>
+                                                    <td class="text-center">₱<?=$pay['payment_desc'] ?></td>
                                                     <td class="text-center"><?= $pay['pay'] ?></td>
                                                 
                                                 </tr>

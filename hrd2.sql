@@ -129,7 +129,6 @@ INSERT INTO `tenant` (`tenant_id`, `users_id`, `house_id`, `tenant_status`, `dat
 --
 -- Table structure for table `users`
 --
-
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `fname` varchar(191) NOT NULL,

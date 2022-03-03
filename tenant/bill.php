@@ -20,6 +20,7 @@ include("includes/header.php");
                                         <th class="text-center">ID</th>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Total Bill</th>
+                                        <th class="text-center">Bil Description</th>
                                         <th class="text-center">Due Date</th>
                                         <th class="text-center">Status</th>
                                     </tr>
@@ -33,7 +34,7 @@ include("includes/header.php");
                                        $user_id = $_SESSION['auth_user']['user_id'];
                                         $bill = "SELECT concat(users.fname,' ',users.lname) AS name, users.id,
                                                     DATE_FORMAT(bills.due_date, '%M %e, %Y') AS due, bills.bill_status,
-                                                    bills.bill_id, bills.bill_total
+                                                    bills.bill_id, bills.bill_total, bills.bill_desc
                                                     FROM bills
                                                     INNER JOIN tenant
                                                     INNER JOIN users
@@ -51,11 +52,11 @@ include("includes/header.php");
                                                     <td class="text-center"><?= $bill['bill_id'] ?> </td>
                                                     <td class="text-center"><?= $bill['name']?></td>
                                                     <td class="text-center">₱<?=$bill['bill_total'] ?></td>
+                                                    <td class="text-center"><?=$bill['bill_desc'] ?></td>
                                                     <td class="text-center"><?= $bill['due']?></td>
                                                     <td class="text-center">
                                                         <?= $bill['bill_status'] == '1' ? 'Paid':'Unpaid' ?>
                                                     </td>
-                                                
                                                 </tr>
                                                 <?php
                                             }

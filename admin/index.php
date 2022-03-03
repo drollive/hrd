@@ -185,7 +185,7 @@ include("includes/header.php");
                     ?>
 
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="balance_report.php">View Details</a>
+                    <a class="small text-white stretched-link" href="tenant_view.php">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
@@ -280,7 +280,7 @@ include("includes/header.php");
                                 <tr>
                                     <th class="text-center">Name</th>
                                     <th class="text-center">Total Bill</th>
-                                    <th class="text-center">Due Date MM/DD/YYYY</th>
+                                    <th class="text-center">Due Date</th>
                             </thead> 
 
                             <tbody>
