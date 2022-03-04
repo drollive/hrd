@@ -19,7 +19,6 @@ include("includes/header.php");
                     <table id="myDataTable" class="table table-bordered table-stripe">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
                                 <th class="text-center">Address</th>
                                 <th class="text-center">Price</th>
                                 <th class="text-center">House Description</th>
@@ -40,7 +39,6 @@ include("includes/header.php");
                                     {
                                         ?>
                                         <tr>
-                                            <td class="text-center"><?= $home['house_id'] ?></td>
                                             <td class="text-center"><?= $home['house_address'] ?></td>
                                             <td class="text-center"><?= $home['house_price'] ?></td>
                                             <td class="text-center"><?= $home['house_desc'] ?></td>
@@ -57,7 +55,7 @@ include("includes/header.php");
                                 {
                                     ?>
                                     <tr>
-                                            <td colspan="6"> No Record Found</td>
+                                            <td colspan="9"> No Record Found</td>
                                     </tr>
                                     <?php
                                 

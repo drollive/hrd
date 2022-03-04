@@ -61,7 +61,7 @@ include("includes/navbar.php");
             </div>
         </div>
     </div>
-</body>
+</div>
 
 <?php
 
