@@ -20,6 +20,7 @@ include("includes/header.php");
                                         <th class="text-center">Payment Invoice</th>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Total Payment</th>
+                                        <th class="text-center">Balance</th>
                                         <th class="text-center">Payment Description</th>
                                         <th class="text-center">Payment Date</th>
                                     </tr>
@@ -31,7 +32,7 @@ include("includes/header.php");
                                     {
                                        # To fetch data from table 
                                        $user_id = $_SESSION['auth_user']['user_id'];
-                                       $payment = "SELECT payments.*, concat(users.fname,' ',users.lname) AS name,
+                                       $payment = "SELECT payments.*, concat(users.fname,' ',users.lname) AS name, bills
                                                     DATE_FORMAT(payments.payment_date, '%M %e, %Y') AS pay
                                                     FROM payments
                                                     INNER JOIN bills
@@ -50,7 +51,8 @@ include("includes/header.php");
                                                     <td class="text-center"><?= $pay['payment_id'] ?></td>
                                                     <td class="text-center"><?= $pay['name'] ?></td>
                                                     <td class="text-center">₱<?=$pay['payment_total'] ?></td>
-                                                    <td class="text-center">₱<?=$pay['payment_desc'] ?></td>
+                                                    <td class="text-center"><?php echo '₱'.$pay['bill_total'] - $pay['payment_total']?></td>
+                                                    <td class="text-center"><?=$pay['payment_desc'] ?></td>
                                                     <td class="text-center"><?= $pay['pay'] ?></td>
                                                 
                                                 </tr>

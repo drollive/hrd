@@ -35,9 +35,7 @@ include("includes/header.php");
                         <tbody>
                             <?php
                                 # To fetch data from table house
-                                $balance = 0;
-                                $bills = 0;
-                                $paid = 0;
+                            
                                 $payment = "SELECT p.*, concat(u.fname,' ',u.lname) AS name, b.bill_total,
                                             DATE_FORMAT(p.payment_date, '%M %e, %Y') AS pay
                                             FROM payments p 
@@ -52,17 +50,15 @@ include("includes/header.php");
                                 #To check each data or table has data
                                 if(mysqli_num_rows($payment_run) > 0 )
                                 {
-                                    $paid = $row['payment_total'];
-                                    $bills = $row['bill_total'];
-                                    $balance = $row['bill_total'] - $row['payment_total'];
                                     foreach($payment_run as $pay)
                                     { 
+                                        
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $pay['payment_id'] ?></td>
                                             <td class="text-center"><?= $pay['name'] ?></td>
                                             <td class="text-center"><?= '₱'.$pay['payment_total'] ?></td>
-                                            <td class="text-center"><?php echo '₱'.$balance ?></td>
+                                            <td class="text-center"><?php echo '₱'.$pay['bill_total'] - $pay['payment_total']?></td>
                                             <td class="text-center"><?= $pay['payment_desc'] ?></td>
                                             <td class="text-center"><?= $pay['pay'] ?></td>
                                             <td class="text-center">
@@ -75,6 +71,8 @@ include("includes/header.php");
                                             
                                         </tr>
                                         <?php
+
+                                        
 
                                     }
                                 }

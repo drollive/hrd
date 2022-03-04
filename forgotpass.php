@@ -11,18 +11,9 @@ include("includes/navbar.php");
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
+                <?php include("message.php"); ?>
                     <div class="card shadow-lg border-0 rounded-lg mt-1">
-                        <?php
-                            if(isset($_SESSION['status']))
-                            {
-                                ?>
-                                <div class=" alert alert-warning">
-                                    <h5 class="text-center"><?=$_SESSION['status']; ?></h5>
-                                </div>
-                                <?php
-                                unset($_SESSION['status']);
-                            }
-                        ?>
+                        
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Password Recovery</h3></div>
                         <div class="card-body">
                             <div class="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div>

@@ -81,7 +81,7 @@ if(isset($_POST['update_bill']))
 	$bill_status = $_POST['bill_status'] == true ? '1':'0';
     $due_date = date('Y-m-d', strtotime($_POST['due_date']));
 
-    $total_bill = $electric_bill + $water_bill + $other_bill;
+    $total_bill =  $house_rent_pay + $electric_bill + $water_bill + $other_bill;
 	
 	$query = "UPDATE bills SET tenant_id='$tenant_id',house_rent_pay = '$house_rent_pay',
                 electric_bill = '$electric_bill', water_bill = '$water_bill',
@@ -133,8 +133,6 @@ if(isset($_POST['add_bill']))
         exit(0);
     }
 }
-
-
 # Tenant's table CRUD 
 if(isset($_POST['delete_btn_tenant']))
 {
@@ -193,8 +191,6 @@ if(isset($_POST['add_tenant']))
         exit(0);
     }
 }
-
-
 
 # House's table CRUD 
 if(isset($_POST['delete_btn_house']))
@@ -258,7 +254,6 @@ if(isset($_POST['add_house']))
         exit(0);
     }
 }
-
 
 # User's table CRUD
 
@@ -325,5 +320,3 @@ if(isset($_POST['update_user']))
         exit(0);
     }
 }
-
-

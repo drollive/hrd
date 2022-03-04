@@ -221,7 +221,7 @@ include("includes/header.php");
                                             INNER JOIN users u 
                                             ON p.bill_id = b.bill_id AND b.tenant_id = t.tenant_id AND t.users_id = u.id 
                                             WHERE payment_status != '2'
-                                            ORDER BY pay ASC LIMIT 5";
+                                            ORDER BY pay ASC LIMIT 10";
                                 $payment_run = mysqli_query($con,$payment);
                                 $row = mysqli_fetch_array($payment_run);
                                
@@ -231,14 +231,11 @@ include("includes/header.php");
                                 {
                                     foreach($payment_run as $pay)
                                     { 
-                                        $paid = $row['payment_total'];
-                                        $bills = $row['bill_total'];
-                                        $balance = $row['bill_total'] - $row['payment_total'];
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $pay['name'] ?></td>
                                             <td class="text-center"><?= '₱'.$pay['payment_total'] ?></td>
-                                            <td class="text-center"><?php echo '₱'.$balance ?></td>
+                                            <td class="text-center"><?php echo '₱'.$pay['bill_total'] - $pay['payment_total']?></td>
                                             <td class="text-center"><?= $pay['pay'] ?></td>
                                         </tr>
                                         <?php
@@ -293,7 +290,7 @@ include("includes/header.php");
                                             INNER JOIN users
                                             ON bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
                                             WHERE bill_status = 0 
-                                            ORDER BY due ASC LIMIT 5";
+                                            ORDER BY due ASC LIMIT 10";
                                 $bill_run = mysqli_query($con,$bill);
                                 #To check each data or table has data
                             

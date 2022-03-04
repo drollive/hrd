@@ -19,22 +19,11 @@ include("includes/navbar.php");
 
 <div id="intro" class="bg-image shadow-2-strong">
     <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
-       
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <?php
-                            if(isset($_SESSION['status']))
-                            {
-                                ?>
-                                <div class=" alert alert-warning">
-                                    <h5 class="text-center"><?=$_SESSION['status']; ?></h5>
-                                </div>
-                                <?php
-                                unset($_SESSION['status']);
-                            }
-                        ?>
+            <div class="row justify-content-center">  
+                <div class="col-lg-5">
+                <?php include("message.php"); ?>  
+                    <div class="card shadow-lg border-0 rounded-lg mt-1">
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Password Recovery</h3></div>
 
                         <div class="card-body">

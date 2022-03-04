@@ -36,7 +36,7 @@ function send_password_reset($get_fname, $get_email, $token)
 
     $email_template ="
         <h2> Hello </h2>
-        <h2> You received this email because tou are trying to recover your account</h2>
+        <h2> You received this email because you are trying to recover your account</h2>
         <br></br>
         <a href= 'http://localhost/hrd/password_change.php?token=$token&email=$get_email'> Click this!</a>
     ";
@@ -70,7 +70,7 @@ if(isset($_POST['forgot_pass']))
         {
             #function to send password reset email
             send_password_reset($get_fname, $get_email, $token);
-            $_SESSION['status'] = "We have sent you a link to your email";
+            $_SESSION['message'] = "We have sent you a link to your email";
             header("Location: forgotpass.php");
             exit(0);
 
@@ -78,7 +78,7 @@ if(isset($_POST['forgot_pass']))
         }
         else
         {
-            $_SESSION['status'] = "Something went wrong!";
+            $_SESSION['message'] = "Something went wrong!";
             header("Location: forgotpass.php");
             exit(0);
 
@@ -87,7 +87,7 @@ if(isset($_POST['forgot_pass']))
     #if no email found in the database
     else
     {
-        $_SESSION['status'] = "No Email Found";
+        $_SESSION['message'] = "No Email Found";
         header("Location: forgotpass.php");
         exit(0);
 
@@ -127,20 +127,20 @@ if(isset($_POST['update_pass']))
                         $update_token = "UPDATE users SET verify_token='$new_token' WHERE verify_token='$token' LIMIT 1";
                         $update_token_run = mysqli_query($con, $update_token);
 
-                        $_SESSION['status'] = "New Password Successfully Updated!";
+                        $_SESSION['message'] = "New Password Successfully Updated!";
                         header("Location: login.php");
                         exit(0);
                     }
                     else
                     {
-                        $_SESSION['status'] = "Something Went Wrong. Password did not update!";
+                        $_SESSION['message'] = "Something Went Wrong. Password did not update!";
                         header("Location: password_change.php?token=$token&email=$email");
                         exit(0);
                     }
                 }
                 else
                 {
-                    $_SESSION['status'] = "Password and Confirm password did not match!";
+                    $_SESSION['message'] = "Password and Confirm password did not match!";
                     header("Location: password_change.php?token=$token&email=$email");
                     exit(0);
                 }
@@ -148,21 +148,21 @@ if(isset($_POST['update_pass']))
             }
             else
             {
-                $_SESSION['status'] = "Invalid Token!";
+                $_SESSION['message'] = "Invalid Token!";
                 header("Location: password_change.php?token=$token&email=$email");
                 exit(0);
             }
         }
         else
         {
-            $_SESSION['status'] = "All fields are required!";
+            $_SESSION['message'] = "All fields are required!";
             header("Location: password_change.php?token=$token&email=$email");
             exit(0);
         }
     }
     else
     {
-        $_SESSION['status'] = "No Token Available";
+        $_SESSION['message'] = "No Token Available";
         header("Location: password_change.php?token=$token&email=$email");
         exit(0);
     }
