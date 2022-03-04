@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2022 at 06:32 AM
+-- Generation Time: Mar 04, 2022 at 01:39 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `hrd2`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_payment` (IN `bill` INT(191), IN `total` INT(20), IN `description` TEXT, IN `pay_date` DATE)  INSERT INTO payments (bill_id, payment_total, payment_desc, payment_date) 
+VALUES (bill, total, description, pay_date)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_btn_bill` (INOUT `bill` INT(191))  UPDATE bills SET bill_status=2 WHERE bill_id=bill LIMIT 1$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_btn_payment` (INOUT `payment` TINYINT(1))  UPDATE payments SET payment_status =2 WHERE payment_id=payment LIMIT 1$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `forgotPass_get` (IN `mail` VARCHAR(191), IN `token` VARCHAR(200))  SELECT * FROM users WHERE email=mail AND verify_token=token LIMIT 1$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Login_get` (IN `mail` VARCHAR(191), IN `pass` VARCHAR(191))  SELECT * FROM users WHERE email=mail AND password=pass$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_payment` (IN `payment` INT(191), IN `bill` INT(191), IN `total` INT(20), IN `description` TEXT, IN `pay_date` DATE)  UPDATE payments SET payment_id= payment,bill_id=bill,payment_total=total,payment_desc=description,payment_date=pay_date WHERE payment_id=payment LIMIT 1$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `view_payment` ()  SELECT * FROM payments$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -46,11 +67,7 @@ CREATE TABLE `bills` (
 --
 
 INSERT INTO `bills` (`bill_id`, `tenant_id`, `house_rent_pay`, `electric_bill`, `water_bill`, `other_bill`, `bill_desc`, `bill_status`, `due_date`, `bill_total`, `created_at`) VALUES
-(14, 24, 10000, 600, 699, 1000, '', 0, '2022-03-01', 2299, '2022-02-23 03:55:12'),
-(18, 24, 10000, 600, 80, 555, '', 0, '2022-04-20', 1235, '2022-02-26 23:53:41'),
-(19, 24, 10000, 600, 700, 99, '', 2, '2022-05-11', 1399, '2022-02-26 23:54:11'),
-(20, 24, 10000, 900, 500, 600, '', 2, '2022-06-02', 2000, '2022-02-26 23:54:38'),
-(21, 25, 8000, 1000, 500, 500, '', 0, '1970-01-01', 10000, '2022-02-27 00:31:43');
+(22, 24, 10000, 123, 134, 123, '', 2, '1970-01-01', 10380, '2022-03-03 13:24:51');
 
 -- --------------------------------------------------------
 
@@ -94,14 +111,6 @@ CREATE TABLE `payments` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`payment_id`, `bill_id`, `payment_total`, `payment_desc`, `payment_date`, `payment_status`, `created_at`) VALUES
-(9, 18, 235, 'Please pay this next week.', '1970-01-01', 2, '2022-02-28 04:28:14'),
-(10, 14, 200, '<p style=\"user-select: auto;\">Okay&nbsp;</p>', '1970-01-01', 0, '2022-02-28 05:06:41');
-
 -- --------------------------------------------------------
 
 --
@@ -129,6 +138,7 @@ INSERT INTO `tenant` (`tenant_id`, `users_id`, `house_id`, `tenant_status`, `dat
 --
 -- Table structure for table `users`
 --
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `fname` varchar(191) NOT NULL,
@@ -147,14 +157,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `phone`, `password`, `verify_token`, `role_as`, `status`, `created_at`) VALUES
-(1, 'Judell', 'Mejorada', 'mejoradajudell15@gmail.com', '09774839769', '123', 'b8a0d5f961eacb3f1c855968541152e4elysium', 1, 1, '2022-01-22 11:59:43'),
+(1, 'Judell', 'Mejorada', 'mejoradajudell15@gmail.com', '09774839769', 'ayawkona', '25b5f87a323d746527b4e5e2cd9df66e', 1, 1, '2022-01-22 11:59:43'),
 (26, 'Mark', 'Banaba', 'markbanaba@yahoo.com', '09635056582', 'qqq', '', 0, 1, '2022-02-25 07:24:20'),
 (27, 'Anne', 'Polland', 'anne@gmail.com', '09702832323', '123', '', 0, 1, '2022-02-26 11:20:10'),
 (28, 'Loraine', 'Naval', 'loraine5@gmail.com', '09812324143', 'qqq', '', 0, 1, '2022-02-26 18:00:21'),
-(29, 'Hannah', 'Cordelia', 'cordelia101', '09702832323', '123', '', 0, 1, '2022-02-26 23:04:53'),
+(29, 'Hannah', 'Cordelia', 'cordelia101@gmail.com', '09702832323', '123', '', 0, 2, '2022-02-26 23:04:53'),
 (30, 'Warren', 'Sy', 'warrrensy@gmail.com', '09702832322', '1234567', '', 0, 1, '2022-02-26 23:07:19'),
 (31, 'John Aron', 'Locked', 'johnaron@gmail.com', '09702832326', 'locked', '', 0, 2, '2022-02-26 23:08:20'),
-(32, 'Daniel', 'Fegason', 'danielfegason@gmail.com', '09102832324', 'rolly', '', 0, 2, '2022-02-26 23:09:46');
+(32, 'Daniel', 'Fegason', 'danielfegason@gmail.com', '09102832324', 'rolly', '', 0, 2, '2022-02-26 23:09:46'),
+(33, 'Loraine', 'Naval', 'meme@gmail.com', '0971237123', '111', '', 0, 1, '2022-03-02 16:43:02'),
+(34, 'Judell', 'Mejorada', 'mejoradajudell@yahoo.com', '9635056582', 'okay', '', 0, 0, '2022-03-03 14:24:37');
 
 --
 -- Indexes for dumped tables
@@ -198,7 +210,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `bill_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `house`
@@ -210,7 +222,7 @@ ALTER TABLE `house`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tenant`
@@ -222,7 +234,7 @@ ALTER TABLE `tenant`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
