@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2022 at 01:39 AM
+-- Generation Time: Mar 04, 2022 at 02:49 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -157,7 +157,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `phone`, `password`, `verify_token`, `role_as`, `status`, `created_at`) VALUES
-(1, 'Judell', 'Mejorada', 'mejoradajudell15@gmail.com', '09774839769', 'ayawkona', '25b5f87a323d746527b4e5e2cd9df66e', 1, 1, '2022-01-22 11:59:43'),
+(1, 'Judell', 'Mejorada', 'mejoradajudell15@gmail.com', '09774839769', '77777', 'cf80b7746fb3a61f0b7593c632cf66eaelysium', 1, 1, '2022-01-22 11:59:43'),
 (26, 'Mark', 'Banaba', 'markbanaba@yahoo.com', '09635056582', 'qqq', '', 0, 1, '2022-02-25 07:24:20'),
 (27, 'Anne', 'Polland', 'anne@gmail.com', '09702832323', '123', '', 0, 1, '2022-02-26 11:20:10'),
 (28, 'Loraine', 'Naval', 'loraine5@gmail.com', '09812324143', 'qqq', '', 0, 1, '2022-02-26 18:00:21'),
@@ -166,7 +166,8 @@ INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `phone`, `password`, `veri
 (31, 'John Aron', 'Locked', 'johnaron@gmail.com', '09702832326', 'locked', '', 0, 2, '2022-02-26 23:08:20'),
 (32, 'Daniel', 'Fegason', 'danielfegason@gmail.com', '09102832324', 'rolly', '', 0, 2, '2022-02-26 23:09:46'),
 (33, 'Loraine', 'Naval', 'meme@gmail.com', '0971237123', '111', '', 0, 1, '2022-03-02 16:43:02'),
-(34, 'Judell', 'Mejorada', 'mejoradajudell@yahoo.com', '9635056582', 'okay', '', 0, 0, '2022-03-03 14:24:37');
+(34, 'Judell', 'Mejorada', 'mejoradajudell@yahoo.com', '9635056582', 'okay', '', 0, 0, '2022-03-03 14:24:37'),
+(35, 'Kelly', 'Lamsen', 'lamsen@gmail.com', '9702832325', '111', '', 0, 0, '2022-03-04 00:49:10');
 
 --
 -- Indexes for dumped tables
@@ -234,7 +235,7 @@ ALTER TABLE `tenant`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
