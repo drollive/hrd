@@ -19,24 +19,26 @@ include("includes/navbar.php");
 
 <div id="intro" class="bg-image shadow-2-strong">
     <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+       
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-5">
+                <div class="col-md-4">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <?php
                             if(isset($_SESSION['status']))
                             {
                                 ?>
                                 <div class=" alert alert-warning">
-                                    <h5 class="text-center"><?=$_SESSION['status']; ?></h5> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <h5 class="text-center"><?=$_SESSION['status']; ?></h5>
                                 </div>
                                 <?php
                                 unset($_SESSION['status']);
                             }
                         ?>
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Password Recovery</h3></div>
+
                         <div class="card-body">
-                            <form action="forgotpass_code.php" method="POST">
+                            <form action="forgot_pass_code.php" method="POST">
                                 <input type="hidden" name="password_token" value="<?php if(isset($_GET['token'])) {echo $_GET['token']; } ?>"> </input>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="inputEmail" name="email" value="<?php if(isset($_GET['email'])) {echo $_GET['email']; } ?>" required type="email" placeholder="name@gmail.com" />
@@ -60,8 +62,9 @@ include("includes/navbar.php");
                 </div>
             </div>
         </div>
+        
+        </div>
     </div>
-</div>
 
 <?php
 

@@ -50,7 +50,7 @@ include("includes/header.php");
                     <i class="fa fa-users" style="font-size:40px;color:white"></i>
                 </div>
                     <?php
-                        $dash_users_query = "SELECT * FROM users";
+                        $dash_users_query = "SELECT * FROM users WHERE status != 2";
                         $dash_users_query_run = mysqli_query($con, $dash_users_query);
                         if($users_total = mysqli_num_rows($dash_users_query_run))
                         {
