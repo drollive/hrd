@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
 
     $mail->send();
     $alert = '<div class="alert alert-warning alert-dismissible fade show" role="alert" > <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <h5 class="text-center">Message Sent! Thank you for contacting us!</h5>
+                <h5 class="text-center">Message Sent!</h5>
               </div>';
   } catch (Exception $e){
     $alert = '<div class="alert-error">

@@ -196,7 +196,7 @@ include("includes/header.php");
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <p class="fs-5 text-center">Payments</p>
+                    <h5 class="text-center">Payments</h5>
                 </div>
                     <div class="card-body">
                     <div class="table-responsive">
@@ -212,7 +212,6 @@ include("includes/header.php");
                             <tbody>
                             <?php
                                 # To fetch data from tables
-                                $bill = $balance = 0;
                                 $payment = "SELECT p.*, concat(u.fname,' ',u.lname) AS name, b.bill_total,
                                             DATE_FORMAT(p.payment_date, '%m/%d/%Y') AS pay
                                             FROM payments p 
@@ -266,9 +265,9 @@ include("includes/header.php");
     
 
         <div class="col-md-6">
-            <div class="card mb-4">
+            <div class="card">
                 <div class="card-header">
-                    <p class="fs-5 text-center">Bills</p>
+                    <h5 class="text-center">Bills</h5>
                 </div>
                     <div class="card-body">
                     <div class="table-responsive">
@@ -283,6 +282,7 @@ include("includes/header.php");
                             <tbody>
                             <?php
                                 # To fetch data from table house
+                                $bill = # To fetch data from table house
                                 $bill = "SELECT concat(users.fname,' ',users.lname) AS name,  DATE_FORMAT(bills.due_date, '%m/%d/%Y') AS due,
                                             bills.bill_total
                                             FROM bills
@@ -290,8 +290,9 @@ include("includes/header.php");
                                             INNER JOIN users
                                             ON bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
                                             WHERE bill_status = 0 
-                                            ORDER BY due ASC LIMIT 10";
+                                            ORDER BY due ASC LIMIT 5";
                                 $bill_run = mysqli_query($con,$bill);
+                                $row = mysqli_fetch_array($bill_run);
                                 #To check each data or table has data
                             
                                 if(mysqli_num_rows($bill_run) > 0 )
@@ -301,7 +302,7 @@ include("includes/header.php");
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $bill['name']?></td>
-                                            <td class="text-center">₱<?= $bill['bill_total'] ?></td>
+                                            <td class="text-center"><?=$bill['bill_total']?></td>
                                             <td class="text-center"><?= $bill['due']?></td>
                                         </tr>
                                         <?php

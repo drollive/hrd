@@ -48,7 +48,7 @@ include("includes/header.php");
                             <label for="">Role</label>
                             <select name="role_as" required class="form-control">
                                 <option value="">>--Select Role--</option>
-                                <option value="1">Owner</option>
+                                <option value="1">Landowner</option>
                                 <option value="0">Tenant</option>
                             </select>
                         </div>

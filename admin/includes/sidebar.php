@@ -64,6 +64,12 @@
                         <a class="nav-link <?= $page == 'payment_view.php' ? 'active': ''?>" href="payment_view.php">View Payments</a>
                     </nav>
                 </div>
+
+                <a class="nav-link <?= $page == 'logs.php' ? 'active': ''?>" href="logs.php">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Activity logs   
+                </a>
+
                 
 
 

@@ -73,7 +73,7 @@ include("includes/header.php");
                                     </div>
                                     
                                     <div class="col-md-6 mb-3">
-                                        <button type="submit"  onclick="return confirm('Are you sure you want to Edit?')" name="update_user" class="btn btn-primary">Update User</button>
+                                        <button type="submit"  onclick="return confirm('Are you sure you want to submit?')" name="update_user" class="btn btn-primary">Update User</button>
                                     </div>
                                     
                                 </div>
