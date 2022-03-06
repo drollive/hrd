@@ -89,10 +89,10 @@ if(isset($_POST['delete_btn_bill']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Deleted bill '.$bill_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
 
-    $query ="UPDATE bills SET bill_status=2 WHERE bill_id='$bill_id' LIMIT 1 ";
+    $query ="CALL sp_bill_delete('$bill_id')";
     $query_run = mysqli_query($con, $query);
 }
 if(isset($_POST['update_bill']))
@@ -113,14 +113,11 @@ if(isset($_POST['update_bill']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Updated bill for tenant '.$tenant_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
 
-	$query = "UPDATE bills SET tenant_id='$tenant_id',house_rent_pay = '$house_rent_pay',
-                electric_bill = '$electric_bill', water_bill = '$water_bill',
-                other_bill = '$other_bill', bill_desc = '$bill_desc', bill_status ='$bill_status', 
-                due_date = '$due_date', bill_total = '$total_bill'
-                WHERE bill_id='$bill_id'";
+	$query = "CALL sp_bill_update ('$bill_id','$tenant_id', '$house_rent_pay','$electric_bill', '$water_bill',
+                '$other_bill', '$bill_desc', '$bill_status', '$due_date','$total_bill')";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
@@ -156,8 +153,7 @@ if(isset($_POST['add_bill']))
         $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
 
-	$query = "INSERT INTO bills (tenant_id,house_rent_pay,electric_bill, water_bill,other_bill,bill_desc,bill_status, due_date, bill_total) 
-                VALUES ('$tenant_id', '$house_rent_pay','$electric_bill','$water_bill', '$other_bill','$bill_desc','$bill_status', '$due_date', '$total_bill')";
+	$query = "CALL sp_bill_add('$tenant_id', '$house_rent_pay','$electric_bill','$water_bill', '$other_bill','$bill_desc','$bill_status', '$due_date', '$total_bill')";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
