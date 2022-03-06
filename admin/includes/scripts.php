@@ -48,8 +48,6 @@
 
 
 
-
-
      <!-- Delete User -->
     <script>
         $(document).ready(function() {

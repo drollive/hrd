@@ -12,7 +12,7 @@ if(isset($_POST['login_btn']))
     $email = mysqli_real_escape_string($con, $_POST["email"]); #
     $password = mysqli_real_escape_string($con, $_POST["password"]);
 
-    $login_query = "CALL Login_get('$email', '$password')"; # limits 1 to return
+    $login_query = "SELECT * FROM users WHERE email='$email' AND password='$password' ";
     $login_query_run = mysqli_query($con, $login_query);
 
     #normal user

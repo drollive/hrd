@@ -36,7 +36,7 @@ include("includes/header.php");
                         <tbody>
                             <?php
                                 # To fetch data from table house
-                                $house = "SELECT * FROM house WHERE house_status != '2' ";
+                                $house = "SELECT * FROM house_view";
                                 $house_run = mysqli_query($con,$house);
 
                                 #To check each data or table has data

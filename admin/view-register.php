@@ -13,7 +13,7 @@ include("includes/header.php");
             
             <div class="card">
                 <div class="card-header">
-                    <h4>View Registered Users
+                    <h4>Registered Users
                         <a href="add-admin.php" class="btn btn-primary float-end">Add Admin</a>
                     </h4>
                 </div>
@@ -39,7 +39,7 @@ include("includes/header.php");
                         <tbody>
                             <?php
                                 # To fetch data from table house
-                                $users = "SELECT * FROM users WHERE status != '2' ";
+                                $users = "SELECT * FROM total_users";
                                 $users_run = mysqli_query($con,$users);
 
                                 #To check each data or table has data

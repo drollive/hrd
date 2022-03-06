@@ -13,13 +13,13 @@ include("includes/header.php");
             <div class="card bg-primary text-white mb-3">
                 <div class="card-body shadow-sm d-flex justify-content-around align-items-center">
                     <div>
-                        <h3 class="fs-5">Available House</h3>
+                        <h3 class="fs-5">Available Houses</h3>
                     </div>
                     <i class="fa fa-home" style="font-size:40px;color:white"></i>
                 </div>
         
                     <?php
-                        $dash_house_query = "SELECT * FROM house WHERE house_status = '1' ";
+                        $dash_house_query = "SELECT * FROM total_house";
                         $dash_house_query_run = mysqli_query($con, $dash_house_query);
 
                         if($house_total = mysqli_num_rows($dash_house_query_run))
@@ -50,7 +50,7 @@ include("includes/header.php");
                     <i class="fa fa-users" style="font-size:40px;color:white"></i>
                 </div>
                     <?php
-                        $dash_users_query = "SELECT * FROM users WHERE status != 2";
+                        $dash_users_query = "SELECT * FROM total_users";
                         $dash_users_query_run = mysqli_query($con, $dash_users_query);
                         if($users_total = mysqli_num_rows($dash_users_query_run))
                         {
@@ -79,7 +79,7 @@ include("includes/header.php");
                     <i class="fa fa-user" style="font-size:40px;color:white"></i>
                 </div>
                     <?php
-                        $dash_users_query = "SELECT * FROM tenant WHERE tenant_status = 1";
+                        $dash_users_query = "SELECT * FROM total_tenants";
                         $dash_users_query_run = mysqli_query($con, $dash_users_query);
                         if($tenant_total = mysqli_num_rows($dash_users_query_run))
                         {
@@ -108,7 +108,7 @@ include("includes/header.php");
                     <i class="fas fa-exclamation-triangle" style="font-size:40px;color:white"></i>
                 </div>
                     <?php
-                        $dash_users_query = "SELECT * FROM bills WHERE bill_status = 0";
+                        $dash_users_query = "SELECT * FROM total_bills";
                         $dash_users_query_run = mysqli_query($con, $dash_users_query);
                         if($bill_total = mysqli_num_rows($dash_users_query_run))
                         {
@@ -137,7 +137,7 @@ include("includes/header.php");
                     <i class="far fa-credit-card" style="font-size:40px;color:white"></i>
                 </div>
                     <?php
-                        $dash_users_query = "SELECT * FROM payments WHERE payment_status != 2";
+                        $dash_users_query = "SELECT * FROM total_payments";
                         $dash_users_query_run = mysqli_query($con, $dash_users_query);
                         if($payment_total = mysqli_num_rows($dash_users_query_run))
                         {
@@ -167,19 +167,13 @@ include("includes/header.php");
                 </div>
                     <?php
                         $balance = 0;
-                        $total = "SELECT SUM(payments.payment_total) AS paid, SUM(bills.bill_total) AS t_bill
-                                    FROM payments 
-                                    JOIN bills
-                                    ON bills.bill_id=payments.bill_id
-                                    WHERE payment_status !=2";
+                        $total = "SELECT * FROM balance";
                         $total_run = mysqli_query($con, $total);
                         $row = mysqli_fetch_array($total_run);
                         $paid = $row['paid'];
                         $bills = $row['t_bill'];
 
                         $balance = $row['t_bill'] - $row['paid'];
-
-
                         echo '<h3 class="mb-0 text-center">'.'₱'.$balance.'</h3>';
   
                     ?>
@@ -212,15 +206,7 @@ include("includes/header.php");
                             <tbody>
                             <?php
                                 # To fetch data from tables
-                                $payment = "SELECT p.*, concat(u.fname,' ',u.lname) AS name, b.bill_total,
-                                            DATE_FORMAT(p.payment_date, '%m/%d/%Y') AS pay
-                                            FROM payments p 
-                                            INNER JOIN bills b 
-                                            INNER JOIN tenant t 
-                                            INNER JOIN users u 
-                                            ON p.bill_id = b.bill_id AND b.tenant_id = t.tenant_id AND t.users_id = u.id 
-                                            WHERE payment_status != '2'
-                                            ORDER BY pay ASC LIMIT 10";
+                                $payment = "SELECT * FROM pay";
                                 $payment_run = mysqli_query($con,$payment);
                                 $row = mysqli_fetch_array($payment_run);
                                
@@ -283,14 +269,7 @@ include("includes/header.php");
                             <?php
                                 # To fetch data from table house
                                 $bill = # To fetch data from table house
-                                $bill = "SELECT concat(users.fname,' ',users.lname) AS name,  DATE_FORMAT(bills.due_date, '%m/%d/%Y') AS due,
-                                            bills.bill_total
-                                            FROM bills
-                                            INNER JOIN tenant
-                                            INNER JOIN users
-                                            ON bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                            WHERE bill_status = 0 
-                                            ORDER BY due ASC LIMIT 5";
+                                $bill = "SELECT * FROM bill";
                                 $bill_run = mysqli_query($con,$bill);
                                 $row = mysqli_fetch_array($bill_run);
                                 #To check each data or table has data
@@ -332,9 +311,6 @@ include("includes/header.php");
         
         
     </div>
-
-    
-
 
 <?php
 include("includes/footer.php");

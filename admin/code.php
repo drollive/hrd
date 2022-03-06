@@ -10,10 +10,10 @@ if(isset($_POST['delete_btn_payment']))
     if(isset($_SESSION['auth_user'])){
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Deleted payment '.$payment_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
       
-    $query ="UPDATE payments SET payment_status =2 WHERE payment_id='$payment_id' LIMIT 1 ";
+    $query = "CALL sp_payment_delete('$payment_id')";
     $query_run = mysqli_query($con, $query);
 
 }
@@ -29,11 +29,9 @@ if(isset($_POST['update_payment']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Updated payment '.$payment_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-	$query = "UPDATE payments SET bill_id = '$bill_id', payment_total = '$payment_total', 
-                payment_desc = '$payment_desc', payment_date = '$payment_date' 
-                WHERE payment_id='$payment_id'";
+	$query = "CALL sp_payment_update('$payment_id','$bill_id','$payment_total', '$payment_desc','$payment_date')";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
@@ -51,6 +49,7 @@ if(isset($_POST['update_payment']))
 }
 if(isset($_POST['add_payment']))
 {
+    $payment_id = $_POST['payment_id'];
     $bill_id = $_POST['bill_id'];
     # To check input if it's a number
     $payment_total = (is_numeric($_POST['total_payment']) ? (int)$_POST['total_payment'] : 0);
@@ -61,11 +60,10 @@ if(isset($_POST['add_payment']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Added payment '.$payment_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
 
-	$query = "INSERT INTO payments (bill_id, payment_total, payment_desc, payment_date) 
-                VALUES ('$bill_id', '$payment_total', '$payment_desc', '$payment_date')";
+	$query = "CALL sp_payment_add('$bill_id', '$payment_total', '$payment_desc', '$payment_date')";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
@@ -155,7 +153,7 @@ if(isset($_POST['add_bill']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Added bill for tenant '.$tenant_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
 
 	$query = "INSERT INTO bills (tenant_id,house_rent_pay,electric_bill, water_bill,other_bill,bill_desc,bill_status, due_date, bill_total) 
@@ -235,7 +233,7 @@ if(isset($_POST['add_tenant']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Added tenant '.$tenant_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
 	$query = "INSERT INTO tenant (users_id, house_id, tenant_status)
 				VALUES ('$users_id', '$house_id', '$tenant_status')";
@@ -317,7 +315,7 @@ if(isset($_POST['add_house']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Added house '.$house_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
 	$query = "INSERT INTO house (house_address, house_price, house_desc,house_status) 
 				VALUES ('$house_add ', '$house_price', '$house_desc', '$house_status')";
@@ -367,7 +365,7 @@ if(isset($_POST['add_user']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Updated user '.$user_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
     $query = "INSERT INTO users (fname,lname,email,phone,password,role_as,status) 
         VALUES('$fname', '$lname', '$email', '$phone', '$password','$role_as','$status' )";

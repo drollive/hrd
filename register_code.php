@@ -11,6 +11,7 @@ if(isset($_POST['register_btn']) && $_POST['g-recaptcha-response'] != "")
 
     if($password == $confirm_password)
     {
+        $email = mysqli_real_escape_string($con, $_POST["email"]);
         #This is to check email if it is already registered
         #Set up query
         $check_email = "SELECT email FROM users WHERE email='$email'";

@@ -32,14 +32,7 @@ include("includes/header.php");
                                     {
                                        # To fetch data from table 
                                        $user_id = $_SESSION['auth_user']['user_id'];
-                                       $payment = "SELECT payments.*, concat(users.fname,' ',users.lname) AS name, bills
-                                                    DATE_FORMAT(payments.payment_date, '%M %e, %Y') AS pay
-                                                    FROM payments
-                                                    INNER JOIN bills
-                                                    INNER JOIN tenant
-                                                    INNER JOIN users
-                                                    ON payments.bill_id = bills.bill_id AND bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                                    WHERE payment_status != '2'AND users.id={$user_id} ";
+                                       $payment = "SELECT * FROM tenant_payments_view WHERE id={$user_id} ";
                                         $payment_run = mysqli_query($con,$payment);
                                         #To check each data or table has data
                                         if(mysqli_num_rows($payment_run) > 0 )

@@ -35,11 +35,7 @@ include("includes/header.php");
                         
                         <tbody>
                             <?php
-                                $tenant = "SELECT t.*,concat(u.fname,' ',u.lname) AS name, u.email, u.phone,u.id, h.house_price, h.house_address
-                                            FROM tenant t 
-                                            INNER JOIN house h ON h.house_id = t.house_id
-                                            INNER JOIN users u ON u.id = t.users_id
-                                            WHERE tenant_status != 2";
+                                $tenant = "SELECT * FROM tenant_view";
                                 $tenant_run = mysqli_query($con, $tenant);
 
                                 if(mysqli_num_rows($tenant_run) > 0)

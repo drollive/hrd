@@ -32,17 +32,10 @@ include("includes/header.php");
                             <tbody>
                             <?php
                                 # To fetch data from table house
-                                $bill = "SELECT *, concat(users.fname,' ',users.lname) AS name,
-                                            DATE_FORMAT(bills.due_date, '%M %e, %Y') AS due
-                                            FROM bills
-                                            INNER JOIN tenant
-                                            INNER JOIN users
-                                            ON bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                            WHERE bill_status != 2 ";
+                                $bill = "SELECT * FROM bill_users";
                                 $bill_run = mysqli_query($con,$bill);
                                 #To check each data or table has data
                                 
-                            
                                 if(mysqli_num_rows($bill_run) > 0 )
                                 {
                                     foreach($bill_run as $bill)

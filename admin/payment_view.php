@@ -36,14 +36,7 @@ include("includes/header.php");
                             <?php
                                 # To fetch data from table house
                             
-                                $payment = "SELECT p.*, concat(u.fname,' ',u.lname) AS name, b.bill_total,
-                                            DATE_FORMAT(p.payment_date, '%M %e, %Y') AS pay
-                                            FROM payments p 
-                                            INNER JOIN bills b 
-                                            INNER JOIN tenant t 
-                                            INNER JOIN users u 
-                                            ON p.bill_id = b.bill_id AND b.tenant_id = t.tenant_id AND t.users_id = u.id 
-                                            WHERE payment_status != '2'";
+                                $payment = "SELECT * FROM pay_view";
                                 $payment_run = mysqli_query($con,$payment);
                                 $row = mysqli_fetch_array($payment_run);
                                 
@@ -51,8 +44,7 @@ include("includes/header.php");
                                 if(mysqli_num_rows($payment_run) > 0 )
                                 {
                                     foreach($payment_run as $pay)
-                                    { 
-                                        
+                                    {
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $pay['payment_id'] ?></td>
@@ -80,7 +72,7 @@ include("includes/header.php");
                                 {
                                     ?>
                                     <tr>
-                                            <td colspan="6"> No Record Found</td>
+                                            <td colspan="9"> No Record Found</td>
                                     </tr>
                                     <?php
                                 

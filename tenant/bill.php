@@ -31,15 +31,8 @@ include("includes/header.php");
                                     if(isset($_SESSION['auth_user']))
                                     {
                                        # To fetch data from table house
-                                       $user_id = $_SESSION['auth_user']['user_id'];
-                                        $bill = "SELECT concat(users.fname,' ',users.lname) AS name, users.id,
-                                                    DATE_FORMAT(bills.due_date, '%M %e, %Y') AS due, bills.bill_status,
-                                                    bills.bill_id, bills.bill_total, bills.bill_desc
-                                                    FROM bills
-                                                    INNER JOIN tenant
-                                                    INNER JOIN users
-                                                    ON bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                                    WHERE bill_status != 2 AND users.id={$user_id}";
+                                        $user_id = $_SESSION['auth_user']['user_id'];
+                                        $bill = "SELECT * FROM tenant_bill_view WHERE id={$user_id}";
                                         $bill_run = mysqli_query($con,$bill);
                                         #To check each data or table has data
                                         

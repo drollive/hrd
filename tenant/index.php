@@ -20,12 +20,7 @@ include("includes/header.php");
                 {
                     # To fetch data from table bill
                     $user_id = $_SESSION['auth_user']['user_id'];
-                        $dash_query = "SELECT *, users.id
-                                        FROM bills
-                                        INNER JOIN tenant
-                                        INNER JOIN users
-                                        ON bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                        WHERE bill_status = 0 AND users.id={$user_id}";
+                        $dash_query = "SELECT * FROM tenant_bill_view WHERE id={$user_id}";
                         $dash_query_run = mysqli_query($con, $dash_query);
 
                         if($total = mysqli_num_rows($dash_query_run))
@@ -60,12 +55,7 @@ include("includes/header.php");
                 {
                     # To fetch data from table bill tenant view
                     $user_id = $_SESSION['auth_user']['user_id'];
-                        $dash_query = "SELECT *, users.id
-                                        FROM bills
-                                        INNER JOIN tenant
-                                        INNER JOIN users
-                                        ON bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                        WHERE bill_status = 1 AND users.id={$user_id}";
+                        $dash_query = "SELECT * FROM paid_bills WHERE id={$user_id}";
                         $dash_query_run = mysqli_query($con, $dash_query);
 
                         if($total = mysqli_num_rows($dash_query_run))
@@ -100,13 +90,7 @@ include("includes/header.php");
                 {
                     # To fetch data from table bill
                     $user_id = $_SESSION['auth_user']['user_id'];
-                        $dash_query = "SELECT *, users.id
-                                        FROM payments
-                                        INNER join bills
-                                        INNER JOIN tenant
-                                        INNER JOIN users
-                                        ON bills.bill_id = payments.bill_id AND bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                        WHERE payment_status != 2 AND users.id={$user_id}";
+                        $dash_query = "SELECT * FROM tenant_payments WHERE id={$user_id}";
                         $dash_query_run = mysqli_query($con, $dash_query);
 
                         if($total = mysqli_num_rows($dash_query_run))

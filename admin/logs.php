@@ -70,8 +70,6 @@ include("includes/header.php");
 </div>
 
 <?php
-
 include("includes/footer.php");
 include("includes/scripts.php");
-
 ?>

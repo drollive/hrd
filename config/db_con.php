@@ -11,12 +11,12 @@ $database = "hrd3";
 # For connection of database
 $con = mysqli_connect("$host","$username","$password","$database");
 
+      date_default_timezone_set("Asia/Manila");
 # For connection failed
 if (!$con) 
 {   
     die();
-  }
+}
 
-    date_default_timezone_set("Asia/Manila");
 
 ?>
