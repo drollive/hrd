@@ -281,7 +281,7 @@ include("includes/header.php");
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $bill['name']?></td>
-                                            <td class="text-center"><?=$bill['bill_total']?></td>
+                                            <td class="text-center"><?='₱'.$bill['bill_total']?></td>
                                             <td class="text-center"><?= $bill['due']?></td>
                                         </tr>
                                         <?php

@@ -23,7 +23,7 @@ include("includes/header.php");
                 if(isset($_GET['id']))
                 {
                     $house_id = $_GET['id'];
-                    $house_edit = "SELECT * FROM house WHERE house_id='$house_id' LIMIT 1";
+                    $house_edit = "CALL sp_house_select('$house_id')";
                     $house_edit_run = mysqli_query($con, $house_edit); 
 
                     #To check if the data is available inside the query

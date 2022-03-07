@@ -22,13 +22,14 @@ include("includes/header.php");
                 if(isset($_GET['id']))
                 {
                     $tenant_id = $_GET['id'];
-                    $tenant= "SELECT * FROM tenant WHERE tenant_status != '2' ";
+                    $tenant= "SELECT * FROM tenant WHERE tenant_id='$tenant_id'
+                                 AND tenant_status !=2 LIMIT 1 ";
                     $tenant_run = mysqli_query($con,$tenant);
+                    $row = mysqli_fetch_array($tenant_run);
 
                     #To check if the data is available inside the query
                     if(mysqli_num_rows($tenant_run) > 0)
                     {
-                        $row = mysqli_fetch_array($tenant_run);
                         ?>
 
                         <form action="code.php" method="POST">
@@ -39,13 +40,15 @@ include("includes/header.php");
                                 <div class="col-md-12 mb-3">
                                     <label for="">Users</label>
                                     <?php
-                                        $users = "SELECT * FROM users WHERE role_as= 0 ";
+                                        $users = "SELECT * FROM users WHERE role_as = 0 ";
                                         $users_run = mysqli_query($con, $users);
+                                        $row_users = mysqli_fetch_array($users_run);
                                         if(mysqli_num_rows($users_run) > 0)
                                         {
                                             ?>
                                             <select name="id" required class="form-control">
-                                                <option value="<?=$row['users_id']?>"><?=$row['users_id']?></option>
+                                                <option value="<?=$row_users['id']?>"> <?=$row_users['id']?> </option>
+                                                
                                                 <?php 
                                                     foreach($users_run as $users)
                                                     {
@@ -70,13 +73,14 @@ include("includes/header.php");
                                 <div class="col-md-12 mb-3">
                                     <label for="">House List</label>
                                     <?php
-                                        $house = "SELECT * FROM house WHERE house_status= 1 ";
+                                        $house = "SELECT * FROM house WHERE house_status !=2 ";
                                         $house_run = mysqli_query($con, $house);
+                                        $row_house = mysqli_fetch_array($house_run);
                                         if(mysqli_num_rows($house_run) > 0)
                                         {
                                             ?>
                                             <select name="house_id" required class="form-control">
-                                                <option value="<?=$row['house_id']?>"><?=$row['house_id']?></option>
+                                                <option value="<?=$row_house['house_id']?>"><?=$row_house['house_id']?></option>
                                                 <?php 
                                                     foreach($house_run as $rent_home)
                                                     {

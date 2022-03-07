@@ -181,9 +181,9 @@ if(isset($_POST['delete_btn_tenant']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Deleted tenant '.$tenant_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-    $query ="UPDATE tenant SET tenant_status=2 WHERE tenant_id='$tenant_id' LIMIT 1 ";
+    $query ="CALL sp_tenant_delete('$tenant_id') ";
     $query_run = mysqli_query($con, $query);
 
 }
@@ -198,11 +198,9 @@ if(isset($_POST['update_tenant']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Updated tenant '.$tenant_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-	$query = "UPDATE tenant SET users_id= '$users_id', house_id='$house_id', tenant_status='$tenant_status'
-                WHERE tenant_id='$tenant_id'";
-				
+	$query = "CALL sp_tenant_update ('$tenant_id','$users_id', '$house_id', '$tenant_status')";
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
@@ -231,8 +229,7 @@ if(isset($_POST['add_tenant']))
         $action = 'Added tenant '.$tenant_id .' by '.$user;
         $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-	$query = "INSERT INTO tenant (users_id, house_id, tenant_status)
-				VALUES ('$users_id', '$house_id', '$tenant_status')";
+	$query = "CALL sp_tenant_add ('$users_id', '$house_id', '$tenant_status')";
 				
 	$query_run = mysqli_query($con,$query);
 
@@ -259,9 +256,9 @@ if(isset($_POST['delete_btn_house']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Deleted house '.$house_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-    $query ="UPDATE house SET house_status='2' WHERE house_id='$house_id' LIMIT 1 ";
+    $query ="CALL sp_house_delete('$house_id')";
     $query_run = mysqli_query($con, $query);
 
 }
@@ -278,10 +275,9 @@ if(isset($_POST['update_house']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Updated house '.$house_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-	$query = "UPDATE house SET house_address='$house_add', house_price='$house_price', house_desc='$house_desc', house_status='$house_status'
-                WHERE house_id='$house_id' ";
+	$query = "CALL sp_house_update ('$house_id','$house_add','$house_price', '$house_desc', '$house_status')";
     $query_run = mysqli_query($con, $query);
 
     
@@ -289,7 +285,7 @@ if(isset($_POST['update_house']))
    {
        $_SESSION['message'] = "House Information Has Been Updated Successfully";
        #To go back ro the same form with the same id
-       header("Location: house_edit.php?id=".$house_id);
+       header("Location: house_view.php?id=".$house_id);
        exit(0);
    }
    else
@@ -313,15 +309,14 @@ if(isset($_POST['add_house']))
         $action = 'Added house '.$house_id .' by '.$user;
         $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-	$query = "INSERT INTO house (house_address, house_price, house_desc,house_status) 
-				VALUES ('$house_add ', '$house_price', '$house_desc', '$house_status')";
+	$query = "CALL sp_house_add('$house_add ', '$house_price', '$house_desc', '$house_status')";
 				
 	$query_run = mysqli_query($con,$query);
 
    if($query_run)
     {
         $_SESSION['message'] = "House added Successfully";
-        header("Location: house_add.php");
+        header("Location: house_view.php");
         exit(0);
     }
     else
@@ -342,9 +337,9 @@ if(isset($_POST['delete_btn_users']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Deleted user '.$user_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-    $query = "UPDATE users SET status = 2 WHERE id='$user_id' LIMIT 1";
+    $query = "CALL sp_users_delete('$user')";
     $query_run = mysqli_query($con, $query);
 }
 if(isset($_POST['add_user']))
@@ -363,8 +358,7 @@ if(isset($_POST['add_user']))
         $action = 'Updated user '.$user_id .' by '.$user;
         $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-    $query = "INSERT INTO users (fname,lname,email,phone,password,role_as,status) 
-        VALUES('$fname', '$lname', '$email', '$phone', '$password','$role_as','$status' )";
+    $query = "CALL sp_users_add ('$fname', '$lname', '$email', '$phone', '$password','$role_as','$status' )";
     $query_run = mysqli_query($con, $query);
 
     if($query_run)
@@ -396,10 +390,9 @@ if(isset($_POST['update_user']))
     {
         $user = $_SESSION['auth_user']['user_name'];
         $action = 'Updated user '.$user_id .' by '.$user;
-        $query = mysqli_query($con,"INSERT INTO logs (user,log_date,action) values ('".$user."', NOW(), '".$action."')");
+        $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-    $query = "UPDATE users SET fname='$fname', lname='$lname', email='$email', phone='$phone', role_as='$role_as', status='$status'
-                WHERE id='$user_id' ";
+    $query = "CALL sp_users_update( '$user_id','$fname','$lname','$email','$phone', '$role_as','$status')";
     $query_run = mysqli_query($con, $query);
 
     if($query_run)

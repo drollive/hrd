@@ -54,7 +54,7 @@ include("includes/header.php");
                                             <td class="text-center">₱<?=$tenant['house_price']?></td>
                         
                                             <td class="text-center"> 
-                                                <?=$tenant['tenant_status'] == '1' ? 'Renting':'Not Renting'?>
+                                                <?=$tenant['tenant_status'] == '1' ? 'Active':'Inactive'?>
                                             </td>
                                             <td class="text-center">
                                                 <a href="tenant_edit.php?id=<?=$tenant['tenant_id']?>" class="btn btn-info">Edit</a>
