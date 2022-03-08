@@ -45,8 +45,6 @@ function send_password_reset($get_fname, $get_email, $token)
     $mail->send();
 }
 
-
-
 if(isset($_POST['forgot_pass']))
 {
     $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -115,9 +113,10 @@ if(isset($_POST['update_pass']))
             if(mysqli_num_rows($check_token_run) > 0)
             {
                 if($new_password == $confirm_password)
-                {
+                {   #password hashing for security
+                    $hash = password_hash($new_password , PASSWORD_DEFAULT);
                     # To update the password in the database
-                    $update_password = "UPDATE users SET password='$new_password' WHERE verify_token='$token' LIMIT 1";
+                    $update_password = "UPDATE users SET password='$hash' WHERE verify_token='$token' LIMIT 1";
                     $update_password_run = mysqli_query($con, $update_password);
 
                     if($update_password_run)

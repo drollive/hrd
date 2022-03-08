@@ -33,8 +33,11 @@ if(isset($_POST['register_btn']) && $_POST['g-recaptcha-response'] != "")
             $password = mysqli_real_escape_string($con, $_POST["password"]);
             $confirm_password = mysqli_real_escape_string($con, $_POST["confirm_password"]);
             $phone = (is_numeric($_POST['phone']) ? (int)$_POST['phone'] : '');
+            
+            #password hashing for security
+            $hash = password_hash($password, PASSWORD_DEFAULT);
             $user_query = "INSERT INTO users (fname,lname,email,phone,password) 
-                            VALUES ('$fname','$lname','$email','$phone','$password')";
+                            VALUES ('$fname','$lname','$email','$phone','$hash')";
             $user_query_run = mysqli_query($con, $user_query);
             
             if($user_query_run)
