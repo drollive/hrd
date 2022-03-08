@@ -55,12 +55,13 @@ include("includes/header.php");
                                 
                                 <div class="col-md-6 mb-3">
                                     <label for="">Status</label> <br/>
-                                    <input type="checkbox" name = "house_status" <?= $row['house_status'] == '1' ? 'checked':'' ?> width="70px" height="70px">
+                                    <input type="checkbox" id="checkbox" name = "house_status" <?= $row['house_status'] == '1' ? 'checked':'' ?> width="70px" height="70px">
+                                    <label for="checkbox">Available</label>
                                 </div>
                                 
                                 
                                 <div class="col-md-6 mb-3">
-                                    <button type="submit" name="update_house"  onclick="return confirm('Are you sure you want to Edit?')" class="btn btn-primary">Update House</button>
+                                    <button type="submit" name="update_house"  onclick="return confirm('Are you sure you want to update?')" class="btn btn-primary">Update House</button>
                                 </div>
                                 
                             </div>

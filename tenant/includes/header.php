@@ -9,9 +9,8 @@
         <title>Tenant</title>
         
         <link href="../css/styles.css" rel="stylesheet" />
-        <link href="../css/jquery.datables.min.css" rel="stylesheet" />
-        
-        <link href="../css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 

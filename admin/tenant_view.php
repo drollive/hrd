@@ -11,7 +11,7 @@ include("includes/header.php");
             
             <div class="card">
                 <div class="card-header">
-                    <h4>View Tenants
+                    <h4>View Tenant
                         <a href="tenant_add.php" class="btn btn-primary float-end">Add tenant</a>
                     </h4>
                 </div>
@@ -51,7 +51,8 @@ include("includes/header.php");
                                             <td class="text-center"><?=$tenant['email']?></td>
                                             <td class="text-center"><?=$tenant['phone']?></td>
                                             <td class="text-center"><?=$tenant['house_address']?></td>
-                                            <td class="text-center">₱<?=$tenant['house_price']?></td>
+                                            <td class="text-center">₱<?= number_format($tenant['house_price'], 2) ?></td>
+                                
                         
                                             <td class="text-center"> 
                                                 <?=$tenant['tenant_status'] == '1' ? 'Active':'Inactive'?>

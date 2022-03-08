@@ -298,6 +298,7 @@ if(isset($_POST['update_house']))
 }
 if(isset($_POST['add_house']))
 {
+    $house_id = $_POST['house_address'];
 	$house_add = $_POST['house_address'];
     $house_price = (is_numeric($_POST['house_price']) ? (int)$_POST['house_price'] : 0);
 	$house_desc = $_POST['house_desc'];
@@ -306,7 +307,7 @@ if(isset($_POST['add_house']))
     if(isset($_SESSION['auth_user']))
     {
         $user = $_SESSION['auth_user']['user_name'];
-        $action = 'Added house '.$house_id .' by '.$user;
+        $action = 'Added house by '.$user;
         $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
 	$query = "CALL sp_house_add('$house_add ', '$house_price', '$house_desc', '$house_status')";
@@ -349,6 +350,7 @@ if(isset($_POST['add_user']))
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $password = $_POST['password'];
+    $hash = password_hash($password, PASSWORD_DEFAULT);
     $role_as = $_POST['role_as'];
     $status = $_POST['status'] == true ? '1':'0';
 
@@ -358,7 +360,7 @@ if(isset($_POST['add_user']))
         $action = 'Updated user '.$user_id .' by '.$user;
         $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-    $query = "CALL sp_users_add ('$fname', '$lname', '$email', '$phone', '$password','$role_as','$status' )";
+    $query = "CALL sp_users_add ('$fname', '$lname', '$email', '$phone', '$hash','$role_as','$status' )";
     $query_run = mysqli_query($con, $query);
 
     if($query_run)
@@ -392,7 +394,7 @@ if(isset($_POST['update_user']))
         $action = 'Updated user '.$user_id .' by '.$user;
         $query = mysqli_query($con,"CALL sp_insert_logs('$user', NOW(), '$action')");
     }
-    $query = "CALL sp_users_update( '$user_id','$fname','$lname','$email','$phone', '$role_as','$status')";
+    $query = "CALL sp_users_update('$user_id','$fname','$lname','$email','$phone', '$role_as','$status')";
     $query_run = mysqli_query($con, $query);
 
     if($query_run)

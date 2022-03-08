@@ -5,7 +5,6 @@ include("includes/header.php");
 ?>
 
 <div class="container-fluid px-4">
-
     <div class="row mt-4">
         <div class="col-md-7">
 		
@@ -22,7 +21,7 @@ include("includes/header.php");
                 if(isset($_GET['id']))
                 {
                     $bill_id = $_GET['id'];
-                    $bill_edit = "SELECT *, DATE_FORMAT(due_date, '%m/%d/%Y') AS due FROM bills WHERE bill_id='$bill_id' LIMIT 1";
+                    $bill_edit = "SELECT * FROM bill_all WHERE bill_id = $bill_id";
                     $bill_edit_run = mysqli_query($con, $bill_edit); 
 
                     #To check if the data is available inside the query
@@ -39,12 +38,8 @@ include("includes/header.php");
                                 <div class="col-md-12 mb-3">
                                     <label for="">Tenant</label>
                                     <?php
-                                        $tenant = "SELECT t.*, concat(u.fname,' ',u.lname) AS name
-                                            FROM tenant t
-                                            RIGHT JOIN users u
-                                            ON t.users_id = u.id
-                                            WHERE tenant_status='1'";
-
+                                        
+                                        $tenant = "SELECT * FROM tenant_user";
                                         $tenant_run = mysqli_query($con, $tenant);
                                         if(mysqli_num_rows($tenant_run) > 0)
                                         {
@@ -113,12 +108,12 @@ include("includes/header.php");
                                 <div class="col-md-6 mb-3">
                                     <label for="">Status</label> <br/>
                                     <input type="checkbox" id="checkbox" name = "bill_status" <?= $row['bill_status'] == '1' ? 'checked':'' ?> width="100px" height="100px">
-                                    <label for="checkbox">Check this box if the bill is paid</label>
+                                    <label for="checkbox">Paid</label>
                                 </div>
                                 
                                 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button type="submit" name="update_bill" class="btn btn-primary">Update Bill</button>
+                                    <button type="submit" onclick="return confirm('Are you sure you want to update?')" name="update_bill" class="btn btn-primary">Update Bill</button>
                                 </div>
                             </div>
                         </form>
@@ -164,11 +159,8 @@ include("includes/header.php");
                         
                         <tbody>
                             <?php
-                                $tenant = "SELECT t.*,concat(u.fname,' ',u.lname) AS name, u.email, u.phone,u.id, h.house_price, h.house_address
-                                            FROM tenant t 
-                                            INNER JOIN house h ON h.house_id = t.house_id
-                                            INNER JOIN users u ON u.id = t.users_id
-                                            WHERE tenant_status != 2";
+                               
+                                $tenant = "SELECT * FROM tenant_user_house";
                                 $tenant_run = mysqli_query($con, $tenant);
 
                                 if(mysqli_num_rows($tenant_run) > 0)
@@ -182,7 +174,7 @@ include("includes/header.php");
                                             <td class="text-center"><?=$tenant['tenant_id']?></td>
                                             <td class="text-center"><?=$tenant['name']?></td>
                                             <td class="text-center"><?=$tenant['house_address']?></td>
-                                            <td class="text-center"><?=$tenant['house_price']?></td>
+                                            <td class="text-center">₱<?= number_format($tenant['house_price'], 2) ?></td>>
                                             <td class="text-center"> 
                                                 <?=$tenant['tenant_status'] == '1' ? 'Renting':'Not Renting'?>
                                             </td>

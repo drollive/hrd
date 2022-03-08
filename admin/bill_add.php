@@ -24,11 +24,7 @@ include("includes/header.php");
                         <div class="col-md-12 mb-3">
                             <label for="">Tenant</label>
                             <?php
-                                $tenant = "SELECT t.*, concat(u.fname,' ',u.lname) AS name 
-                                    FROM tenant t
-                                    RIGHT JOIN users u
-                                    ON t.users_id = u.id
-                                    WHERE tenant_status='1'";
+                                $tenant = "SELECT * FROM tenant_user";
 
                                 $tenant_run = mysqli_query($con, $tenant);
                                 if(mysqli_num_rows($tenant_run) > 0)
@@ -138,12 +134,7 @@ include("includes/header.php");
                             <tbody>
                             <?php
                                 # To fetch data from table tenants details
-                                $bill = "SELECT *, concat(users.fname,' ',users.lname) AS name, tenant.tenant_status, house.house_address
-                                            FROM tenant
-                                            INNER JOIN users
-                                            INNER JOIN house
-                                            ON tenant.users_id = users.id AND tenant.house_id = house.house_id
-                                            WHERE tenant_status = 1";
+                                $bill = "SELECT * FROM tenant_view";
                                 $bill_run = mysqli_query($con,$bill);
                                 #To check each data or table has data
                                 
@@ -156,7 +147,7 @@ include("includes/header.php");
                                         <tr>
                                             <td class="text-center"><?= $bill['name']?></td>
                                             <td class="text-center"><?= $bill['house_address'] ?></td>
-                                            <td class="text-center"><?= $bill['house_price'] ?></td>
+                                            <td class="text-center">₱<?= number_format($bill['house_price'], 2) ?></td>
                                             <td class="text-center"><?= $bill['date_in'] ?></td>
                                             <td class="text-center">
                                                 <?= $bill['tenant_status'] == '1' ? 'Renting':' ' ?>

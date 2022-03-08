@@ -12,7 +12,7 @@ include("includes/header.php");
 			<?php include('message.php'); ?>
             <div class="card">
                 <div class="card-header">
-                    <h4>View House/s
+                    <h4>View House
                         <a href="house_add.php" class="btn btn-primary float-end">Add House</a>
                     </h4>
                 </div>
@@ -48,7 +48,7 @@ include("includes/header.php");
                                         <tr>
                                             <td class="text-center"><?= $home['house_id'] ?></td>
                                             <td class="text-center"><?= $home['house_address'] ?></td>
-                                            <td class="text-center"><?= '₱'.$home['house_price'] ?></td>
+                                            <td class="text-center">₱<?= number_format($home['house_price'], 2)  ?></td>
                                             <td class="text-center"><?= $home['house_desc'] ?></td>
                                             <td class="text-center">
                                                 <?= $home['house_status'] == '1' ? 'Available':'Unavailable' ?>

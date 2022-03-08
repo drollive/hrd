@@ -91,7 +91,7 @@ include("includes/header.php");
                                 </div>
                                     
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button type="submit" name="update_payment"  onclick="return confirm('Are you sure you want to Edit?')" class="btn btn-primary">Update Payment</button>
+                                    <button type="submit" onclick="return confirm('Are you sure you want to update?')" name="update_payment"  onclick="return confirm('Are you sure you want to Edit?')" class="btn btn-primary">Update Payment</button>
                                 </div>
                             </div>
                         </form>

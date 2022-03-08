@@ -45,7 +45,7 @@ include("includes/header.php");
                                 else
                                 {
                                     ?>
-                                    <h5>No Unpaid Bills</h5>
+                                    <h5>No Unpaid Bill</h5>
                                     <?php
                                 }
                             ?>
@@ -110,12 +110,7 @@ include("includes/header.php");
                             <tbody>
                             <?php
                                 # To fetch data from table house
-                                $bill = "SELECT *, concat(users.fname,' ',users.lname) AS name
-                                            FROM bills
-                                            INNER JOIN tenant
-                                            INNER JOIN users
-                                            ON bills.tenant_id = tenant.tenant_id AND tenant.users_id = users.id
-                                            WHERE bill_status != 2 ";
+                                $bill = "SELECT * FROM bill_all_stat";
                                 $bill_run = mysqli_query($con,$bill);
                                 #To check each data or table has data
                                 
@@ -128,7 +123,7 @@ include("includes/header.php");
                                         <tr>
                                             <td class="text-center"><?= $bill['bill_id'] ?> </td>
                                             <td class="text-center"><?= $bill['name']?></td>
-                                            <td class="text-center"><?= $bill['bill_total'] ?></td>
+                                            <td class="text-center">₱<?= number_format($bill['bill_total'], 2) ?></td>>
                                             <td class="text-center">
                                                 <?= $bill['bill_status'] == '1' ? 'Paid':'Unpaid' ?>
                                             </td>

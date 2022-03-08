@@ -4,10 +4,6 @@ include("includes/header.php");
 ?>
 
 <div class="container-fluid px-4">
-    <h4 class="mt-4">User</h4>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -68,12 +64,13 @@ include("includes/header.php");
                                     </div>
                                     
                                     <div class="col-md-6 mb-3">
-                                        <label for="">Status</label>
-                                        <input type="checkbox" name = "status" <?=$user['status'] == '1' ? 'checked':''?> width="70px" height="70px">
+                                        <label for="">Status</label><br/>
+                                        <input type="checkbox" id="checkbox" name = "status" <?=$user['status'] == '1' ? 'checked':''?> width="70px" height="70px">
+                                        <label for="checkbox">Active</label>
                                     </div>
                                     
-                                    <div class="col-md-6 mb-3">
-                                        <button type="submit"  onclick="return confirm('Are you sure you want to submit?')" name="update_user" class="btn btn-primary">Update User</button>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="submit"  onclick="return confirm('Are you sure you want to update?')" name="update_user" class="btn btn-primary">Update User</button>
                                     </div>
                                     
                                 </div>

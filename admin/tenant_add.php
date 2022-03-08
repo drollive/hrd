@@ -7,7 +7,7 @@ include("includes/header.php");
 <div class="container-fluid px-4">
 
     <div class="row mt-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
 		
 			<?php include('message.php'); ?>
             <div class="card">
@@ -45,7 +45,7 @@ include("includes/header.php");
                                     else
                                     {
                                         ?>
-                                        <h5>No House Available</h5>
+                                        <h5>No User Available</h5>
                                         <?php
                                     }
                                 ?>
@@ -62,7 +62,7 @@ include("includes/header.php");
                                     {
                                         ?>
                                         <select name="house_id" required class="form-control">
-                                            <option value="">Select House ID</option>
+                                            <option value="">Select House</option>
                                             <?php
                                                 foreach($house_run as $rent_home)
                                                 {
@@ -89,7 +89,7 @@ include("includes/header.php");
                             <div class="col-md-12 mb-3">
                                 <label for="">Status</label> <br/>
                                 <input type="checkbox" name = "tenant_status"  width="70px" height="70px">
-                                <label for="checkbox">Check this box if the tenant is active</label>
+                                <label for="checkbox">Active tenant</label>
                              </div>
                             
                             
@@ -104,7 +104,7 @@ include("includes/header.php");
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     <h4>House
@@ -166,7 +166,8 @@ include("includes/header.php");
 
                 </div>
             </div>
-            
+        </div>
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
                     <h4>Registered Users
@@ -181,8 +182,6 @@ include("includes/header.php");
                             <tr>
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Name</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Phone</th>
                                 <th class="text-center">Status</th>
 
                             </tr>
@@ -203,8 +202,6 @@ include("includes/header.php");
                                         <tr>
                                             <td class="text-center"><?= $user['id'] ?></td>
                                             <td class="text-center"><?= $user['name'] ?></td>
-                                            <td class="text-center"><?= $user['email'] ?></td>
-                                            <td class="text-center"><?= $user['phone'] ?></td>
                                             <td class="text-center">
                                                 <?= $user['status'] == '1' ? 'Active':'Inactive' ?>
                                             </td>

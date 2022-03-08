@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2022 at 01:23 PM
+-- Generation Time: Mar 09, 2022 at 12:51 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -30,17 +30,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_bill_add` (IN `param_tenant_id` 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_bill_delete` (IN `param_bill_id` INT(200))  UPDATE bills SET bill_status = 2 
 WHERE bill_id= param_bill_id LIMIT 1$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_bill_select` ()  SELECT t.*, concat(u.fname,' ',u.lname) AS name
-FROM tenant t
-RIGHT JOIN users u
-ON t.users_id = u.id
-WHERE tenant_status='1'$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_bill_select` (IN `param_bill_id` INT(200))  SELECT * FROM bills WHERE bill_id= param_bill_id LIMIT 1$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_bill_update` (IN `param_bill_id` INT(200), IN `param_tenant_id` INT(200), IN `param_house_rent_pay` INT(20), IN `param_electric_bill` INT(20), IN `param_water_bill` INT(20), IN `param_other_bill` INT(20), IN `param_bill_desc` TEXT, IN `param_bill_status` TINYINT(1), IN `param_due_date` DATE, IN `param_total_bill` INT(20))  UPDATE bills SET tenant_id= param_tenant_id, house_rent_pay = param_house_rent_pay, electric_bill = param_electric_bill, water_bill = param_water_bill,other_bill = param_other_bill, bill_desc = param_bill_desc, bill_status = param_bill_status, 
 due_date = param_due_date, bill_total = param_total_bill
 WHERE bill_id= param_bill_id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_house_add` (IN `param_house_add` VARCHAR(200), IN `param_house_price` INT(20), IN ` param_house_desc` TEXT, IN `param_house_status` TINYINT(1))  INSERT INTO house (house_address, house_price, house_desc,house_status) VALUES (param_house_add, param_house_price, param_house_desc, param_house_status)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_house_add` (IN `param_house_add` VARCHAR(200), IN `param_house_price` INT(20), IN `param_house_desc` TEXT, IN `param_house_status` TINYINT(1))  INSERT INTO house (house_address, house_price, house_desc,house_status) VALUES (param_house_add, param_house_price, param_house_desc, param_house_status)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_house_delete` (IN `param_house_id` INT(200))  UPDATE house SET house_status='2' WHERE house_id=param_house_id LIMIT 1$$
 
@@ -67,19 +63,48 @@ VALUES (param_users_id, param_house_id, param_tenant_status)$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_tenant_delete` (IN `param_tenant_id` INT(200))  UPDATE tenant SET tenant_status=2
 WHERE tenant_id= param_tenant_id LIMIT 1$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_tenant_select` (INOUT `param_tenant_id` INT(200))  SELECT t.*, concat(u.fname,' ',u.lname) AS name
+FROM tenant t
+RIGHT JOIN users u
+ON t.users_id = u.id
+WHERE tenant_status= 1$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_tenant_update` (IN `param_tenant_id` INT(200), IN `param_users_id` INT(200), IN `param_house_id` INT(200), IN `param_tenant_status` TINYINT(1))  UPDATE tenant SET users_id= param_users_id,house_id= param_house_id,tenant_status = param_tenant_status
 
 WHERE tenant_id=param_tenant_id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_add` (IN `param_fname` VARCHAR(200), IN `param_lname` VARCHAR(200), IN `param_email` VARCHAR(200), IN `param_phone` INT(20), IN `param_password` VARCHAR(200), IN `param_role_as` TINYINT(1), IN `param_status` TINYINT(1))  INSERT INTO users (fname,lname,email,phone,password,role_as,status) 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_add` (IN `param_fname` VARCHAR(200), IN `param_lname` VARCHAR(200), IN `param_email` VARCHAR(200), IN `param_phone` VARCHAR(20), IN `param_password` VARCHAR(200), IN `param_role_as` TINYINT(1), IN `param_status` TINYINT(1))  INSERT INTO users (fname,lname,email,phone,password,role_as,status) 
       VALUES(param_fname, param_lname, param_email, param_phone, param_password, param_role_as, param_status )$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_delete` (IN `param_user_id` INT(200))  UPDATE users SET status = 2 WHERE id=param_user_id LIMIT 1$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_update` (IN `param_user_id` INT(200), IN `param_fname` VARCHAR(200), IN `param_lname` VARCHAR(200), IN `param_email` VARCHAR(200), IN `param_phone` INT(20), IN `param_role_as` TINYINT(1), IN `param_status` TINYINT(1))  UPDATE users SET fname=param_fname, lname= param_lname, email=param_email, phone= param_phone, role_as=param_role_as, status= param_status
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_update` (IN `param_user_id` INT(200), IN `param_fname` VARCHAR(200), IN `param_lname` VARCHAR(200), IN `param_email` VARCHAR(200), IN `param_phone` VARCHAR(20), IN `param_role_as` TINYINT(1), IN `param_status` TINYINT(1))  UPDATE users SET fname=param_fname, lname= param_lname, email=param_email, phone=param_phone, role_as=param_role_as, status= param_status
 WHERE id= param_user_id$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `balance`
+-- (See below for the actual view)
+--
+CREATE TABLE `balance` (
+`paid` decimal(65,0)
+,`t_bill` decimal(65,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `bill`
+-- (See below for the actual view)
+--
+CREATE TABLE `bill` (
+`name` varchar(383)
+,`due` varchar(10)
+,`bill_total` int(200)
+);
 
 -- --------------------------------------------------------
 
@@ -106,18 +131,58 @@ CREATE TABLE `bills` (
 --
 
 INSERT INTO `bills` (`bill_id`, `tenant_id`, `house_rent_pay`, `electric_bill`, `water_bill`, `other_bill`, `bill_desc`, `bill_status`, `due_date`, `bill_total`, `created_at`) VALUES
-(22, 24, 10000, 123, 134, 123, '', 2, '1970-01-01', 10380, '2022-03-03 13:24:51'),
-(23, 24, 9499, 1000, 1500, 500, '', 0, '2022-04-14', 12499, '2022-03-04 03:45:17'),
-(24, 27, 7000, 1000, 600, 400, '', 0, '2022-05-17', 9000, '2022-03-04 03:45:44'),
-(25, 28, 5999, 1200, 700, 650, '', 1, '2022-05-10', 8549, '2022-03-04 03:50:19'),
-(26, 29, 9500, 1974, 1673, 499, '', 1, '2022-05-11', 13646, '2022-03-04 03:54:47'),
-(27, 30, 10000, 2000, 2400, 698, '', 1, '2022-03-31', 15098, '2022-03-04 04:04:00'),
-(28, 32, 9499, 1997, 2042, 692, '', 1, '2022-04-12', 14230, '2022-03-04 04:14:30'),
-(29, 33, 5000, 5122, 4992, 2011, '', 0, '2022-03-31', 12125, '2022-03-04 04:15:33'),
-(30, 34, 7999, 2415, 2612, 522, '', 1, '2022-04-08', 13548, '2022-03-04 04:17:28'),
-(31, 35, 8000, 2477, 1763, 600, '', 1, '2022-04-14', 12840, '2022-03-04 04:18:07'),
-(32, 36, 10000, 4921, 2910, 1921, '', 1, '2022-05-20', 19752, '2022-03-04 04:18:47'),
-(33, 29, 95000, 1000, 1000, 1000, '<p style=\"user-select: auto;\">OKay update update</p>', 2, '2022-01-01', 98000, '2022-03-06 23:16:43');
+(34, 40, 10000, 100, 100, 1000, '', 1, '2022-01-01', 11200, '2022-03-08 17:07:27');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `bill_all`
+-- (See below for the actual view)
+--
+CREATE TABLE `bill_all` (
+`bill_id` int(20)
+,`tenant_id` int(20)
+,`house_rent_pay` int(200)
+,`electric_bill` int(200)
+,`water_bill` int(200)
+,`other_bill` int(200)
+,`bill_desc` text
+,`bill_status` tinyint(1)
+,`due_date` date
+,`bill_total` int(200)
+,`created_at` timestamp
+,`due` varchar(10)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `bill_all_stat`
+-- (See below for the actual view)
+--
+CREATE TABLE `bill_all_stat` (
+`name` varchar(383)
+,`bill_id` int(20)
+,`bill_total` int(200)
+,`bill_desc` text
+,`bill_status` tinyint(1)
+,`b_id` int(20)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `bill_users`
+-- (See below for the actual view)
+--
+CREATE TABLE `bill_users` (
+`name` varchar(383)
+,`bill_status` tinyint(1)
+,`bill_total` int(200)
+,`bill_id` int(20)
+,`t_id` int(20)
+,`due` varchar(73)
+);
 
 -- --------------------------------------------------------
 
@@ -139,17 +204,155 @@ CREATE TABLE `house` (
 --
 
 INSERT INTO `house` (`house_id`, `house_address`, `house_price`, `house_desc`, `house_status`, `added_date`) VALUES
-(15, 'Blk 1 Lot 2 Elysium St. Phase 1 Ely Homes San Lorenzo Makati City ', 10000, '<p style=\"user-select: auto;\"><span style=\"color: rgb(17, 17, 17); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", Helvetica, \"ヒラギノ角ゴ Pro W3\", \"Hiragino Kaku Gothic Pro\", メイリオ, Meiryo, \"ＭＳ Ｐゴシック\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; font-size: 14px; user-select: auto;\">This<span style=\"user-select: auto;\"><b> 4 bedroom modern house</b></span> is <b style=\"user-select: auto;\">185 sq.m</b>. total floor area ( 92 sq.m. ground floor and 93 sq.m. second floor) which will require at least 106 sq.m. lot area.</span><br style=\"user-select: auto;\"></p>', 0, '2022-02-25 17:49:48'),
+(15, 'Blk 1 Lot 2 Elysium St. Phase 1 Ely Homes San Lorenzo Makati City ', 10000, '<p style=\"user-select: auto;\"><span style=\"color: rgb(17, 17, 17); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", Helvetica, \"ヒラギノ角ゴ Pro W3\", \"Hiragino Kaku Gothic Pro\", メイリオ, Meiryo, \"ＭＳ Ｐゴシック\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; font-size: 14px; user-select: auto;\">This<span style=\"user-select: auto;\"><b> 4 bedroom modern house</b></span> is <b style=\"user-select: auto;\">185 sq.m</b>. total floor area ( 92 sq.m. ground floor and 93 sq.m. second floor) which will require at least 106 sq.m. lot area.</span><br style=\"user-select: auto;\"></p>', 1, '2022-02-25 17:49:48'),
 (16, 'Blk 2 Lot 2 Elysium St. Phase 2 Ely Homes San Lorenzo Makati City ', 8000, '<div data-test-id=\"closeup-title\" class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><div class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><div class=\"CloseupTitleCard\" style=\"color: rgb(68, 68, 68); user-select: auto;\"><div class=\"KO4 zI7 iyn Hsu\" style=\"margin-top: 16px; user-select: auto;\"><div itemscope=\"\" itemtype=\"https://schema.org/Article\" style=\"user-select: auto;\"><div itemprop=\"name\" style=\"user-select: auto;\"><a class=\"Wk9 xQ4 CCY czT eEj kVc\" href=\"https://wp.me/p8jWDO-2X\" rel=\"noopener noreferrer nofollow\" target=\"_blank\" style=\"font-weight: 700; user-select: auto; outline: 0px; color: rgb(68, 68, 68); transition: transform 85ms ease-out 0s; text-decoration: none; display: block; border-radius: 0px;\"></a><pre style=\"display: inline-block; margin-top: 4px; user-select: auto;\"><p style=\"user-select: auto;\"><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"user-select: auto;\">Single Storey House Plan With <b>125 Square Meters</b> Of Lot Area</span></p></pre></div></div></div></div></div></div><div class=\"jzS ujU un8 TB_\" style=\"display: flex; margin-bottom: 0px; margin-top: 0px; flex-direction: column; flex: 1 1 auto; min-height: 0px; min-width: 0px; user-select: auto;\"><div class=\"Rnj hs0 un8 C9i\" style=\"display: flex; margin-left: 0px; margin-right: 0px; flex-direction: row; align-items: baseline; color: rgb(33, 25, 34); user-select: auto;\" segoe=\"\" ui\",=\"\" roboto,=\"\" oxygen-sans,=\"\" ubuntu,=\"\" cantarell,=\"\" \"fira=\"\" sans\",=\"\" \"droid=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" \"ヒラギノ角ゴ=\"\" pro=\"\" w3\",=\"\" \"hiragino=\"\" kaku=\"\" gothic=\"\" pro\",=\"\" メイリオ,=\"\" meiryo,=\"\" \"ＭＳ=\"\" Ｐゴシック\",=\"\" arial,=\"\" sans-serif,=\"\" \"apple=\"\" color=\"\" emoji\",=\"\" \"segoe=\"\" ui=\"\" symbol\";=\"\" font-size:=\"\" 12px;=\"\" user-select:=\"\" auto;\"=\"\"><div class=\"richPinInformation\" style=\"user-select: auto;\"><div class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><span class=\"tBJ dyH iFc j1A pBj zDA IZT swG\" style=\"user-select: auto; color: var(--g-colorGray300); -webkit-font-smoothing: antialiased; font-size: var(--font-size-200); font-family: var(--font-family-default-latin); font-weight: var(--font-weight-normal); overflow-wrap: break-word;\"></span></div></div></div><div class=\"zI7 iyn Hsu\" style=\"color: rgb(33, 25, 34); user-select: auto;\" segoe=\"\" ui\",=\"\" roboto,=\"\" oxygen-sans,=\"\" ubuntu,=\"\" cantarell,=\"\" \"fira=\"\" sans\",=\"\" \"droid=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" \"ヒラギノ角ゴ=\"\" pro=\"\" w3\",=\"\" \"hiragino=\"\" kaku=\"\" gothic=\"\" pro\",=\"\" メイリオ,=\"\" meiryo,=\"\" \"ＭＳ=\"\" Ｐゴシック\",=\"\" arial,=\"\" sans-serif,=\"\" \"apple=\"\" color=\"\" emoji\",=\"\" \"segoe=\"\" ui=\"\" symbol\";=\"\" font-size:=\"\" 12px;=\"\" user-select:=\"\" auto;\"=\"\"><div data-test-id=\"canonical-card\" id=\"canonical-card\" class=\"WbA zI7 iyn Hsu\" style=\"margin-top: 40px; user-select: auto;\"><div class=\"gjz hs0 un8 C9i\" style=\"display: flex; margin-left: 0px; margin-right: 0px; flex-direction: row; align-items: center; user-select: auto;\"><div class=\"Rz6 zI7 iyn Hsu\" style=\"margin-right: 4px; user-select: auto;\"></div></div></div></div></div><p style=\"user-select: auto;\"></p><p style=\"user-select: auto;\"></p>', 1, '2022-02-25 17:56:20'),
-(17, 'Blk 3 Lot 2 Elysium St. Phase 3 Ely Homes San Lorenzo Makati City ', 7999, '<p style=\"user-select: auto;\"><span style=\"color: rgb(17, 17, 17); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", Helvetica, \"ヒラギノ角ゴ Pro W3\", \"Hiragino Kaku Gothic Pro\", メイリオ, Meiryo, \"ＭＳ Ｐゴシック\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; font-size: 14px; user-select: auto;\">House Financing Bungalow Lot area 80 sqm. . Floor area <b>43.5 sqm. </b></span><br style=\"user-select: auto;\"></p>', 0, '2022-02-25 18:17:37'),
+(17, 'Blk 3 Lot 2 Elysium St. Phase 3 Ely Homes San Lorenzo Makati City ', 7999, '<p style=\"user-select: auto;\"><span style=\"color: rgb(17, 17, 17); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", Helvetica, \"ヒラギノ角ゴ Pro W3\", \"Hiragino Kaku Gothic Pro\", メイリオ, Meiryo, \"ＭＳ Ｐゴシック\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; font-size: 14px; user-select: auto;\">House Financing Bungalow Lot area 80 sqm. . Floor area <b>43.5 sqm. </b></span><br style=\"user-select: auto;\"></p>', 1, '2022-02-25 18:17:37'),
 (18, 'Blk 4 Lot 2 Elysium St. Phase 4 Ely Homes San Lorenzo Makati City ', 5000, '<p style=\"user-select: auto;\"><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"user-select: auto;\">This newly built 3,880 sq. ft. south-facing house is situated in a large, secluded, and quiet plot of <b>28,821 sq</b>. ft.<br style=\"user-select: auto;\"></span><span style=\"text-align: var(--bs-body-text-align); user-select: auto;\">It is protected from the north-east winds in the winter months, whilst enjoying the light east/southeast winds in <br style=\"user-select: auto;\">the summer months, making it cool year-rou</span><span style=\"text-align: var(--bs-body-text-align); user-select: auto;\">nd.</span></p>', 2, '2022-02-25 18:26:33'),
-(19, 'Blk 5 Lot 2 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 5000, '<p style=\"user-select: auto;\"><span style=\"color: rgb(44, 44, 45); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Droid Sans\", \"Helvetica Neue\", sans-serif; white-space: pre-wrap; user-select: auto;\">4 bedrooms, master bedroom has a balcony facing the garden (2 upstairs and 2\r\non the ground floor) All bedrooms have ceiling fans, master bedroom with split type\r\ninverter AC</span><br style=\"user-select: auto;\"></p>', 0, '2022-02-25 18:29:07'),
-(20, 'Blk 4 Lot 2 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 6999, '<p>Boasting an array of sleek finishes and a thoughtful open plan layout, this immaculate 1-bedroom, 1-bathroom condo is a paradigm of contemporary Elysium living. Features of this 50 sqm.<br></p>', 0, '2022-03-04 03:13:41'),
-(21, 'Blk 6 Lot 2 Elysium St. Phase 6 Ely Homes San Lorenzo Makati City ', 9499, '<p><span style=\"color: rgb(38, 38, 38); font-family: \"PT Sans Caption\"; font-size: 18px; font-style: italic;\">This 3 Bedroom W/ 2 Full Bathroom Ranch Home Is Immaculate & Full Of Upgrades! Enjoy The Open Floor Plan W/ Vaulted 15ft Ceilings & Large Windows Throughout.</span><br></p>', 0, '2022-03-04 03:16:07'),
-(22, 'Blk 7 Lot 2 Elysium St. Phase 6 Ely Homes San Lorenzo Makati City ', 10000, '<p><span style=\"color: rgb(34, 34, 34); font-family: \"2\", \"Helvetica Neue\", sans-serif;\">Spacious, sun-filled corner studio located in the premier full-service Makati, in the heart of the Elysium. This cozy home can easily accommodate a living area, bedroom, and dining.</span><br></p>', 0, '2022-03-04 03:19:45'),
-(23, 'Blk 9 Lot 2 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 9500, '<p>Adorable Cape Cod on nearly an acre that is ready to move into right away! Beautiful hardwood floors and carpet, a large master bathroom with double sinks, and his and her master bedroom closets.</p>', 0, '2022-03-04 03:27:16'),
+(19, 'Blk 5 Lot 2 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 5000, '<p style=\"user-select: auto;\"><span style=\"color: rgb(44, 44, 45); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Droid Sans\", \"Helvetica Neue\", sans-serif; white-space: pre-wrap; user-select: auto;\">4 bedrooms, master bedroom has a balcony facing the garden (2 upstairs and 2\r\non the ground floor) All bedrooms have ceiling fans, master bedroom with split type\r\ninverter AC</span><br style=\"user-select: auto;\"></p>', 1, '2022-02-25 18:29:07'),
+(20, 'Blk 4 Lot 2 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 6999, '<p>Boasting an array of sleek finishes and a thoughtful open plan layout, this immaculate 1-bedroom, 1-bathroom condo is a paradigm of contemporary Elysium living. Features of this 50 sqm.<br></p>', 1, '2022-03-04 03:13:41'),
+(21, 'Blk 6 Lot 2 Elysium St. Phase 6 Ely Homes San Lorenzo Makati City ', 9499, '<p><span style=\"color: rgb(38, 38, 38); font-family: \"PT Sans Caption\"; font-size: 18px; font-style: italic;\">This 3 Bedroom W/ 2 Full Bathroom Ranch Home Is Immaculate & Full Of Upgrades! Enjoy The Open Floor Plan W/ Vaulted 15ft Ceilings & Large Windows Throughout.</span><br></p>', 1, '2022-03-04 03:16:07'),
+(22, 'Blk 7 Lot 2 Elysium St. Phase 6 Ely Homes San Lorenzo Makati City ', 10000, '<p><span style=\"color: rgb(34, 34, 34); font-family: \"2\", \"Helvetica Neue\", sans-serif;\">Spacious, sun-filled corner studio located in the premier full-service Makati, in the heart of the Elysium. This cozy home can easily accommodate a living area, bedroom, and dining.</span><br></p>', 1, '2022-03-04 03:19:45'),
+(23, 'Blk 9 Lot 2 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 9500, '<p>Adorable Cape Cod on nearly an acre that is ready to move into right away! Beautiful hardwood floors and carpet, a large master bathroom with double sinks, and his and her master bedroom closets.</p>', 1, '2022-03-04 03:27:16'),
 (24, 'Blk 10 Lot 7 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 5999, '<p>Enjoy your own space and privacy in this beautifully updated one-story home, which comes fully furnished. Would make an excellent full-time residence or investment property in Elysium.<br></p>', 0, '2022-03-04 03:34:01'),
 (25, 'Blk 11 Lot 7 Elysium St. Phase 1 Ely Homes San Lorenzo Makati City ', 7000, '<p>A beautiful, spacious townhome with an open floor plan awaits you! Enjoy a private wooded view from the deck, as well as upgrades galore throughout this lovely home.</p><div><br></div>', 0, '2022-03-04 03:37:26');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `house_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `house_view` (
+`house_id` int(11)
+,`house_address` varchar(199)
+,`house_price` int(20)
+,`house_desc` text
+,`house_status` tinyint(1)
+,`added_date` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `log_id` int(200) NOT NULL,
+  `user` varchar(200) NOT NULL,
+  `log_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `action` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `logs`
+--
+
+INSERT INTO `logs` (`log_id`, `user`, `log_date`, `action`) VALUES
+(4, 'Judell Mejorada', '2022-03-05 09:10:20', 'Updated house 15 by Judell Mejorada'),
+(5, 'Judell Mejorada', '2022-03-05 09:10:57', 'Updated house 15 by Judell Mejorada'),
+(6, 'Judell Mejorada', '2022-03-05 16:33:37', 'Updated house 15 by Judell Mejorada'),
+(7, 'Judell Mejorada', '2022-03-05 22:22:58', 'Deleted user 37 by Judell Mejorada'),
+(11, 'Judell Mejorada', '2022-03-06 22:03:30', 'Added payment  by Judell Mejorada'),
+(12, 'Judell Mejorada', '2022-03-06 22:03:55', 'Updated payment 23 by Judell Mejorada'),
+(13, 'Judell Mejorada', '2022-03-06 22:21:14', 'Updated payment 23 by Judell Mejorada'),
+(14, 'Judell Mejorada', '2022-03-06 22:22:25', 'Updated payment 23 by Judell Mejorada'),
+(15, 'Judell Mejorada', '2022-03-06 22:23:05', 'Updated payment 23 by Judell Mejorada'),
+(16, 'Judell Mejorada', '2022-03-06 22:23:29', 'Updated payment 23 by Judell Mejorada'),
+(17, 'Judell Mejorada', '2022-03-06 22:24:36', 'Updated payment 23 by Judell Mejorada'),
+(18, 'Judell Mejorada', '2022-03-06 22:25:00', 'Updated payment 23 by Judell Mejorada'),
+(19, 'Judell Mejorada', '2022-03-06 22:29:25', 'Deleted payment 23 by Judell Mejorada'),
+(20, 'Judell Mejorada', '2022-03-06 23:15:08', 'Added bill for tenant 29 by Judell Mejorada'),
+(21, 'Judell Mejorada', '2022-03-06 23:16:43', 'Added bill for tenant 29 by Judell Mejorada'),
+(22, 'Judell Mejorada', '2022-03-06 23:17:29', 'Updated bill for tenant 29 by Judell Mejorada'),
+(23, 'Judell Mejorada', '2022-03-06 23:19:15', 'Updated bill for tenant 29 by Judell Mejorada'),
+(24, 'Judell Mejorada', '2022-03-06 23:19:36', 'Deleted bill 32 by Judell Mejorada'),
+(25, 'Judell Mejorada', '2022-03-06 23:19:43', 'Deleted bill 33 by Judell Mejorada'),
+(26, 'Judell Mejorada', '2022-03-07 00:00:05', 'Deleted tenant 36 by Judell Mejorada'),
+(27, 'Judell Mejorada', '2022-03-07 00:01:45', 'Updated tenant 24 by Judell Mejorada'),
+(28, 'Judell Mejorada', '2022-03-07 00:03:14', 'Updated tenant 24 by Judell Mejorada'),
+(29, 'Judell Mejorada', '2022-03-07 00:04:32', 'Updated tenant 24 by Judell Mejorada'),
+(30, 'Judell Mejorada', '2022-03-07 00:05:06', 'Updated tenant 24 by Judell Mejorada'),
+(31, 'Judell Mejorada', '2022-03-07 00:09:03', 'Updated tenant 24 by Judell Mejorada'),
+(32, 'Judell Mejorada', '2022-03-07 00:09:16', 'Updated tenant 24 by Judell Mejorada'),
+(33, 'Judell Mejorada', '2022-03-07 00:09:36', 'Updated tenant 24 by Judell Mejorada'),
+(34, 'Judell Mejorada', '2022-03-07 00:11:48', 'Updated tenant 24 by Judell Mejorada'),
+(35, 'Judell Mejorada', '2022-03-07 00:20:05', 'Updated tenant 24 by Judell Mejorada'),
+(36, 'Judell Mejorada', '2022-03-07 00:21:37', 'Updated tenant 24 by Judell Mejorada'),
+(37, 'Judell Mejorada', '2022-03-07 00:22:44', 'Added tenant  by Judell Mejorada'),
+(38, 'Judell Mejorada', '2022-03-07 00:31:28', 'Updated bill for tenant 36 by Judell Mejorada'),
+(39, 'Judell Mejorada', '2022-03-07 00:31:43', 'Updated bill for tenant 36 by Judell Mejorada'),
+(40, 'Judell Mejorada', '2022-03-07 00:39:43', 'Updated bill for tenant 34 by Judell Mejorada'),
+(41, 'Judell Mejorada', '2022-03-07 00:39:53', 'Updated bill for tenant 34 by Judell Mejorada'),
+(42, 'Judell Mejorada', '2022-03-07 00:53:14', 'Updated house 16 by Judell Mejorada'),
+(43, 'Judell Mejorada', '2022-03-07 00:54:34', 'Updated tenant 24 by Judell Mejorada'),
+(44, 'Judell Mejorada', '2022-03-07 00:54:47', 'Updated tenant 24 by Judell Mejorada'),
+(45, 'Judell Mejorada', '2022-03-07 01:47:16', 'Added tenant  by Judell Mejorada'),
+(46, 'Judell Mejorada', '2022-03-07 01:47:44', 'Updated tenant 24 by Judell Mejorada'),
+(47, 'Judell Mejorada', '2022-03-07 01:48:31', 'Updated tenant 24 by Judell Mejorada'),
+(48, 'Judell Mejorada', '2022-03-07 01:48:37', 'Updated tenant 24 by Judell Mejorada'),
+(49, 'Judell Mejorada', '2022-03-07 01:49:02', 'Updated tenant 24 by Judell Mejorada'),
+(50, 'Judell Mejorada', '2022-03-07 01:49:34', 'Added tenant  by Judell Mejorada'),
+(51, 'Judell Mejorada', '2022-03-07 01:50:08', 'Updated tenant 24 by Judell Mejorada'),
+(52, 'Judell Mejorada', '2022-03-07 01:50:25', 'Updated tenant 24 by Judell Mejorada'),
+(53, 'Judell Mejorada', '2022-03-07 01:53:12', 'Updated tenant 24 by Judell Mejorada'),
+(54, 'Judell Mejorada', '2022-03-07 01:53:20', 'Updated tenant 24 by Judell Mejorada'),
+(55, 'Judell Mejorada', '2022-03-07 01:53:29', 'Updated tenant 24 by Judell Mejorada'),
+(56, 'Judell Mejorada', '2022-03-07 01:56:36', 'Updated tenant 33 by Judell Mejorada'),
+(57, 'Judell Mejorada', '2022-03-07 01:56:43', 'Updated tenant 33 by Judell Mejorada'),
+(58, 'Judell Mejorada', '2022-03-07 02:31:47', 'Updated house 16 by Judell Mejorada'),
+(59, 'Judell Mejorada', '2022-03-07 04:21:04', 'Updated house 16 by Judell Mejorada'),
+(60, 'Judell Mejorada', '2022-03-08 13:29:11', 'Added house  by Judell Mejorada'),
+(61, 'Judell Mejorada', '2022-03-08 13:34:33', 'Added house by Judell Mejorada'),
+(62, 'Judell Mejorada', '2022-03-08 13:35:12', 'Added house by Judell Mejorada'),
+(63, 'Judell Mejorada', '2022-03-08 13:35:15', 'Added house by Judell Mejorada'),
+(64, 'Judell Mejorada', '2022-03-08 13:35:25', 'Added house by Judell Mejorada'),
+(65, 'Judell Mejorada', '2022-03-08 16:46:26', 'Updated house 15 by Judell Mejorada'),
+(66, 'Judell Mejorada', '2022-03-08 16:46:33', 'Updated house 17 by Judell Mejorada'),
+(67, 'Judell Mejorada', '2022-03-08 16:46:39', 'Updated house 19 by Judell Mejorada'),
+(68, 'Judell Mejorada', '2022-03-08 16:46:47', 'Updated house 20 by Judell Mejorada'),
+(69, 'Judell Mejorada', '2022-03-08 16:46:54', 'Updated house 21 by Judell Mejorada'),
+(70, 'Judell Mejorada', '2022-03-08 16:47:03', 'Updated house 22 by Judell Mejorada'),
+(71, 'Judell Mejorada', '2022-03-08 16:47:11', 'Updated house 23 by Judell Mejorada'),
+(72, 'Judell Mejorada', '2022-03-08 16:49:53', 'Updated user 67 by Judell Mejorada'),
+(73, 'Judell Mejorada', '2022-03-08 16:50:48', 'Updated user 67 by Judell Mejorada'),
+(74, 'Judell Mejorada', '2022-03-08 16:55:22', 'Updated user 67 by Judell Mejorada'),
+(75, 'Judell Mejorada', '2022-03-08 16:56:08', 'Updated user 67 by Judell Mejorada'),
+(76, 'Judell Mejorada', '2022-03-08 16:58:47', 'Updated user 67 by Judell Mejorada'),
+(77, 'Judell Mejorada', '2022-03-08 17:01:43', 'Added tenant  by Judell Mejorada'),
+(78, 'Judell Mejorada', '2022-03-08 17:07:27', 'Added bill for tenant 40 by Judell Mejorada'),
+(79, 'Judell Mejorada', '2022-03-08 21:15:44', 'Updated bill for tenant 40 by Judell Mejorada'),
+(80, 'Judell Mejorada', '2022-03-08 21:21:22', 'Updated bill for tenant 40 by Judell Mejorada');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `paid_bills`
+-- (See below for the actual view)
+--
+CREATE TABLE `paid_bills` (
+`id` int(11)
+,`bill_status` tinyint(1)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `pay`
+-- (See below for the actual view)
+--
+CREATE TABLE `pay` (
+`payment_id` int(11)
+,`bill_id` int(20)
+,`payment_total` int(200)
+,`payment_desc` text
+,`payment_date` date
+,`payment_status` tinyint(1)
+,`created_at` timestamp
+,`name` varchar(383)
+,`bill_total` int(200)
+,`pay` varchar(10)
+);
 
 -- --------------------------------------------------------
 
@@ -167,21 +370,24 @@ CREATE TABLE `payments` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `payments`
---
+-- --------------------------------------------------------
 
-INSERT INTO `payments` (`payment_id`, `bill_id`, `payment_total`, `payment_desc`, `payment_date`, `payment_status`, `created_at`) VALUES
-(13, 25, 8549, '<p>paid via credit card</p>', '2022-03-25', 0, '2022-03-04 04:28:43'),
-(14, 26, 13646, '<p>paid via cheque</p>', '2022-04-13', 0, '2022-03-04 04:29:11'),
-(15, 27, 15098, '<p>paid via credit card</p>', '2022-04-23', 0, '2022-03-04 04:31:53'),
-(16, 28, 14230, '<p>paid via e-wallet</p>', '2022-04-08', 0, '2022-03-04 04:33:16'),
-(17, 29, 12125, '<p>pay your debts</p>', '2022-05-11', 0, '2022-03-04 04:33:40'),
-(18, 30, 13548, '<p>paid via bank</p>', '2022-03-30', 0, '2022-03-04 04:35:18'),
-(19, 32, 19752, '<p>paid via bank</p>', '2022-05-09', 0, '2022-03-04 04:35:52'),
-(20, 24, 5000, '<p>paid via credit card, balance is 4000</p>', '2022-03-31', 0, '2022-03-04 05:44:34'),
-(21, 29, 1900, '<p>paid via swiss bank, balance is 10225</p>', '2022-04-15', 2, '2022-03-04 05:44:49'),
-(23, 23, 12500, 'ok update', '2022-01-08', 0, '2022-03-06 22:03:30');
+--
+-- Stand-in structure for view `pay_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `pay_view` (
+`payment_id` int(11)
+,`bill_id` int(20)
+,`payment_total` int(200)
+,`payment_desc` text
+,`payment_date` date
+,`payment_status` tinyint(1)
+,`created_at` timestamp
+,`name` varchar(383)
+,`bill_total` int(200)
+,`pay` varchar(73)
+);
 
 -- --------------------------------------------------------
 
@@ -202,21 +408,194 @@ CREATE TABLE `tenant` (
 --
 
 INSERT INTO `tenant` (`tenant_id`, `users_id`, `house_id`, `tenant_status`, `date_in`) VALUES
-(24, 26, 15, 0, '2022-02-26 23:52:30'),
-(25, 30, 16, 1, '2022-02-26 23:52:46'),
-(26, 54, 15, 1, '2022-03-04 03:38:15'),
-(27, 47, 25, 1, '2022-03-04 03:38:53'),
-(28, 44, 24, 1, '2022-03-04 03:39:07'),
-(29, 42, 23, 1, '2022-03-04 03:39:16'),
-(30, 54, 22, 1, '2022-03-04 03:40:14'),
-(31, 52, 22, 0, '2022-03-04 03:40:30'),
-(32, 51, 21, 1, '2022-03-04 03:41:08'),
-(33, 26, 15, 1, '2022-03-04 03:41:18'),
-(34, 52, 17, 1, '2022-03-04 03:41:38'),
-(35, 48, 16, 1, '2022-03-04 03:42:00'),
-(36, 45, 15, 1, '2022-03-04 03:42:17'),
-(38, 26, 16, 1, '2022-03-07 01:47:16'),
-(39, 27, 16, 0, '2022-03-07 01:49:34');
+(40, 67, 15, 1, '2022-03-08 17:01:43');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tenant_bill_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `tenant_bill_view` (
+`name` varchar(383)
+,`id` int(11)
+,`due` varchar(73)
+,`bill_status` tinyint(1)
+,`bill_id` int(20)
+,`bill_total` int(200)
+,`bill_desc` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tenant_payments`
+-- (See below for the actual view)
+--
+CREATE TABLE `tenant_payments` (
+`id` int(11)
+,`pay` int(20)
+,`payment_status` tinyint(1)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tenant_payments_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `tenant_payments_view` (
+`payment_id` int(11)
+,`bill_id` int(20)
+,`payment_total` int(200)
+,`payment_desc` text
+,`payment_date` date
+,`payment_status` tinyint(1)
+,`created_at` timestamp
+,`name` varchar(383)
+,`bill_total` int(200)
+,`pay` varchar(73)
+,`id` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tenant_user`
+-- (See below for the actual view)
+--
+CREATE TABLE `tenant_user` (
+`tenant_id` int(199)
+,`users_id` int(199)
+,`house_id` int(200)
+,`tenant_status` tinyint(1)
+,`date_in` timestamp
+,`name` varchar(383)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tenant_user_house`
+-- (See below for the actual view)
+--
+CREATE TABLE `tenant_user_house` (
+`tenant_id` int(199)
+,`users_id` int(199)
+,`house_id` int(200)
+,`tenant_status` tinyint(1)
+,`date_in` timestamp
+,`name` varchar(383)
+,`email` varchar(191)
+,`phone` varchar(15)
+,`id` int(11)
+,`house_price` int(20)
+,`house_address` varchar(199)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tenant_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `tenant_view` (
+`tenant_id` int(199)
+,`users_id` int(199)
+,`house_id` int(200)
+,`tenant_status` tinyint(1)
+,`date_in` timestamp
+,`name` varchar(383)
+,`email` varchar(191)
+,`phone` varchar(15)
+,`id` int(11)
+,`house_price` int(20)
+,`house_address` varchar(199)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `total_bills`
+-- (See below for the actual view)
+--
+CREATE TABLE `total_bills` (
+`bill_id` int(20)
+,`tenant_id` int(20)
+,`house_rent_pay` int(200)
+,`electric_bill` int(200)
+,`water_bill` int(200)
+,`other_bill` int(200)
+,`bill_desc` text
+,`bill_status` tinyint(1)
+,`due_date` date
+,`bill_total` int(200)
+,`created_at` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `total_house`
+-- (See below for the actual view)
+--
+CREATE TABLE `total_house` (
+`house_id` int(11)
+,`house_address` varchar(199)
+,`house_price` int(20)
+,`house_desc` text
+,`house_status` tinyint(1)
+,`added_date` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `total_payments`
+-- (See below for the actual view)
+--
+CREATE TABLE `total_payments` (
+`payment_id` int(11)
+,`bill_id` int(20)
+,`payment_total` int(200)
+,`payment_desc` text
+,`payment_date` date
+,`payment_status` tinyint(1)
+,`created_at` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `total_tenants`
+-- (See below for the actual view)
+--
+CREATE TABLE `total_tenants` (
+`tenant_id` int(199)
+,`users_id` int(199)
+,`house_id` int(200)
+,`tenant_status` tinyint(1)
+,`date_in` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `total_users`
+-- (See below for the actual view)
+--
+CREATE TABLE `total_users` (
+`id` int(11)
+,`fname` varchar(191)
+,`lname` varchar(191)
+,`email` varchar(191)
+,`phone` varchar(15)
+,`password` varchar(191)
+,`verify_token` varchar(200)
+,`role_as` tinyint(1)
+,`status` tinyint(1)
+,`created_at` timestamp
+);
 
 -- --------------------------------------------------------
 
@@ -233,7 +612,7 @@ CREATE TABLE `users` (
   `password` varchar(191) NOT NULL,
   `verify_token` varchar(200) NOT NULL,
   `role_as` tinyint(1) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0-inactive, 1 -active, 2- delete',
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0-inactive, 1 -active, 2- delete',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -242,36 +621,188 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `phone`, `password`, `verify_token`, `role_as`, `status`, `created_at`) VALUES
-(1, 'Judell', 'Mejorada', 'mejoradajudell15@gmail.com', '09774839769', 'portia', '6eff92a1f825007bb44d712247a565c0elysium', 1, 1, '2022-01-22 11:59:43'),
-(26, 'Mark', 'Banaba', 'markbanaba@yahoo.com', '09635056582', 'qqq', '', 0, 1, '2022-02-25 07:24:20'),
-(27, 'Anne', 'Polly', 'anne@gmail.com', '09702832323', '123', '', 0, 1, '2022-02-26 11:20:10'),
-(28, 'Loraine', 'Naval', 'loraine5@gmail.com', '09812324143', 'qqq', '', 0, 1, '2022-02-26 18:00:21'),
-(29, 'Hannah', 'Cordelia', 'cordelia101@gmail.com', '09702832323', '123', '', 0, 2, '2022-02-26 23:04:53'),
-(30, 'Warren', 'Sy', 'warrrensy@gmail.com', '09702832322', '1234567', '', 0, 1, '2022-02-26 23:07:19'),
-(31, 'John Aron', 'Locked', 'johnaron@gmail.com', '09702832326', 'locked', '', 0, 2, '2022-02-26 23:08:20'),
-(32, 'Daniel', 'Fegason', 'danielfegason@gmail.com', '09102832324', 'rolly', '', 0, 2, '2022-02-26 23:09:46'),
-(33, 'Loraine', 'Naval', 'meme@gmail.com', '0971237123', '111', '', 0, 1, '2022-03-02 16:43:02'),
-(34, 'Judell', 'Mejorada', 'mejoradajudell@yahoo.com', '9635056582', 'okay', '', 0, 0, '2022-03-03 14:24:37'),
-(35, 'Ferdinand ', 'Marcos', 'martiallaw@gmail.com', '09557115823', 'diktadorako', '', 0, 1, '2022-03-04 02:20:40'),
-(36, 'Perla', 'Aventura', 'perlaaventura06@yahoo.com', '09582240125', 'perla12345', '', 0, 1, '2022-03-04 02:21:41'),
-(37, 'Walter ', 'White', 'walterwhite@hotmail.com', '09922215367', 'breakingbad', '', 0, 2, '2022-03-04 02:23:03'),
-(38, 'Saul', 'Goodman', 'bettercallsaul@gmail.com', '09202533507', 'slippinjimmy', '', 0, 1, '2022-03-04 02:23:57'),
-(39, 'Tobey ', 'Maguire', 'bestspiderman@gmail.com', '09555285199', 'tobeyvincent', '', 0, 1, '2022-03-04 02:25:17'),
-(40, 'Chadwick', 'Boseman', 'wakandaforever@gmail.com', '09974220015', 'blackpanther', '', 0, 1, '2022-03-04 02:27:43'),
-(41, 'Corey', 'Taylor', 'slipknot@gmail.com', '09666111999', 'psychosocial', '', 0, 1, '2022-03-04 02:31:39'),
-(42, 'Taylor', 'Swift', 'alltoowell@gmail.com', '09123456776', 'tayloralison', '', 0, 1, '2022-03-04 02:32:40'),
-(43, 'Oliver', 'Sykes', 'bringmethehorizonuk@gmail.com', '09992216347', 'sempiternal', '', 0, 1, '2022-03-04 02:33:20'),
-(44, 'Hayley Nichole', 'Williams', 'petalsforarmor@gmail.com', '09777641231', 'paramore', '', 0, 1, '2022-03-04 02:34:36'),
-(45, 'Sabine ', 'Callas', 'vipertoxic@gmail.com', '09876458989', 'snakebite', '', 0, 1, '2022-03-04 02:35:33'),
-(46, 'Avril', 'Lavigne', 'lovesux143@yahoo.com', '09344571123', 'imwithyou', '', 0, 1, '2022-03-04 02:36:40'),
-(47, 'Eren', 'Yeager', 'rumblingiscoming@gmail.com', '09025889109', 'mikasa', '', 0, 1, '2022-03-04 02:37:28'),
-(48, 'Myoui', ' Mina', 'sharonpenguin@gmail.com', '09026812258', 'twice', '', 0, 1, '2022-03-04 02:38:24'),
-(49, 'Marshall ', 'Mathers', 'realslimshady@gmail.com', '09092261277', 'no1rapper', '', 0, 1, '2022-03-04 02:40:10'),
-(50, 'Ji Min', 'Yu', 'aespa@gmail.com', '09928525512', 'yujimin', '', 0, 1, '2022-03-04 02:41:32'),
-(51, 'Levi', 'Ackerman', 'zekesdaddy@gmail.com', '09143619069', 'strong', '', 0, 1, '2022-03-04 02:43:13'),
-(52, 'Cardo', 'Dalisay', 'talamattalahat@yahoo.com', '09922188554', 'coco', '', 0, 1, '2022-03-04 02:45:12'),
-(53, 'Jayson', 'Tatum', 'celtics0@yahoo.com', '09002422611', 'duke', '', 0, 1, '2022-03-04 02:46:39'),
-(54, 'Jennie', 'Ruby', 'blackpinkhiatus@gmail.com', '095595857567', 'kai', '', 0, 1, '2022-03-04 02:48:52');
+(1, 'Judell', 'Mejorada', 'mejoradajudell15@gmail.com', '09774839769', '$2y$10$vnp6/P8/v4ISVKe6DWV/D./x.ghney9l3PBsDMyStXZT/ZithON3.', 'f1bc5ee2b4601ff03c0cffa3ba2cd0dbelysium', 1, 1, '2022-01-22 11:59:43'),
+(67, 'Loraine', 'Naval', 'meme@gmail.com', '09391968957', '$2y$10$gTKBzYtShai6FDjDGXhHF.CE9IpvA3aiOpJ/afK5y.chYsu34uPXu', '', 0, 1, '2022-03-08 16:44:48');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `balance`
+--
+DROP TABLE IF EXISTS `balance`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `balance`  AS SELECT sum(`payments`.`payment_total`) AS `paid`, sum(`bills`.`bill_total`) AS `t_bill` FROM (`payments` join `bills` on(`bills`.`bill_id` = `payments`.`bill_id`)) WHERE `payments`.`payment_status` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `bill`
+--
+DROP TABLE IF EXISTS `bill`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bill`  AS SELECT concat(`users`.`fname`,' ',`users`.`lname`) AS `name`, date_format(`bills`.`due_date`,'%m/%d/%Y') AS `due`, `bills`.`bill_total` AS `bill_total` FROM ((`bills` join `tenant`) join `users` on(`bills`.`tenant_id` = `tenant`.`tenant_id` and `tenant`.`users_id` = `users`.`id`)) WHERE `bills`.`bill_status` = 0 ORDER BY date_format(`bills`.`due_date`,'%m/%d/%Y') ASC LIMIT 0, 5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `bill_all`
+--
+DROP TABLE IF EXISTS `bill_all`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bill_all`  AS SELECT `bills`.`bill_id` AS `bill_id`, `bills`.`tenant_id` AS `tenant_id`, `bills`.`house_rent_pay` AS `house_rent_pay`, `bills`.`electric_bill` AS `electric_bill`, `bills`.`water_bill` AS `water_bill`, `bills`.`other_bill` AS `other_bill`, `bills`.`bill_desc` AS `bill_desc`, `bills`.`bill_status` AS `bill_status`, `bills`.`due_date` AS `due_date`, `bills`.`bill_total` AS `bill_total`, `bills`.`created_at` AS `created_at`, date_format(`bills`.`due_date`,'%m/%d/%Y') AS `due` FROM `bills` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `bill_all_stat`
+--
+DROP TABLE IF EXISTS `bill_all_stat`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bill_all_stat`  AS SELECT concat(`users`.`fname`,' ',`users`.`lname`) AS `name`, `b`.`bill_id` AS `bill_id`, `b`.`bill_total` AS `bill_total`, `b`.`bill_desc` AS `bill_desc`, `b`.`bill_status` AS `bill_status`, `b`.`tenant_id` AS `b_id` FROM ((`bills` `b` join `tenant`) join `users` on(`b`.`tenant_id` = `tenant`.`tenant_id` and `tenant`.`users_id` = `users`.`id`)) WHERE `b`.`bill_status` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `bill_users`
+--
+DROP TABLE IF EXISTS `bill_users`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bill_users`  AS SELECT concat(`u`.`fname`,' ',`u`.`lname`) AS `name`, `b`.`bill_status` AS `bill_status`, `b`.`bill_total` AS `bill_total`, `b`.`bill_id` AS `bill_id`, `b`.`tenant_id` AS `t_id`, date_format(`b`.`due_date`,'%M %e, %Y') AS `due` FROM ((`bills` `b` join `tenant` `t`) join `users` `u` on(`b`.`tenant_id` = `t`.`tenant_id` and `t`.`users_id` = `u`.`id`)) WHERE `b`.`bill_status` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `house_view`
+--
+DROP TABLE IF EXISTS `house_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `house_view`  AS SELECT `house`.`house_id` AS `house_id`, `house`.`house_address` AS `house_address`, `house`.`house_price` AS `house_price`, `house`.`house_desc` AS `house_desc`, `house`.`house_status` AS `house_status`, `house`.`added_date` AS `added_date` FROM `house` WHERE `house`.`house_status` <> '2' ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `paid_bills`
+--
+DROP TABLE IF EXISTS `paid_bills`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `paid_bills`  AS SELECT `users`.`id` AS `id`, `bills`.`bill_status` AS `bill_status` FROM ((`bills` join `tenant`) join `users` on(`bills`.`tenant_id` = `tenant`.`tenant_id` and `tenant`.`users_id` = `users`.`id`)) WHERE `bills`.`bill_status` = 1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `pay`
+--
+DROP TABLE IF EXISTS `pay`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pay`  AS SELECT `p`.`payment_id` AS `payment_id`, `p`.`bill_id` AS `bill_id`, `p`.`payment_total` AS `payment_total`, `p`.`payment_desc` AS `payment_desc`, `p`.`payment_date` AS `payment_date`, `p`.`payment_status` AS `payment_status`, `p`.`created_at` AS `created_at`, concat(`u`.`fname`,' ',`u`.`lname`) AS `name`, `b`.`bill_total` AS `bill_total`, date_format(`p`.`payment_date`,'%m/%d/%Y') AS `pay` FROM (((`payments` `p` join `bills` `b`) join `tenant` `t`) join `users` `u` on(`p`.`bill_id` = `b`.`bill_id` and `b`.`tenant_id` = `t`.`tenant_id` and `t`.`users_id` = `u`.`id`)) WHERE `p`.`payment_status` <> '2' ORDER BY date_format(`p`.`payment_date`,'%m/%d/%Y') ASC LIMIT 0, 10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `pay_view`
+--
+DROP TABLE IF EXISTS `pay_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pay_view`  AS SELECT `p`.`payment_id` AS `payment_id`, `p`.`bill_id` AS `bill_id`, `p`.`payment_total` AS `payment_total`, `p`.`payment_desc` AS `payment_desc`, `p`.`payment_date` AS `payment_date`, `p`.`payment_status` AS `payment_status`, `p`.`created_at` AS `created_at`, concat(`u`.`fname`,' ',`u`.`lname`) AS `name`, `b`.`bill_total` AS `bill_total`, date_format(`p`.`payment_date`,'%M %e, %Y') AS `pay` FROM (((`payments` `p` join `bills` `b`) join `tenant` `t`) join `users` `u` on(`p`.`bill_id` = `b`.`bill_id` and `b`.`tenant_id` = `t`.`tenant_id` and `t`.`users_id` = `u`.`id`)) WHERE `p`.`payment_status` <> '2' ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tenant_bill_view`
+--
+DROP TABLE IF EXISTS `tenant_bill_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tenant_bill_view`  AS SELECT concat(`users`.`fname`,' ',`users`.`lname`) AS `name`, `users`.`id` AS `id`, date_format(`bills`.`due_date`,'%M %e, %Y') AS `due`, `bills`.`bill_status` AS `bill_status`, `bills`.`bill_id` AS `bill_id`, `bills`.`bill_total` AS `bill_total`, `bills`.`bill_desc` AS `bill_desc` FROM ((`bills` join `tenant`) join `users` on(`bills`.`tenant_id` = `tenant`.`tenant_id` and `tenant`.`users_id` = `users`.`id`)) WHERE `bills`.`bill_status` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tenant_payments`
+--
+DROP TABLE IF EXISTS `tenant_payments`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tenant_payments`  AS SELECT `users`.`id` AS `id`, `payments`.`bill_id` AS `pay`, `payments`.`payment_status` AS `payment_status` FROM (((`payments` join `bills`) join `tenant`) join `users` on(`bills`.`bill_id` = `payments`.`bill_id` and `bills`.`tenant_id` = `tenant`.`tenant_id` and `tenant`.`users_id` = `users`.`id`)) WHERE `payments`.`payment_status` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tenant_payments_view`
+--
+DROP TABLE IF EXISTS `tenant_payments_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tenant_payments_view`  AS SELECT `payments`.`payment_id` AS `payment_id`, `payments`.`bill_id` AS `bill_id`, `payments`.`payment_total` AS `payment_total`, `payments`.`payment_desc` AS `payment_desc`, `payments`.`payment_date` AS `payment_date`, `payments`.`payment_status` AS `payment_status`, `payments`.`created_at` AS `created_at`, concat(`users`.`fname`,' ',`users`.`lname`) AS `name`, `bills`.`bill_total` AS `bill_total`, date_format(`payments`.`payment_date`,'%M %e, %Y') AS `pay`, `users`.`id` AS `id` FROM (((`payments` join `bills`) join `tenant`) join `users` on(`payments`.`bill_id` = `bills`.`bill_id` and `bills`.`tenant_id` = `tenant`.`tenant_id` and `tenant`.`users_id` = `users`.`id`)) WHERE `payments`.`payment_status` <> '2' ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tenant_user`
+--
+DROP TABLE IF EXISTS `tenant_user`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tenant_user`  AS SELECT `t`.`tenant_id` AS `tenant_id`, `t`.`users_id` AS `users_id`, `t`.`house_id` AS `house_id`, `t`.`tenant_status` AS `tenant_status`, `t`.`date_in` AS `date_in`, concat(`u`.`fname`,' ',`u`.`lname`) AS `name` FROM (`users` `u` left join `tenant` `t` on(`t`.`users_id` = `u`.`id`)) WHERE `t`.`tenant_status` = 1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tenant_user_house`
+--
+DROP TABLE IF EXISTS `tenant_user_house`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tenant_user_house`  AS SELECT `t`.`tenant_id` AS `tenant_id`, `t`.`users_id` AS `users_id`, `t`.`house_id` AS `house_id`, `t`.`tenant_status` AS `tenant_status`, `t`.`date_in` AS `date_in`, concat(`u`.`fname`,' ',`u`.`lname`) AS `name`, `u`.`email` AS `email`, `u`.`phone` AS `phone`, `u`.`id` AS `id`, `h`.`house_price` AS `house_price`, `h`.`house_address` AS `house_address` FROM ((`tenant` `t` join `house` `h` on(`h`.`house_id` = `t`.`house_id`)) join `users` `u` on(`u`.`id` = `t`.`users_id`)) WHERE `t`.`tenant_status` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tenant_view`
+--
+DROP TABLE IF EXISTS `tenant_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tenant_view`  AS SELECT `t`.`tenant_id` AS `tenant_id`, `t`.`users_id` AS `users_id`, `t`.`house_id` AS `house_id`, `t`.`tenant_status` AS `tenant_status`, `t`.`date_in` AS `date_in`, concat(`u`.`fname`,' ',`u`.`lname`) AS `name`, `u`.`email` AS `email`, `u`.`phone` AS `phone`, `u`.`id` AS `id`, `h`.`house_price` AS `house_price`, `h`.`house_address` AS `house_address` FROM ((`tenant` `t` join `house` `h` on(`h`.`house_id` = `t`.`house_id`)) join `users` `u` on(`u`.`id` = `t`.`users_id`)) WHERE `t`.`tenant_status` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `total_bills`
+--
+DROP TABLE IF EXISTS `total_bills`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_bills`  AS SELECT `bills`.`bill_id` AS `bill_id`, `bills`.`tenant_id` AS `tenant_id`, `bills`.`house_rent_pay` AS `house_rent_pay`, `bills`.`electric_bill` AS `electric_bill`, `bills`.`water_bill` AS `water_bill`, `bills`.`other_bill` AS `other_bill`, `bills`.`bill_desc` AS `bill_desc`, `bills`.`bill_status` AS `bill_status`, `bills`.`due_date` AS `due_date`, `bills`.`bill_total` AS `bill_total`, `bills`.`created_at` AS `created_at` FROM `bills` WHERE `bills`.`bill_status` = 0 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `total_house`
+--
+DROP TABLE IF EXISTS `total_house`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_house`  AS SELECT `house`.`house_id` AS `house_id`, `house`.`house_address` AS `house_address`, `house`.`house_price` AS `house_price`, `house`.`house_desc` AS `house_desc`, `house`.`house_status` AS `house_status`, `house`.`added_date` AS `added_date` FROM `house` WHERE `house`.`house_status` = '1' ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `total_payments`
+--
+DROP TABLE IF EXISTS `total_payments`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_payments`  AS SELECT `payments`.`payment_id` AS `payment_id`, `payments`.`bill_id` AS `bill_id`, `payments`.`payment_total` AS `payment_total`, `payments`.`payment_desc` AS `payment_desc`, `payments`.`payment_date` AS `payment_date`, `payments`.`payment_status` AS `payment_status`, `payments`.`created_at` AS `created_at` FROM `payments` WHERE `payments`.`payment_status` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `total_tenants`
+--
+DROP TABLE IF EXISTS `total_tenants`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_tenants`  AS SELECT `tenant`.`tenant_id` AS `tenant_id`, `tenant`.`users_id` AS `users_id`, `tenant`.`house_id` AS `house_id`, `tenant`.`tenant_status` AS `tenant_status`, `tenant`.`date_in` AS `date_in` FROM `tenant` WHERE `tenant`.`tenant_status` = 1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `total_users`
+--
+DROP TABLE IF EXISTS `total_users`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_users`  AS SELECT `users`.`id` AS `id`, `users`.`fname` AS `fname`, `users`.`lname` AS `lname`, `users`.`email` AS `email`, `users`.`phone` AS `phone`, `users`.`password` AS `password`, `users`.`verify_token` AS `verify_token`, `users`.`role_as` AS `role_as`, `users`.`status` AS `status`, `users`.`created_at` AS `created_at` FROM `users` WHERE `users`.`status` <> 2 ;
 
 --
 -- Indexes for dumped tables
@@ -288,6 +819,12 @@ ALTER TABLE `bills`
 --
 ALTER TABLE `house`
   ADD PRIMARY KEY (`house_id`);
+
+--
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`log_id`);
 
 --
 -- Indexes for table `payments`
@@ -315,13 +852,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `bill_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `house`
 --
 ALTER TABLE `house`
-  MODIFY `house_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `house_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -333,13 +876,13 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `tenant`
 --
 ALTER TABLE `tenant`
-  MODIFY `tenant_id` int(199) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `tenant_id` int(199) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -40,7 +40,7 @@ include("includes/header.php");
                                 <div class="col-md-12 mb-3">
                                     <label for="">Users</label>
                                     <?php
-                                        $users = "SELECT * FROM users WHERE role_as = 0 ";
+                                        $users = "SELECT * FROM tenant_user";
                                         $users_run = mysqli_query($con, $users);
                                         $row_users = mysqli_fetch_array($users_run);
                                         if(mysqli_num_rows($users_run) > 0)
@@ -64,7 +64,7 @@ include("includes/header.php");
                                         else
                                         {
                                             ?>
-                                            <h5>No Users Available</h5>
+                                            <h5>No User Available</h5>
                                             <?php
                                         }
                                     ?>
@@ -73,7 +73,7 @@ include("includes/header.php");
                                 <div class="col-md-12 mb-3">
                                     <label for="">House List</label>
                                     <?php
-                                        $house = "SELECT * FROM house WHERE house_status !=2 ";
+                                        $house = "SELECT * FROM total_house ";
                                         $house_run = mysqli_query($con, $house);
                                         $row_house = mysqli_fetch_array($house_run);
                                         if(mysqli_num_rows($house_run) > 0)
@@ -107,11 +107,11 @@ include("includes/header.php");
                                 <div class="col-md-12 mb-3">
                                     <label for="">Status</label> <br/>
                                     <input type="checkbox" name="tenant_status" <?= $row['tenant_status'] == '1' ? 'checked':'' ?> width="70px" height="70px">
-                                    <label for="checkbox">Check this box if tenant is active</label>
+                                    <label for="checkbox">Active</label>
                                 </div>
                 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button type="submit" name="update_tenant" class="btn btn-primary">Update Tenant</button>
+                                    <button type="submit" name="update_tenant" onclick="return confirm('Are you sure you want to update?')" class="btn btn-primary">Update Tenant</button>
                                 </div>
                                 
                             </div>

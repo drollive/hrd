@@ -58,7 +58,7 @@ include("includes/header.php");
                         }
                         else
                         {
-                            echo '<h3 class="mb-0 text-center ">No data</h3>';
+                            echo '<h3 class="mb-0 text-center">No data</h3>';
                         }
                     ?>
 
@@ -156,7 +156,7 @@ include("includes/header.php");
             </div>
         </div>
 
-        <!--BALANCE REPORTS -->
+        <!--BALANCE REPORT -->
         <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body shadow-sm d-flex justify-content-around align-items-center">
@@ -174,8 +174,7 @@ include("includes/header.php");
                         $bills = $row['t_bill'];
 
                         $balance = $row['t_bill'] - $row['paid'];
-                        echo '<h3 class="mb-0 text-center">'.'₱'.$balance.'</h3>';
-  
+                        echo '<h3 class="mb-0 text-center">'. '₱'. number_format($balance, 2).'</h3>';
                     ?>
 
                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -200,7 +199,7 @@ include("includes/header.php");
                                     <th class="text-center">Name</th>
                                     <th class="text-center">Total Payment</th>
                                     <th class="text-center">Balance</th>
-                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Payment Date</th>
                             </thead> 
 
                             <tbody>
@@ -219,8 +218,8 @@ include("includes/header.php");
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $pay['name'] ?></td>
-                                            <td class="text-center"><?= '₱'.$pay['payment_total'] ?></td>
-                                            <td class="text-center"><?php echo '₱'.$pay['bill_total'] - $pay['payment_total']?></td>
+                                            <td class="text-center">₱<?= number_format($pay['payment_total'], 2) ?></td>
+                                            <td class="text-center">₱<?= number_format($pay['bill_total'], 2) - number_format($pay['payment_total'], 2)?></td>
                                             <td class="text-center"><?= $pay['pay'] ?></td>
                                         </tr>
                                         <?php
@@ -281,7 +280,7 @@ include("includes/header.php");
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $bill['name']?></td>
-                                            <td class="text-center"><?='₱'.$bill['bill_total']?></td>
+                                            <td class="text-center">₱<?= number_format($bill['bill_total'], 2) ?></td>
                                             <td class="text-center"><?= $bill['due']?></td>
                                         </tr>
                                         <?php

@@ -20,7 +20,7 @@ include("includes/header.php");
                 <div class="card-body">
 
                 <div class="table-responsive">
-                    <table id="myDataTable" class="table table-bordered table-stripe">
+                    <table id="myDataTable" class="table table-bordered table-stripe" style="width:100%">
                         <thead>
                             <tr>
                                 <th class="text-center">ID</th>
@@ -39,7 +39,7 @@ include("includes/header.php");
                         <tbody>
                             <?php
                                 # To fetch data from table house
-                                $users = "SELECT * FROM total_users";
+                                $users = "SELECT * FROM users";
                                 $users_run = mysqli_query($con,$users);
 
                                 #To check each data or table has data
