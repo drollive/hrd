@@ -137,12 +137,10 @@ include("includes/header.php");
                                         GROUP BY id";
                         $dash_query_run = mysqli_query($con, $dash_query);
                         $row = mysqli_fetch_array($dash_query_run);
-                        $val = ((int)$row['bill'] - (int)$row['pay']);
-                        
                         
                         if(mysqli_num_rows($dash_query_run) > 0)
                         {
-                            echo '<h3 class="mb-0 text-center">'.'₱'. number_format($val, 2).'</h3>';
+                            echo '<h3 class="mb-0 text-center">'.'₱'. number_format((int)$row['bill'] - (int)$row['pay'], 2).'</h3>';
                         }
                         else
                         {
