@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2022 at 12:51 AM
+-- Generation Time: Mar 09, 2022 at 04:26 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -131,7 +131,8 @@ CREATE TABLE `bills` (
 --
 
 INSERT INTO `bills` (`bill_id`, `tenant_id`, `house_rent_pay`, `electric_bill`, `water_bill`, `other_bill`, `bill_desc`, `bill_status`, `due_date`, `bill_total`, `created_at`) VALUES
-(34, 40, 10000, 100, 100, 1000, '', 1, '2022-01-01', 11200, '2022-03-08 17:07:27');
+(34, 40, 10000, 100, 100, 1000, '', 1, '2022-01-01', 11200, '2022-03-08 17:07:27'),
+(35, 40, 10000, 500, 500, 123, '', 0, '2022-04-13', 11123, '2022-03-09 00:28:23');
 
 -- --------------------------------------------------------
 
@@ -322,7 +323,15 @@ INSERT INTO `logs` (`log_id`, `user`, `log_date`, `action`) VALUES
 (77, 'Judell Mejorada', '2022-03-08 17:01:43', 'Added tenant  by Judell Mejorada'),
 (78, 'Judell Mejorada', '2022-03-08 17:07:27', 'Added bill for tenant 40 by Judell Mejorada'),
 (79, 'Judell Mejorada', '2022-03-08 21:15:44', 'Updated bill for tenant 40 by Judell Mejorada'),
-(80, 'Judell Mejorada', '2022-03-08 21:21:22', 'Updated bill for tenant 40 by Judell Mejorada');
+(80, 'Judell Mejorada', '2022-03-08 21:21:22', 'Updated bill for tenant 40 by Judell Mejorada'),
+(81, 'Judell Mejorada', '2022-03-09 00:06:50', 'Updated bill for tenant 40 by Judell Mejorada'),
+(82, 'Judell Mejorada', '2022-03-09 00:07:40', 'Added payment  by Judell Mejorada'),
+(83, 'Judell Mejorada', '2022-03-09 00:07:54', 'Updated bill for tenant 40 by Judell Mejorada'),
+(84, 'Judell Mejorada', '2022-03-09 00:28:23', 'Added bill for tenant 40 by Judell Mejorada'),
+(85, 'Judell Mejorada', '2022-03-09 00:28:48', 'Updated bill for tenant 40 by Judell Mejorada'),
+(86, 'Judell Mejorada', '2022-03-09 00:33:07', 'Updated user 1 by Judell Mejorada'),
+(87, 'HRD ELYSIUM', '2022-03-09 00:36:46', 'Updated payment 24 by HRD ELYSIUM'),
+(88, 'HRD ELYSIUM', '2022-03-09 00:46:51', 'Added payment  by HRD ELYSIUM');
 
 -- --------------------------------------------------------
 
@@ -369,6 +378,14 @@ CREATE TABLE `payments` (
   `payment_status` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`payment_id`, `bill_id`, `payment_total`, `payment_desc`, `payment_date`, `payment_status`, `created_at`) VALUES
+(24, 34, 11200, '<p>paid via gcash</p>', '2022-03-09', 0, '2022-03-09 00:07:40'),
+(25, 35, 10000, '', '1970-01-01', 0, '2022-03-09 00:46:51');
 
 -- --------------------------------------------------------
 
@@ -621,7 +638,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `phone`, `password`, `verify_token`, `role_as`, `status`, `created_at`) VALUES
-(1, 'Judell', 'Mejorada', 'mejoradajudell15@gmail.com', '09774839769', '$2y$10$vnp6/P8/v4ISVKe6DWV/D./x.ghney9l3PBsDMyStXZT/ZithON3.', 'f1bc5ee2b4601ff03c0cffa3ba2cd0dbelysium', 1, 1, '2022-01-22 11:59:43'),
+(1, 'HRD', 'ELYSIUM', 'hrdelysium@gmail.com', '09774839769', '$2y$10$vnp6/P8/v4ISVKe6DWV/D./x.ghney9l3PBsDMyStXZT/ZithON3.', '79b96c948f887012f5ebb9a4beb7202e', 1, 1, '2022-01-22 11:59:43'),
 (67, 'Loraine', 'Naval', 'meme@gmail.com', '09391968957', '$2y$10$gTKBzYtShai6FDjDGXhHF.CE9IpvA3aiOpJ/afK5y.chYsu34uPXu', '', 0, 1, '2022-03-08 16:44:48');
 
 -- --------------------------------------------------------
@@ -852,7 +869,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `bill_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `house`
@@ -864,13 +881,13 @@ ALTER TABLE `house`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tenant`
