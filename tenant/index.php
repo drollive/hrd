@@ -20,7 +20,7 @@ include("includes/header.php");
                 {
                     # To fetch data from table bill
                     $user_id = $_SESSION['auth_user']['user_id'];
-                        $dash_query = "SELECT * FROM tenant_bill_view WHERE id={$user_id}";
+                        $dash_query = "SELECT * FROM tenant_bill_view WHERE id={$user_id} AND bill_status = 0";
                         $dash_query_run = mysqli_query($con, $dash_query);
 
                         if($total = mysqli_num_rows($dash_query_run))
@@ -89,13 +89,16 @@ include("includes/header.php");
                 if(isset($_SESSION['auth_user']))
                 {
                     # To fetch data from table bill
-                    $user_id = $_SESSION['auth_user']['user_id'];
-                        $dash_query = "SELECT * FROM tenant_payments WHERE id={$user_id}";
+                        $user_id = $_SESSION['auth_user']['user_id'];
+                        $dash_query = "SELECT * FROM tenant_payments_view WHERE id={$user_id}";
                         $dash_query_run = mysqli_query($con, $dash_query);
-
-                        if($total = mysqli_num_rows($dash_query_run))
+                        $row = mysqli_fetch_array($dash_query_run);
+                        $paid = $row['payment_total'];
+                        
+                        
+                        if(mysqli_num_rows($dash_query_run) > 0)
                         {
-                            echo '<h3 class="mb-0 text-center">'.$total.'</h3>';
+                            echo '<h3 class="mb-0 text-center">'.'₱'. number_format($paid, 2).'</h3>';
                         }
                         else
                         {
@@ -110,6 +113,8 @@ include("includes/header.php");
                 </div>
             </div>
         </div>
+
+    </div>
 
        
 </div>

@@ -44,7 +44,7 @@ include("includes/header.php");
                                                 <tr>
                                                     <td class="text-center"><?= $bill['bill_id'] ?> </td>
                                                     <td class="text-center"><?= $bill['name']?></td>
-                                                    <td class="text-center">₱<?=$bill['bill_total'] ?></td>
+                                                    <td class="text-center">₱<?= number_format($bill['bill_total'], 2) ?></td>
                                                     <td class="text-center"><?=$bill['bill_desc'] ?></td>
                                                     <td class="text-center"><?= $bill['due']?></td>
                                                     <td class="text-center">

@@ -213,14 +213,18 @@ include("includes/header.php");
                             
                                 if(mysqli_num_rows($payment_run) > 0 )
                                 {
+                                    
                                     foreach($payment_run as $pay)
                                     { 
+                                        $val = ((int)$pay['bill_total'] - (int)$pay['payment_total']);
                                         ?>
                                         <tr>
                                             <td class="text-center"><?= $pay['name'] ?></td>
                                             <td class="text-center">₱<?= number_format($pay['payment_total'], 2) ?></td>
-                                            <td class="text-center">₱<?= number_format($pay['bill_total'], 2) - number_format($pay['payment_total'], 2)?></td>
+                                            <td class="text-center">₱<?= number_format($val, 2) ?></td>
                                             <td class="text-center"><?= $pay['pay'] ?></td>
+
+                                            
                                         </tr>
                                         <?php
                                     }
@@ -310,6 +314,8 @@ include("includes/header.php");
         
         
     </div>
+
+    
 
 <?php
 include("includes/footer.php");

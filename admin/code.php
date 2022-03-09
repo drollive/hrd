@@ -170,8 +170,6 @@ if(isset($_POST['add_bill']))
     }
 }
 
-
-
 # Tenant's table CRUD 
 if(isset($_POST['delete_btn_tenant']))
 {

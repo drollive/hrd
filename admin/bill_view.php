@@ -19,7 +19,7 @@ include("includes/header.php");
                         <table id="myDataTable" class="table table-bordered table-stripe">
                             <thead>
                                 <tr>
-                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Bill Invoice</th>
                                     <th class="text-center">Name</th>
                                     <th class="text-center">Total Bill</th>
                                     <th class="text-center">Due Date</th>

@@ -39,13 +39,13 @@ include("includes/header.php");
                                         {
                                             foreach($payment_run as $pay)
                                             {
+                                                $val = ((int)$pay['bill_total'] - (int)$pay['payment_total']);
                                                 ?>
                                                 <tr>
                                                     <td class="text-center"><?= $pay['payment_id'] ?></td>
                                                     <td class="text-center"><?= $pay['name'] ?></td>
-                                                    <td class="text-center">₱<?=$pay['payment_total'] ?></td>
-                                                    <td class="text-center"><?php echo '₱'.$pay['bill_total'] - $pay['payment_total']?></td>
-                                                    <td class="text-center"><?=$pay['payment_desc'] ?></td>
+                                                    <td class="text-center">₱<?= number_format($pay['payment_total'], 2) ?></td>
+                                                    <td class="text-center">₱<?= number_format($val, 2) ?></td>                                                    <td class="text-center"><?=$pay['payment_desc'] ?></td>
                                                     <td class="text-center"><?= $pay['pay'] ?></td>
                                                 
                                                 </tr>
