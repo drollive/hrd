@@ -76,7 +76,7 @@ include("includes/header.php");
             </div>
         </div>
 
-        <!--COUNTER FOR NUMBER OF PAYMENTS -->
+        <!--TOTAL PAYMENTS -->
         <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body shadow-sm d-flex justify-content-around align-items-center">
@@ -117,6 +117,7 @@ include("includes/header.php");
             </div>
         </div>
 
+        <!--TOTAL BALANCE-->
         <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body shadow-sm d-flex justify-content-around align-items-center">
