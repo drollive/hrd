@@ -54,7 +54,7 @@ if(isset($_POST['add_payment']))
     # To check input if it's a number
     $payment_total = (is_numeric($_POST['total_payment']) ? (int)$_POST['total_payment'] : 0);
     $payment_desc = $_POST['payment_desc'];
-	$payment_date = date('Y-m-d', strtotime($_POST['date']));
+	$payment_date = date('Y-m-d', strtotime($_POST['payment_date']));
 
     if(isset($_SESSION['auth_user']))
     {

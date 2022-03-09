@@ -6,7 +6,7 @@ $ROOT_PATH = 'C:\xampp\htdocs\hrd';
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "hrd3";
+$database = "hrd4";
 
 # For connection of database
 $con = mysqli_connect("$host","$username","$password","$database");
