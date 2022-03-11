@@ -33,8 +33,8 @@ include("includes/navbar.php");
 								<div class="carousel-item">
 									<img class="d-block w-100" src="images/home9.jpg" alt="Second slide">
 									<div class="carousel-caption d-none d-md-block">
-										<h4>Get your unit now!</h4>
-										<p>For as low as PHP 4500.00/month!</p><br><br><br><br><br><br>
+										<h4>Get your house now!</h4>
+										<p>For as low as PHP 4,500.00/month!</p><br><br><br><br><br><br>
 										<div class="slider-btn">
 											<a class="btn btn-1" href="contact_us.php" role="button">Contact Us</a>
 											<a class="btn btn-1" href="house.php" role="button">Learn More</a>
