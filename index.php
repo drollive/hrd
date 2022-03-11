@@ -10,8 +10,8 @@ include("includes/navbar.php");
 	<div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
 		<div class="container-sm">
 			<div class="row mt-5">	
-				<div class="row justify-content-center">
-					<div class="col-md-12">
+				<div class="d-flex justify-content-center align-items-center mb-4">
+					<div class="col-md-11">
 						<div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="5000" data-bs-ride="carousel">
 							<ol class="carousel-indicators">
 								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
