@@ -22,32 +22,30 @@ include("includes/header.php");
                 if(isset($_GET['id']))
                 {
                     $tenant_id = $_GET['id'];
-                    $tenant= "SELECT * FROM tenant WHERE tenant_id='$tenant_id'
-                                 AND tenant_status !=2 LIMIT 1 ";
+                    $tenant= "SELECT * FROM tenant_user_house WHERE tenant_id='$tenant_id' ";
                     $tenant_run = mysqli_query($con,$tenant);
-                    $row = mysqli_fetch_array($tenant_run);
-
+                    
                     #To check if the data is available inside the query
                     if(mysqli_num_rows($tenant_run) > 0)
                     {
-                        ?>
+                        $row = mysqli_fetch_array($tenant_run);
 
+                        ?>
                         <form action="code.php" method="POST">
                             
                             <input type ="hidden" name= "tenant_id" value="<?=$row['tenant_id'] ?>"> </input>
                             <div class="row">
-                                
+
                                 <div class="col-md-12 mb-3">
                                     <label for="">Users</label>
                                     <?php
-                                        $users = "SELECT * FROM tenant_user";
+                                        $users = "SELECT * FROM tenant_user_house";
                                         $users_run = mysqli_query($con, $users);
-                                        $row_users = mysqli_fetch_array($users_run);
                                         if(mysqli_num_rows($users_run) > 0)
                                         {
                                             ?>
                                             <select name="id" required class="form-control">
-                                                <option value="<?=$row_users['id']?>"> <?=$row_users['id']?> </option>
+                                                <option value="<?=$row['id']?>"> <?=$row['id']?> </option>
                                                 
                                                 <?php 
                                                     foreach($users_run as $users)
@@ -80,7 +78,7 @@ include("includes/header.php");
                                         {
                                             ?>
                                             <select name="house_id" required class="form-control">
-                                                <option value="<?=$row_house['house_id']?>"><?=$row_house['house_id']?></option>
+                                                <option value="<?=$row_house['house_id']?>"><?=$row['house_id']?></option>
                                                 <?php 
                                                     foreach($house_run as $rent_home)
                                                     {
@@ -136,7 +134,7 @@ include("includes/header.php");
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
                     <h4>House
@@ -165,6 +163,7 @@ include("includes/header.php");
                                 #To check each data or table has data
                                 if(mysqli_num_rows($house_run) > 0 )
                                 {
+
                                     foreach($house_run as $home)
                                     {
                                         ?>
@@ -199,72 +198,71 @@ include("includes/header.php");
                 </div>
             </div>
             
-            <div class="card">
-                <div class="card-header">
-                    <h4>Registered Users
-                        <a href="view-register.php" class="btn btn-primary float-end">Users</a>
-                    </h4>
-                </div>
-                <div class="card-body">
+        </div>
 
-                <div class="table-responsive">
-                    <table id="myDataTable2" class="table table-bordered table-stripe">
-                        <thead>
-                            <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Phone</th>
-                                <th class="text-center">Status</th>
+        <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Registered Users
+                            <a href="view-register.php" class="btn btn-primary float-end">Users</a>
+                        </h4>
+                    </div>
+                    <div class="card-body">
 
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            <?php
-                                # To fetch data from table house
-                                $users = "SELECT *, concat(u.fname,' ',u.lname) AS name FROM users u WHERE role_as = 0 ";
-                                $users_run = mysqli_query($con,$users);
+                    <div class="table-responsive">
+                        <table id="myDataTable2" class="table table-bordered table-stripe">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Status</th>
 
-                                #To check each data or table has data
-                                if(mysqli_num_rows($users_run) > 0 )
-                                {
-                                    foreach($users_run as $user)
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <?php
+                                    # To fetch data from table house
+                                    $users = "SELECT *, concat(u.fname,' ',u.lname) AS name FROM users u WHERE role_as = 0 ";
+                                    $users_run = mysqli_query($con,$users);
+
+                                    #To check each data or table has data
+                                    if(mysqli_num_rows($users_run) > 0 )
+                                    {
+                                        foreach($users_run as $user)
+                                        {
+                                            ?>
+                                            <tr>
+                                                <td class="text-center"><?= $user['id'] ?></td>
+                                                <td class="text-center"><?= $user['name'] ?></td>
+                                                <td class="text-center">
+                                                    <?= $user['status'] == '1' ? 'Active':'Inactive' ?>
+                                                </td>
+                                            </tr>
+                                            <?php
+
+                                        }
+                                    }
+                                    else
                                     {
                                         ?>
                                         <tr>
-                                            <td class="text-center"><?= $user['id'] ?></td>
-                                            <td class="text-center"><?= $user['name'] ?></td>
-                                            <td class="text-center"><?= $user['email'] ?></td>
-                                            <td class="text-center"><?= $user['phone'] ?></td>
-                                            <td class="text-center">
-                                                <?= $user['status'] == '1' ? 'Active':'Inactive' ?>
-                                            </td>
+                                                <td colspan="6"> No Record Found</td>
                                         </tr>
                                         <?php
-
+                                    
                                     }
-                                }
-                                else
-                                {
-                                    ?>
-                                    <tr>
-                                            <td colspan="6"> No Record Found</td>
-                                    </tr>
-                                    <?php
-                                
-                                }
-                                
-                            ?>
-                        </tbody>
+                                    
+                                ?>
+                            </tbody>
 
-                    </table>
-                </div>
+                        </table>
+                    </div>
 
 
+                    </div>
                 </div>
             </div>
-        </div>
 
     </div>
 </div>

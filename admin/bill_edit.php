@@ -7,7 +7,6 @@ include("includes/header.php");
 <div class="container-fluid px-4">
     <div class="row mt-4">
         <div class="col-md-7">
-		
 			<?php include('message.php'); ?>
             <div class="card">
                 <div class="card-header">
@@ -111,7 +110,6 @@ include("includes/header.php");
                                     <label for="checkbox">Paid</label>
                                 </div>
                                 
-                                
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <button type="submit" onclick="return confirm('Are you sure you want to update?')" name="update_bill" class="btn btn-primary">Update Bill</button>
                                 </div>
@@ -120,7 +118,7 @@ include("includes/header.php");
                             
                             <?php 
 
-                        }
+                     }
                     # if the data is not available
                     else
                     {
@@ -130,7 +128,6 @@ include("includes/header.php");
                     }
                 }
                 ?>
-
                 
                 </div>
             </div>
@@ -145,63 +142,62 @@ include("includes/header.php");
                 </div>
                 <div class="card-body">
 
-                <div class="table-responsive">
-                    <table id="myDataTable" class="table table-bordered table-stripe">
-                        <thead>
-                            <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">House Address</th>
-                                <th class="text-center">Monthly House Rent</th>
-                                <th class="text-center">Status</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            <?php
-                               
-                                $tenant = "SELECT * FROM tenant_user_house";
-                                $tenant_run = mysqli_query($con, $tenant);
+                    <div class="table-responsive">
+                        <table id="myDataTable" class="table table-bordered table-stripe">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">House Address</th>
+                                    <th class="text-center">Monthly House Rent</th>
+                                    <th class="text-center">Status</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <?php
+                                
+                                    $tenant = "SELECT * FROM tenant_user_house";
+                                    $tenant_run = mysqli_query($con, $tenant);
 
-                                if(mysqli_num_rows($tenant_run) > 0)
-                                {
-                                    $balance = 0;
+                                    if(mysqli_num_rows($tenant_run) > 0)
+                                    {
+                                        $balance = 0;
 
-                                    foreach($tenant_run as $tenant)
+                                        foreach($tenant_run as $tenant)
+                                        {
+                                            ?>
+                                            <tr>
+                                                <td class="text-center"><?=$tenant['tenant_id']?></td>
+                                                <td class="text-center"><?=$tenant['name']?></td>
+                                                <td class="text-center"><?=$tenant['house_address']?></td>
+                                                <td class="text-center">₱<?= number_format($tenant['house_price'], 2) ?></td>>
+                                                <td class="text-center"> 
+                                                    <?=$tenant['tenant_status'] == '1' ? 'Renting':'Not Renting'?>
+                                                </td>
+
+                                            </tr>
+
+                                            <?php
+
+                                        }
+                                        
+                                    }
+                                    else
                                     {
                                         ?>
                                         <tr>
-                                            <td class="text-center"><?=$tenant['tenant_id']?></td>
-                                            <td class="text-center"><?=$tenant['name']?></td>
-                                            <td class="text-center"><?=$tenant['house_address']?></td>
-                                            <td class="text-center">₱<?= number_format($tenant['house_price'], 2) ?></td>>
-                                            <td class="text-center"> 
-                                                <?=$tenant['tenant_status'] == '1' ? 'Renting':'Not Renting'?>
-                                            </td>
-
+                                            <td colspan="6">No record found</td>
                                         </tr>
 
                                         <?php
 
                                     }
-                                    
-                                }
-                                else
-                                {
-                                    ?>
-                                    <tr>
-                                        <td colspan="6">No record found</td>
-                                    </tr>
+                                ?>
+                            </tbody>
 
-                                    <?php
-
-                                }
-                            ?>
-                        </tbody>
-
-                    </table>
-                </div>
-
+                        </table>
+                    </div>
 
                 </div>
             </div>
