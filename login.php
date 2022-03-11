@@ -39,15 +39,10 @@ include("includes/navbar.php");
                                 <label>Password</label>
                                 <input required type="password" name="password" placeholder="Enter Password" class="form-control">
                             </div>
-                            <div class="form-group mb-3">
-                                <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-                                <label class="form-check-label" for="autoSizingCheck">
-                                    Remember me
-                                </label>
-                            </div>
+                        
                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                 <a class="small" href="forgotpass.php">Forgot Password?</a>
-                                <button type="submit" name="login_btn" class="btn btn-primary">Login Now</button>
+                                <button type="submit" name="login_btn" class="btn btn-primary">Login</button>
                             </div>
                         </form>
                     </div>

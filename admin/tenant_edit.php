@@ -45,13 +45,13 @@ include("includes/header.php");
                                         {
                                             ?>
                                             <select name="id" required class="form-control">
-                                                <option value="<?=$row['id']?>"> <?=$row['id']?> </option>
+                                                <option value="<?=$row['id']?>"> <?=$row['name']?> </option>
                                                 
                                                 <?php 
                                                     foreach($users_run as $users)
                                                     {
                                                         ?>
-                                                        <option value="<?=$users['id']?>"><?=$users['id'] ?></option>
+                                                        <option value="<?=$users['id']?>"><?=$users['name'] ?></option>
                                                         <?php
                                                     }
                                                 ?>
@@ -78,7 +78,7 @@ include("includes/header.php");
                                         {
                                             ?>
                                             <select name="house_id" required class="form-control">
-                                                <option value="<?=$row_house['house_id']?>"><?=$row['house_id']?></option>
+                                                <option value="<?=$row_house['house_id']?>"><?=$row['house_address']?></option>
                                                 <?php 
                                                     foreach($house_run as $rent_home)
                                                     {

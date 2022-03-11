@@ -6,7 +6,7 @@ include("includes/header.php");
 
 <div class="container-fluid px-4">
     <div class="row mt-4">
-        <div class="col-md-7">
+        <div class="col-md-6">
 			<?php include('message.php'); ?>
             <div class="card">
                 <div class="card-header">
@@ -133,7 +133,7 @@ include("includes/header.php");
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4>Tenants
@@ -141,63 +141,61 @@ include("includes/header.php");
                     </h4>
                 </div>
                 <div class="card-body">
+                <div class="table-responsive">
+                    <table id="myDataTable" class="table table-bordered table-stripe">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">House Address</th>
+                                <th class="text-center">Monthly House Rent</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <?php
+                                $tenant = "SELECT * FROM tenant_user_house";
+                                $tenant_run = mysqli_query($con, $tenant);
 
-                    <div class="table-responsive">
-                        <table id="myDataTable" class="table table-bordered table-stripe">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">ID</th>
-                                    <th class="text-center">Name</th>
-                                    <th class="text-center">House Address</th>
-                                    <th class="text-center">Monthly House Rent</th>
-                                    <th class="text-center">Status</th>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                                <?php
-                                
-                                    $tenant = "SELECT * FROM tenant_user_house";
-                                    $tenant_run = mysqli_query($con, $tenant);
+                                if(mysqli_num_rows($tenant_run) > 0)
+                                {
+                                    $balance = 0;
 
-                                    if(mysqli_num_rows($tenant_run) > 0)
-                                    {
-                                        $balance = 0;
-
-                                        foreach($tenant_run as $tenant)
-                                        {
-                                            ?>
-                                            <tr>
-                                                <td class="text-center"><?=$tenant['tenant_id']?></td>
-                                                <td class="text-center"><?=$tenant['name']?></td>
-                                                <td class="text-center"><?=$tenant['house_address']?></td>
-                                                <td class="text-center">₱<?= number_format($tenant['house_price'], 2) ?></td>>
-                                                <td class="text-center"> 
-                                                    <?=$tenant['tenant_status'] == '1' ? 'Renting':'Not Renting'?>
-                                                </td>
-
-                                            </tr>
-
-                                            <?php
-
-                                        }
-                                        
-                                    }
-                                    else
+                                    foreach($tenant_run as $tenant)
                                     {
                                         ?>
                                         <tr>
-                                            <td colspan="6">No record found</td>
+                                            <td class="text-center"><?=$tenant['tenant_id']?></td>
+                                            <td class="text-center"><?=$tenant['name']?></td>
+                                            <td class="text-center"><?=$tenant['house_address']?></td>
+                                            <td class="text-center">₱<?= number_format($tenant['house_price'], 2) ?></td>
+                                            <td class="text-center"> 
+                                                <?=$tenant['tenant_status'] == '1' ? 'Renting':'Not Renting'?>
+                                            </td>
+
                                         </tr>
 
                                         <?php
 
                                     }
-                                ?>
-                            </tbody>
+                                    
+                                }
+                                else
+                                {
+                                    ?>
+                                    <tr>
+                                        <td colspan="6">No record found</td>
+                                    </tr>
 
-                        </table>
-                    </div>
+                                    <?php
+
+                                }
+                            ?>
+                        </tbody>
+
+                    </table>
+                </div>
 
                 </div>
             </div>
