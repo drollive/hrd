@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2022 at 08:32 AM
+-- Generation Time: Mar 11, 2022 at 07:02 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -127,24 +127,18 @@ CREATE TABLE `bills` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELATIONSHIPS FOR TABLE `bills`:
---   `tenant_id`
---       `tenant` -> `tenant_id`
---
-
---
 -- Dumping data for table `bills`
 --
 
 INSERT INTO `bills` (`bill_id`, `tenant_id`, `house_rent_pay`, `electric_bill`, `water_bill`, `other_bill`, `bill_desc`, `bill_status`, `due_date`, `bill_total`, `created_at`) VALUES
 (34, 40, 10000, 100, 100, 1000, '', 1, '2022-01-01', 11200, '2022-03-08 17:07:27'),
 (35, 40, 10000, 500, 500, 123, '', 0, '2022-04-13', 11123, '2022-03-09 00:28:23'),
-(36, 43, 0, 0, 900, 0, '', 0, '2022-01-01', 900, '2022-03-09 08:39:14'),
+(36, 43, 0, 0, 900, 0, '', 0, '2022-04-01', 900, '2022-03-09 08:39:14'),
 (37, 43, 0, 0, 0, 0, '', 2, '2023-01-01', 0, '2022-03-09 08:39:53'),
-(38, 40, 0, 0, 1345, 0, '', 1, '1970-01-01', 1345, '2022-03-09 08:42:19'),
+(38, 40, 0, 0, 1345, 0, '', 1, '2022-03-10', 1345, '2022-03-09 08:42:19'),
 (39, 43, 0, 0, 0, 1234, '', 2, '1970-01-01', 1234, '2022-03-09 08:44:43'),
-(40, 43, 8000, 2344, 110, 0, '', 0, '1970-01-01', 10454, '2022-03-09 08:45:51'),
-(41, 47, 9499, 2400, 900, 0, '', 0, '1970-01-01', 12799, '2022-03-09 09:19:16');
+(40, 43, 8000, 2344, 110, 0, '', 0, '2022-03-10', 10454, '2022-03-09 08:45:51'),
+(41, 47, 9499, 2400, 900, 0, '', 0, '2022-03-12', 12799, '2022-03-09 09:19:16');
 
 -- --------------------------------------------------------
 
@@ -213,17 +207,13 @@ CREATE TABLE `house` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELATIONSHIPS FOR TABLE `house`:
---
-
---
 -- Dumping data for table `house`
 --
 
 INSERT INTO `house` (`house_id`, `house_address`, `house_price`, `house_desc`, `house_status`, `added_date`) VALUES
 (15, 'Blk 1 Lot 2 Elysium St. Phase 1 Ely Homes San Lorenzo Makati City ', 10000, '<p style=\"user-select: auto;\"><span style=\"color: rgb(17, 17, 17); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", Helvetica, \"ヒラギノ角ゴ Pro W3\", \"Hiragino Kaku Gothic Pro\", メイリオ, Meiryo, \"ＭＳ Ｐゴシック\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; font-size: 14px; user-select: auto;\">This<span style=\"user-select: auto;\"><b> 4 bedroom modern house</b></span> is <b style=\"user-select: auto;\">185 sq.m</b>. total floor area ( 92 sq.m. ground floor and 93 sq.m. second floor) which will require at least 106 sq.m. lot area.</span><br style=\"user-select: auto;\"></p>', 0, '2022-02-25 17:49:48'),
-(16, 'Blk 2 Lot 2 Elysium St. Phase 2 Ely Homes San Lorenzo Makati City ', 8000, '<div data-test-id=\"closeup-title\" class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><div class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><div class=\"CloseupTitleCard\" style=\"color: rgb(68, 68, 68); user-select: auto;\"><div class=\"KO4 zI7 iyn Hsu\" style=\"margin-top: 16px; user-select: auto;\"><div itemscope=\"\" itemtype=\"https://schema.org/Article\" style=\"user-select: auto;\"><div itemprop=\"name\" style=\"user-select: auto;\"><a class=\"Wk9 xQ4 CCY czT eEj kVc\" href=\"https://wp.me/p8jWDO-2X\" rel=\"noopener noreferrer nofollow\" target=\"_blank\" style=\"font-weight: 700; user-select: auto; outline: 0px; color: rgb(68, 68, 68); transition: transform 85ms ease-out 0s; text-decoration: none; display: block; border-radius: 0px;\"></a><pre style=\"display: inline-block; margin-top: 4px; user-select: auto;\"><p style=\"user-select: auto;\"><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"user-select: auto;\">Single Storey House Plan With <b>125 Square Meters</b> Of Lot Area</span></p></pre></div></div></div></div></div></div><div class=\"jzS ujU un8 TB_\" style=\"display: flex; margin-bottom: 0px; margin-top: 0px; flex-direction: column; flex: 1 1 auto; min-height: 0px; min-width: 0px; user-select: auto;\"><div class=\"Rnj hs0 un8 C9i\" style=\"display: flex; margin-left: 0px; margin-right: 0px; flex-direction: row; align-items: baseline; color: rgb(33, 25, 34); user-select: auto;\" segoe=\"\" ui\",=\"\" roboto,=\"\" oxygen-sans,=\"\" ubuntu,=\"\" cantarell,=\"\" \"fira=\"\" sans\",=\"\" \"droid=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" \"ヒラギノ角ゴ=\"\" pro=\"\" w3\",=\"\" \"hiragino=\"\" kaku=\"\" gothic=\"\" pro\",=\"\" メイリオ,=\"\" meiryo,=\"\" \"ＭＳ=\"\" Ｐゴシック\",=\"\" arial,=\"\" sans-serif,=\"\" \"apple=\"\" color=\"\" emoji\",=\"\" \"segoe=\"\" ui=\"\" symbol\";=\"\" font-size:=\"\" 12px;=\"\" user-select:=\"\" auto;\"=\"\"><div class=\"richPinInformation\" style=\"user-select: auto;\"><div class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><span class=\"tBJ dyH iFc j1A pBj zDA IZT swG\" style=\"user-select: auto; color: var(--g-colorGray300); -webkit-font-smoothing: antialiased; font-size: var(--font-size-200); font-family: var(--font-family-default-latin); font-weight: var(--font-weight-normal); overflow-wrap: break-word;\"></span></div></div></div><div class=\"zI7 iyn Hsu\" style=\"color: rgb(33, 25, 34); user-select: auto;\" segoe=\"\" ui\",=\"\" roboto,=\"\" oxygen-sans,=\"\" ubuntu,=\"\" cantarell,=\"\" \"fira=\"\" sans\",=\"\" \"droid=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" \"ヒラギノ角ゴ=\"\" pro=\"\" w3\",=\"\" \"hiragino=\"\" kaku=\"\" gothic=\"\" pro\",=\"\" メイリオ,=\"\" meiryo,=\"\" \"ＭＳ=\"\" Ｐゴシック\",=\"\" arial,=\"\" sans-serif,=\"\" \"apple=\"\" color=\"\" emoji\",=\"\" \"segoe=\"\" ui=\"\" symbol\";=\"\" font-size:=\"\" 12px;=\"\" user-select:=\"\" auto;\"=\"\"><div data-test-id=\"canonical-card\" id=\"canonical-card\" class=\"WbA zI7 iyn Hsu\" style=\"margin-top: 40px; user-select: auto;\"><div class=\"gjz hs0 un8 C9i\" style=\"display: flex; margin-left: 0px; margin-right: 0px; flex-direction: row; align-items: center; user-select: auto;\"><div class=\"Rz6 zI7 iyn Hsu\" style=\"margin-right: 4px; user-select: auto;\"></div></div></div></div></div><p style=\"user-select: auto;\"></p><p style=\"user-select: auto;\"></p>', 0, '2022-02-25 17:56:20'),
-(17, 'Blk 3 Lot 2 Elysium St. Phase 3 Ely Homes San Lorenzo Makati City ', 7999, '<p style=\"user-select: auto;\"><span style=\"color: rgb(17, 17, 17); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", Helvetica, \"ヒラギノ角ゴ Pro W3\", \"Hiragino Kaku Gothic Pro\", メイリオ, Meiryo, \"ＭＳ Ｐゴシック\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"; font-size: 14px; user-select: auto;\">House Financing Bungalow Lot area 80 sqm. . Floor area <b>43.5 sqm. </b></span><br style=\"user-select: auto;\"></p>', 1, '2022-02-25 18:17:37'),
+(16, 'Blk 2 Lot 2 Elysium St. Phase 2 Ely Homes San Lorenzo Makati City ', 8000, '<div data-test-id=\"closeup-title\" class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><div class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><div class=\"CloseupTitleCard\" style=\"color: rgb(68, 68, 68); user-select: auto;\"><div class=\"KO4 zI7 iyn Hsu\" style=\"margin-top: 16px; user-select: auto;\"><div itemscope=\"\" itemtype=\"https://schema.org/Article\" style=\"user-select: auto;\"><div itemprop=\"name\" style=\"user-select: auto;\"><a class=\"Wk9 xQ4 CCY czT eEj kVc\" href=\"https://wp.me/p8jWDO-2X\" rel=\"noopener noreferrer nofollow\" target=\"_blank\" style=\"font-weight: 700; user-select: auto; outline: 0px; color: rgb(68, 68, 68); transition: transform 85ms ease-out 0s; text-decoration: none; display: block; border-radius: 0px;\"></a><pre style=\"display: inline-block; margin-top: 4px; user-select: auto;\"><p style=\"user-select: auto;\"><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"user-select: auto;\"><span style=\"font-family: Arial;\">Single Storey House Plan With </span><b>125 Square Meters</b><span style=\"font-family: Arial;\"> Of Lot Area</span></span></p></pre></div></div></div></div></div></div><div class=\"jzS ujU un8 TB_\" style=\"display: flex; margin-bottom: 0px; margin-top: 0px; flex-direction: column; flex: 1 1 auto; min-height: 0px; min-width: 0px; user-select: auto;\"><div class=\"Rnj hs0 un8 C9i\" style=\"display: flex; margin-left: 0px; margin-right: 0px; flex-direction: row; align-items: baseline; color: rgb(33, 25, 34); user-select: auto;\" segoe=\"\" ui\",=\"\" roboto,=\"\" oxygen-sans,=\"\" ubuntu,=\"\" cantarell,=\"\" \"fira=\"\" sans\",=\"\" \"droid=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" \"ヒラギノ角ゴ=\"\" pro=\"\" w3\",=\"\" \"hiragino=\"\" kaku=\"\" gothic=\"\" pro\",=\"\" メイリオ,=\"\" meiryo,=\"\" \"ＭＳ=\"\" Ｐゴシック\",=\"\" arial,=\"\" sans-serif,=\"\" \"apple=\"\" color=\"\" emoji\",=\"\" \"segoe=\"\" ui=\"\" symbol\";=\"\" font-size:=\"\" 12px;=\"\" user-select:=\"\" auto;\"=\"\"><div class=\"richPinInformation\" style=\"user-select: auto;\"><div class=\"zI7 iyn Hsu\" style=\"user-select: auto;\"><span class=\"tBJ dyH iFc j1A pBj zDA IZT swG\" style=\"user-select: auto; color: var(--g-colorGray300); -webkit-font-smoothing: antialiased; font-size: var(--font-size-200); font-family: var(--font-family-default-latin); font-weight: var(--font-weight-normal); overflow-wrap: break-word;\"></span></div></div></div><div class=\"zI7 iyn Hsu\" style=\"color: rgb(33, 25, 34); user-select: auto;\" segoe=\"\" ui\",=\"\" roboto,=\"\" oxygen-sans,=\"\" ubuntu,=\"\" cantarell,=\"\" \"fira=\"\" sans\",=\"\" \"droid=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" \"ヒラギノ角ゴ=\"\" pro=\"\" w3\",=\"\" \"hiragino=\"\" kaku=\"\" gothic=\"\" pro\",=\"\" メイリオ,=\"\" meiryo,=\"\" \"ＭＳ=\"\" Ｐゴシック\",=\"\" arial,=\"\" sans-serif,=\"\" \"apple=\"\" color=\"\" emoji\",=\"\" \"segoe=\"\" ui=\"\" symbol\";=\"\" font-size:=\"\" 12px;=\"\" user-select:=\"\" auto;\"=\"\"><div data-test-id=\"canonical-card\" id=\"canonical-card\" class=\"WbA zI7 iyn Hsu\" style=\"margin-top: 40px; user-select: auto;\"><div class=\"gjz hs0 un8 C9i\" style=\"display: flex; margin-left: 0px; margin-right: 0px; flex-direction: row; align-items: center; user-select: auto;\"><div class=\"Rz6 zI7 iyn Hsu\" style=\"margin-right: 4px; user-select: auto;\"></div></div></div></div></div><p style=\"user-select: auto;\"></p><p style=\"user-select: auto;\"></p>', 0, '2022-02-25 17:56:20'),
+(17, 'Blk 3 Lot 2 Elysium St. Phase 3 Ely Homes San Lorenzo Makati City ', 7999, '<p style=\"user-select: auto;\"><span style=\"color: rgb(17, 17, 17); font-family: -apple-system, BlinkMacSystemFont, \" segoe=\"\" ui\",=\"\" roboto,=\"\" oxygen-sans,=\"\" ubuntu,=\"\" cantarell,=\"\" \"fira=\"\" sans\",=\"\" \"droid=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" \"ヒラギノ角ゴ=\"\" pro=\"\" w3\",=\"\" \"hiragino=\"\" kaku=\"\" gothic=\"\" pro\",=\"\" メイリオ,=\"\" meiryo,=\"\" \"ＭＳ=\"\" Ｐゴシック\",=\"\" arial,=\"\" sans-serif,=\"\" \"apple=\"\" color=\"\" emoji\",=\"\" \"segoe=\"\" ui=\"\" symbol\";=\"\" font-size:=\"\" 14px;=\"\" user-select:=\"\" auto;\"=\"\"><span style=\"font-family: Arial;\">House Financing Bungalow Lot area 80 sqm. . Floor area </span><b><span style=\"font-family: Arial;\">43.5 sqm.&nbsp;</span></b></span><br style=\"user-select: auto;\"></p>', 0, '2022-02-25 18:17:37'),
 (18, 'Blk 4 Lot 2 Elysium St. Phase 4 Ely Homes San Lorenzo Makati City ', 5000, '<p style=\"user-select: auto;\"><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"font-family: Arial; user-select: auto;\">﻿</span><span style=\"user-select: auto;\">This newly built 3,880 sq. ft. south-facing house is situated in a large, secluded, and quiet plot of <b>28,821 sq</b>. ft.<br style=\"user-select: auto;\"></span><span style=\"text-align: var(--bs-body-text-align); user-select: auto;\">It is protected from the north-east winds in the winter months, whilst enjoying the light east/southeast winds in <br style=\"user-select: auto;\">the summer months, making it cool year-rou</span><span style=\"text-align: var(--bs-body-text-align); user-select: auto;\">nd.</span></p>', 2, '2022-02-25 18:26:33'),
 (19, 'Blk 5 Lot 2 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 5000, '<p style=\"user-select: auto;\"><span style=\"color: rgb(44, 44, 45); font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Droid Sans\", \"Helvetica Neue\", sans-serif; white-space: pre-wrap; user-select: auto;\">4 bedrooms, master bedroom has a balcony facing the garden (2 upstairs and 2\r\non the ground floor) All bedrooms have ceiling fans, master bedroom with split type\r\ninverter AC</span><br style=\"user-select: auto;\"></p>', 1, '2022-02-25 18:29:07'),
 (20, 'Blk 4 Lot 2 Elysium St. Phase 5 Ely Homes San Lorenzo Makati City ', 6999, '<p>Boasting an array of sleek finishes and a thoughtful open plan layout, this immaculate 1-bedroom, 1-bathroom condo is a paradigm of contemporary Elysium living. Features of this 50 sqm.<br></p>', 0, '2022-03-04 03:13:41'),
@@ -262,85 +252,10 @@ CREATE TABLE `logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELATIONSHIPS FOR TABLE `logs`:
---
-
---
 -- Dumping data for table `logs`
 --
 
 INSERT INTO `logs` (`log_id`, `user`, `log_date`, `action`) VALUES
-(4, 'Judell Mejorada', '2022-03-05 09:10:20', 'Updated house 15 by Judell Mejorada'),
-(5, 'Judell Mejorada', '2022-03-05 09:10:57', 'Updated house 15 by Judell Mejorada'),
-(6, 'Judell Mejorada', '2022-03-05 16:33:37', 'Updated house 15 by Judell Mejorada'),
-(7, 'Judell Mejorada', '2022-03-05 22:22:58', 'Deleted user 37 by Judell Mejorada'),
-(11, 'Judell Mejorada', '2022-03-06 22:03:30', 'Added payment  by Judell Mejorada'),
-(12, 'Judell Mejorada', '2022-03-06 22:03:55', 'Updated payment 23 by Judell Mejorada'),
-(13, 'Judell Mejorada', '2022-03-06 22:21:14', 'Updated payment 23 by Judell Mejorada'),
-(14, 'Judell Mejorada', '2022-03-06 22:22:25', 'Updated payment 23 by Judell Mejorada'),
-(15, 'Judell Mejorada', '2022-03-06 22:23:05', 'Updated payment 23 by Judell Mejorada'),
-(16, 'Judell Mejorada', '2022-03-06 22:23:29', 'Updated payment 23 by Judell Mejorada'),
-(17, 'Judell Mejorada', '2022-03-06 22:24:36', 'Updated payment 23 by Judell Mejorada'),
-(18, 'Judell Mejorada', '2022-03-06 22:25:00', 'Updated payment 23 by Judell Mejorada'),
-(19, 'Judell Mejorada', '2022-03-06 22:29:25', 'Deleted payment 23 by Judell Mejorada'),
-(20, 'Judell Mejorada', '2022-03-06 23:15:08', 'Added bill for tenant 29 by Judell Mejorada'),
-(21, 'Judell Mejorada', '2022-03-06 23:16:43', 'Added bill for tenant 29 by Judell Mejorada'),
-(22, 'Judell Mejorada', '2022-03-06 23:17:29', 'Updated bill for tenant 29 by Judell Mejorada'),
-(23, 'Judell Mejorada', '2022-03-06 23:19:15', 'Updated bill for tenant 29 by Judell Mejorada'),
-(24, 'Judell Mejorada', '2022-03-06 23:19:36', 'Deleted bill 32 by Judell Mejorada'),
-(25, 'Judell Mejorada', '2022-03-06 23:19:43', 'Deleted bill 33 by Judell Mejorada'),
-(26, 'Judell Mejorada', '2022-03-07 00:00:05', 'Deleted tenant 36 by Judell Mejorada'),
-(27, 'Judell Mejorada', '2022-03-07 00:01:45', 'Updated tenant 24 by Judell Mejorada'),
-(28, 'Judell Mejorada', '2022-03-07 00:03:14', 'Updated tenant 24 by Judell Mejorada'),
-(29, 'Judell Mejorada', '2022-03-07 00:04:32', 'Updated tenant 24 by Judell Mejorada'),
-(30, 'Judell Mejorada', '2022-03-07 00:05:06', 'Updated tenant 24 by Judell Mejorada'),
-(31, 'Judell Mejorada', '2022-03-07 00:09:03', 'Updated tenant 24 by Judell Mejorada'),
-(32, 'Judell Mejorada', '2022-03-07 00:09:16', 'Updated tenant 24 by Judell Mejorada'),
-(33, 'Judell Mejorada', '2022-03-07 00:09:36', 'Updated tenant 24 by Judell Mejorada'),
-(34, 'Judell Mejorada', '2022-03-07 00:11:48', 'Updated tenant 24 by Judell Mejorada'),
-(35, 'Judell Mejorada', '2022-03-07 00:20:05', 'Updated tenant 24 by Judell Mejorada'),
-(36, 'Judell Mejorada', '2022-03-07 00:21:37', 'Updated tenant 24 by Judell Mejorada'),
-(37, 'Judell Mejorada', '2022-03-07 00:22:44', 'Added tenant  by Judell Mejorada'),
-(38, 'Judell Mejorada', '2022-03-07 00:31:28', 'Updated bill for tenant 36 by Judell Mejorada'),
-(39, 'Judell Mejorada', '2022-03-07 00:31:43', 'Updated bill for tenant 36 by Judell Mejorada'),
-(40, 'Judell Mejorada', '2022-03-07 00:39:43', 'Updated bill for tenant 34 by Judell Mejorada'),
-(41, 'Judell Mejorada', '2022-03-07 00:39:53', 'Updated bill for tenant 34 by Judell Mejorada'),
-(42, 'Judell Mejorada', '2022-03-07 00:53:14', 'Updated house 16 by Judell Mejorada'),
-(43, 'Judell Mejorada', '2022-03-07 00:54:34', 'Updated tenant 24 by Judell Mejorada'),
-(44, 'Judell Mejorada', '2022-03-07 00:54:47', 'Updated tenant 24 by Judell Mejorada'),
-(45, 'Judell Mejorada', '2022-03-07 01:47:16', 'Added tenant  by Judell Mejorada'),
-(46, 'Judell Mejorada', '2022-03-07 01:47:44', 'Updated tenant 24 by Judell Mejorada'),
-(47, 'Judell Mejorada', '2022-03-07 01:48:31', 'Updated tenant 24 by Judell Mejorada'),
-(48, 'Judell Mejorada', '2022-03-07 01:48:37', 'Updated tenant 24 by Judell Mejorada'),
-(49, 'Judell Mejorada', '2022-03-07 01:49:02', 'Updated tenant 24 by Judell Mejorada'),
-(50, 'Judell Mejorada', '2022-03-07 01:49:34', 'Added tenant  by Judell Mejorada'),
-(51, 'Judell Mejorada', '2022-03-07 01:50:08', 'Updated tenant 24 by Judell Mejorada'),
-(52, 'Judell Mejorada', '2022-03-07 01:50:25', 'Updated tenant 24 by Judell Mejorada'),
-(53, 'Judell Mejorada', '2022-03-07 01:53:12', 'Updated tenant 24 by Judell Mejorada'),
-(54, 'Judell Mejorada', '2022-03-07 01:53:20', 'Updated tenant 24 by Judell Mejorada'),
-(55, 'Judell Mejorada', '2022-03-07 01:53:29', 'Updated tenant 24 by Judell Mejorada'),
-(56, 'Judell Mejorada', '2022-03-07 01:56:36', 'Updated tenant 33 by Judell Mejorada'),
-(57, 'Judell Mejorada', '2022-03-07 01:56:43', 'Updated tenant 33 by Judell Mejorada'),
-(58, 'Judell Mejorada', '2022-03-07 02:31:47', 'Updated house 16 by Judell Mejorada'),
-(59, 'Judell Mejorada', '2022-03-07 04:21:04', 'Updated house 16 by Judell Mejorada'),
-(60, 'Judell Mejorada', '2022-03-08 13:29:11', 'Added house  by Judell Mejorada'),
-(61, 'Judell Mejorada', '2022-03-08 13:34:33', 'Added house by Judell Mejorada'),
-(62, 'Judell Mejorada', '2022-03-08 13:35:12', 'Added house by Judell Mejorada'),
-(63, 'Judell Mejorada', '2022-03-08 13:35:15', 'Added house by Judell Mejorada'),
-(64, 'Judell Mejorada', '2022-03-08 13:35:25', 'Added house by Judell Mejorada'),
-(65, 'Judell Mejorada', '2022-03-08 16:46:26', 'Updated house 15 by Judell Mejorada'),
-(66, 'Judell Mejorada', '2022-03-08 16:46:33', 'Updated house 17 by Judell Mejorada'),
-(67, 'Judell Mejorada', '2022-03-08 16:46:39', 'Updated house 19 by Judell Mejorada'),
-(68, 'Judell Mejorada', '2022-03-08 16:46:47', 'Updated house 20 by Judell Mejorada'),
-(69, 'Judell Mejorada', '2022-03-08 16:46:54', 'Updated house 21 by Judell Mejorada'),
-(70, 'Judell Mejorada', '2022-03-08 16:47:03', 'Updated house 22 by Judell Mejorada'),
-(71, 'Judell Mejorada', '2022-03-08 16:47:11', 'Updated house 23 by Judell Mejorada'),
-(72, 'Judell Mejorada', '2022-03-08 16:49:53', 'Updated user 67 by Judell Mejorada'),
-(73, 'Judell Mejorada', '2022-03-08 16:50:48', 'Updated user 67 by Judell Mejorada'),
-(74, 'Judell Mejorada', '2022-03-08 16:55:22', 'Updated user 67 by Judell Mejorada'),
-(75, 'Judell Mejorada', '2022-03-08 16:56:08', 'Updated user 67 by Judell Mejorada'),
-(76, 'Judell Mejorada', '2022-03-08 16:58:47', 'Updated user 67 by Judell Mejorada'),
-(77, 'Judell Mejorada', '2022-03-08 17:01:43', 'Added tenant  by Judell Mejorada'),
 (78, 'Judell Mejorada', '2022-03-08 17:07:27', 'Added bill for tenant 40 by Judell Mejorada'),
 (79, 'Judell Mejorada', '2022-03-08 21:15:44', 'Updated bill for tenant 40 by Judell Mejorada'),
 (80, 'Judell Mejorada', '2022-03-08 21:21:22', 'Updated bill for tenant 40 by Judell Mejorada'),
@@ -398,7 +313,19 @@ INSERT INTO `logs` (`log_id`, `user`, `log_date`, `action`) VALUES
 (132, 'HRD ELYSIUM', '2022-03-09 15:00:48', 'Updated house 22 by HRD ELYSIUM'),
 (133, 'HRD ELYSIUM', '2022-03-09 15:01:02', 'Updated house 21 by HRD ELYSIUM'),
 (134, 'HRD ELYSIUM', '2022-03-09 15:01:16', 'Updated house 23 by HRD ELYSIUM'),
-(135, 'HRD ELYSIUM', '2022-03-11 07:14:40', 'Deleted bill 37 by HRD ELYSIUM');
+(135, 'HRD ELYSIUM', '2022-03-11 07:14:40', 'Deleted bill 37 by HRD ELYSIUM'),
+(136, 'HRD ELYSIUM', '2022-03-11 10:57:19', 'Updated bill for tenant 43 by HRD ELYSIUM'),
+(137, 'HRD ELYSIUM', '2022-03-11 10:57:40', 'Updated bill for tenant 40 by HRD ELYSIUM'),
+(138, 'HRD ELYSIUM', '2022-03-11 10:58:29', 'Updated payment 25 by HRD ELYSIUM'),
+(139, 'HRD ELYSIUM', '2022-03-11 13:19:57', 'Updated bill for tenant 43 by HRD ELYSIUM'),
+(140, 'HRD ELYSIUM', '2022-03-11 15:34:23', 'Added tenant  by HRD ELYSIUM'),
+(141, 'HRD ELYSIUM', '2022-03-11 15:34:48', 'Updated house 17 by HRD ELYSIUM'),
+(142, 'HRD ELYSIUM', '2022-03-11 15:35:41', 'Updated bill for tenant 47 by HRD ELYSIUM'),
+(143, 'HRD ELYSIUM', '2022-03-11 17:51:03', 'Updated house 17 by HRD ELYSIUM'),
+(144, 'HRD ELYSIUM', '2022-03-11 17:51:20', 'Updated house 16 by HRD ELYSIUM'),
+(145, 'HRD ELYSIUM', '2022-03-11 17:54:44', 'Updated payment 25 by HRD ELYSIUM'),
+(146, 'HRD ELYSIUM', '2022-03-11 17:54:58', 'Updated payment 26 by HRD ELYSIUM'),
+(147, 'HRD ELYSIUM', '2022-03-11 17:55:18', 'Updated payment 27 by HRD ELYSIUM');
 
 -- --------------------------------------------------------
 
@@ -447,20 +374,14 @@ CREATE TABLE `payments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELATIONSHIPS FOR TABLE `payments`:
---   `bill_id`
---       `bills` -> `bill_id`
---
-
---
 -- Dumping data for table `payments`
 --
 
 INSERT INTO `payments` (`payment_id`, `bill_id`, `payment_total`, `payment_desc`, `payment_date`, `payment_status`, `created_at`) VALUES
 (24, 34, 11200, '<p>paid via gcash</p>', '2022-03-09', 0, '2022-03-09 00:07:40'),
-(25, 35, 10000, '', '2022-01-01', 0, '2022-03-09 00:46:51'),
-(26, 40, 7000, '', '2022-06-15', 0, '2022-03-09 09:18:26'),
-(27, 41, 9499, '', '2022-03-01', 0, '2022-03-09 09:19:37'),
+(25, 35, 10000, '<p>paid via credit card</p>', '2022-03-10', 0, '2022-03-09 00:46:51'),
+(26, 40, 7000, '<p>paid via cash</p>', '2022-06-15', 0, '2022-03-09 09:18:26'),
+(27, 41, 9499, '<p>paid via bank transfer</p>', '2022-03-01', 0, '2022-03-09 09:19:37'),
 (28, 35, 900, '', '1970-01-01', 2, '2022-03-09 14:36:52'),
 (29, 35, 1000, '', '2022-03-02', 2, '2022-03-09 14:44:34');
 
@@ -498,14 +419,6 @@ CREATE TABLE `tenant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELATIONSHIPS FOR TABLE `tenant`:
---   `house_id`
---       `house` -> `house_id`
---   `users_id`
---       `users` -> `id`
---
-
---
 -- Dumping data for table `tenant`
 --
 
@@ -516,7 +429,8 @@ INSERT INTO `tenant` (`tenant_id`, `users_id`, `house_id`, `tenant_status`, `dat
 (44, 70, 19, 2, '2022-03-09 08:37:47'),
 (45, 72, 20, 0, '2022-03-09 08:38:01'),
 (46, 71, 22, 1, '2022-03-09 09:17:18'),
-(47, 73, 21, 1, '2022-03-09 09:17:41');
+(47, 73, 21, 1, '2022-03-09 09:17:41'),
+(48, 70, 17, 1, '2022-03-11 15:34:23');
 
 -- --------------------------------------------------------
 
@@ -723,10 +637,6 @@ CREATE TABLE `users` (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0-inactive, 1 -active, 2- delete',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELATIONSHIPS FOR TABLE `users`:
---
 
 --
 -- Dumping data for table `users`
@@ -987,7 +897,7 @@ ALTER TABLE `house`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -999,7 +909,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `tenant`
 --
 ALTER TABLE `tenant`
-  MODIFY `tenant_id` int(199) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `tenant_id` int(199) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `users`
