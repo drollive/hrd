@@ -54,7 +54,7 @@ include("includes/header.php");
 
                         <div class="col-md-12 mb-3">
                             <label for="">Total Payment</label>
-                            <input type="text" name="total_payment" placeholder="Please input the price" required="required" class="form-control">
+                            <input type="text" name="total_payment" placeholder="Please input the amount" required="required" class="form-control">
                         </div>
                         
                         <div class="col-md-12 mb-3">
@@ -66,7 +66,7 @@ include("includes/header.php");
                             <label class="control-label" for="date">Payment Date</label>
                             <div class="col-sm-12">
                                 <div class="input-group date" id="datepicker">
-                                    <input name="payment_date" type="text" class="form-control">
+                                    <input name="payment_date" placeholder="MM/DD/YYYY" type="text" class="form-control">
                                     <span class="input-group-append">
                                         <span class="input-group-text bg-white d-block">
                                             <i class="fa fa-calendar"></i>

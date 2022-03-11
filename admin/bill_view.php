@@ -24,8 +24,8 @@ include("includes/header.php");
                                     <th class="text-center">Total Bill</th>
                                     <th class="text-center">Due Date</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Edit</th>
-                                    <th class="text-center">Delete</th>
+                                    <th class="text-center"></th>
+                                    <th class="text-center"></th>
                                 </tr>
                             </thead> 
 

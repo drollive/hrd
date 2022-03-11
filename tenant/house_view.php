@@ -10,7 +10,7 @@ include("includes/header.php");
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="text-center"> Houses
+                    <h4 class="text-center">Houses
                     </h4>
                 </div>
                 <div class="card-body">

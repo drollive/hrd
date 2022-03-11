@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2022 at 04:06 PM
+-- Generation Time: Mar 11, 2022 at 08:32 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -115,7 +115,7 @@ CREATE TABLE `bill` (
 CREATE TABLE `bills` (
   `bill_id` int(20) NOT NULL,
   `tenant_id` int(20) NOT NULL,
-  `house_rent_pay` int(200) NOT NULL,
+  `house_rent_pay` int(20) NOT NULL,
   `electric_bill` int(200) NOT NULL,
   `water_bill` int(200) NOT NULL,
   `other_bill` int(200) NOT NULL,
@@ -127,6 +127,12 @@ CREATE TABLE `bills` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- RELATIONSHIPS FOR TABLE `bills`:
+--   `tenant_id`
+--       `tenant` -> `tenant_id`
+--
+
+--
 -- Dumping data for table `bills`
 --
 
@@ -134,7 +140,7 @@ INSERT INTO `bills` (`bill_id`, `tenant_id`, `house_rent_pay`, `electric_bill`, 
 (34, 40, 10000, 100, 100, 1000, '', 1, '2022-01-01', 11200, '2022-03-08 17:07:27'),
 (35, 40, 10000, 500, 500, 123, '', 0, '2022-04-13', 11123, '2022-03-09 00:28:23'),
 (36, 43, 0, 0, 900, 0, '', 0, '2022-01-01', 900, '2022-03-09 08:39:14'),
-(37, 43, 0, 0, 0, 0, '', 0, '2023-01-01', 0, '2022-03-09 08:39:53'),
+(37, 43, 0, 0, 0, 0, '', 2, '2023-01-01', 0, '2022-03-09 08:39:53'),
 (38, 40, 0, 0, 1345, 0, '', 1, '1970-01-01', 1345, '2022-03-09 08:42:19'),
 (39, 43, 0, 0, 0, 1234, '', 2, '1970-01-01', 1234, '2022-03-09 08:44:43'),
 (40, 43, 8000, 2344, 110, 0, '', 0, '1970-01-01', 10454, '2022-03-09 08:45:51'),
@@ -149,7 +155,7 @@ INSERT INTO `bills` (`bill_id`, `tenant_id`, `house_rent_pay`, `electric_bill`, 
 CREATE TABLE `bill_all` (
 `bill_id` int(20)
 ,`tenant_id` int(20)
-,`house_rent_pay` int(200)
+,`house_rent_pay` int(20)
 ,`electric_bill` int(200)
 ,`water_bill` int(200)
 ,`other_bill` int(200)
@@ -207,6 +213,10 @@ CREATE TABLE `house` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- RELATIONSHIPS FOR TABLE `house`:
+--
+
+--
 -- Dumping data for table `house`
 --
 
@@ -250,6 +260,10 @@ CREATE TABLE `logs` (
   `log_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `action` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `logs`:
+--
 
 --
 -- Dumping data for table `logs`
@@ -383,7 +397,8 @@ INSERT INTO `logs` (`log_id`, `user`, `log_date`, `action`) VALUES
 (131, 'HRD ELYSIUM', '2022-03-09 15:00:41', 'Updated house 20 by HRD ELYSIUM'),
 (132, 'HRD ELYSIUM', '2022-03-09 15:00:48', 'Updated house 22 by HRD ELYSIUM'),
 (133, 'HRD ELYSIUM', '2022-03-09 15:01:02', 'Updated house 21 by HRD ELYSIUM'),
-(134, 'HRD ELYSIUM', '2022-03-09 15:01:16', 'Updated house 23 by HRD ELYSIUM');
+(134, 'HRD ELYSIUM', '2022-03-09 15:01:16', 'Updated house 23 by HRD ELYSIUM'),
+(135, 'HRD ELYSIUM', '2022-03-11 07:14:40', 'Deleted bill 37 by HRD ELYSIUM');
 
 -- --------------------------------------------------------
 
@@ -432,6 +447,12 @@ CREATE TABLE `payments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- RELATIONSHIPS FOR TABLE `payments`:
+--   `bill_id`
+--       `bills` -> `bill_id`
+--
+
+--
 -- Dumping data for table `payments`
 --
 
@@ -477,13 +498,20 @@ CREATE TABLE `tenant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- RELATIONSHIPS FOR TABLE `tenant`:
+--   `house_id`
+--       `house` -> `house_id`
+--   `users_id`
+--       `users` -> `id`
+--
+
+--
 -- Dumping data for table `tenant`
 --
 
 INSERT INTO `tenant` (`tenant_id`, `users_id`, `house_id`, `tenant_status`, `date_in`) VALUES
 (40, 67, 15, 1, '2022-03-08 17:01:43'),
 (41, 68, 23, 1, '2022-03-09 07:58:41'),
-(42, 0, 17, 1, '2022-03-09 08:36:53'),
 (43, 69, 16, 1, '2022-03-09 08:37:28'),
 (44, 70, 19, 2, '2022-03-09 08:37:47'),
 (45, 72, 20, 0, '2022-03-09 08:38:01'),
@@ -602,7 +630,7 @@ CREATE TABLE `tenant_view` (
 CREATE TABLE `total_bills` (
 `bill_id` int(20)
 ,`tenant_id` int(20)
-,`house_rent_pay` int(200)
+,`house_rent_pay` int(20)
 ,`electric_bill` int(200)
 ,`water_bill` int(200)
 ,`other_bill` int(200)
@@ -695,6 +723,10 @@ CREATE TABLE `users` (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0-inactive, 1 -active, 2- delete',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `users`:
+--
 
 --
 -- Dumping data for table `users`
@@ -898,7 +930,8 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for table `bills`
 --
 ALTER TABLE `bills`
-  ADD PRIMARY KEY (`bill_id`);
+  ADD PRIMARY KEY (`bill_id`),
+  ADD KEY `bills_tenant` (`tenant_id`);
 
 --
 -- Indexes for table `house`
@@ -916,19 +949,23 @@ ALTER TABLE `logs`
 -- Indexes for table `payments`
 --
 ALTER TABLE `payments`
-  ADD PRIMARY KEY (`payment_id`);
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `bill_payment` (`bill_id`);
 
 --
 -- Indexes for table `tenant`
 --
 ALTER TABLE `tenant`
-  ADD PRIMARY KEY (`tenant_id`);
+  ADD PRIMARY KEY (`tenant_id`),
+  ADD KEY `users_tenant` (`users_id`),
+  ADD KEY `house_tenant` (`house_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UC_Email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -950,7 +987,7 @@ ALTER TABLE `house`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -969,6 +1006,29 @@ ALTER TABLE `tenant`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bills`
+--
+ALTER TABLE `bills`
+  ADD CONSTRAINT `bills_tenant` FOREIGN KEY (`tenant_id`) REFERENCES `tenant` (`tenant_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `bill_payment` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`bill_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tenant`
+--
+ALTER TABLE `tenant`
+  ADD CONSTRAINT `house_tenant` FOREIGN KEY (`house_id`) REFERENCES `house` (`house_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_tenant` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

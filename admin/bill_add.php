@@ -55,22 +55,22 @@ include("includes/header.php");
 
                         <div class="col-md-12 mb-3">
                             <label for="">House Monthly Rent Payment</label>
-                            <input type="text" name="house_rent_pay" placeholder="Please input the price" required class="form-control">
+                            <input type="text" name="house_rent_pay" placeholder="Please input the amount" required class="form-control">
                         </div>
 
                         <div class="col-md-12 mb-3">
                             <label for="">Electric Bill</label>
-                            <input type="text" name="electric_bill" placeholder="Please input the price" required class="form-control">
+                            <input type="text" name="electric_bill" placeholder="Please input the amount" required class="form-control">
                         </div>
 
                         <div class="col-md-12 mb-3">
                             <label for="">Water BIll</label>
-                            <input type="text" name="water_bill" placeholder="Please input the price" required class="form-control">
+                            <input type="text" name="water_bill" placeholder="Please input the amount" required class="form-control">
                         </div>
 
                         <div class="col-md-12 mb-3">
                             <label for="">Other BIll</label>
-                            <input type="text" name="other_bill" placeholder="Please input the price" required class="form-control">
+                            <input type="text" name="other_bill" placeholder="Please input the amount" required class="form-control">
                         </div>
                         
                         <div class="col-md-12 mb-3">
@@ -82,7 +82,7 @@ include("includes/header.php");
                             <label class="control-label" for="date">Due Date</label>
                             <div class="col-sm-12">
                                 <div class="input-group date" id="datepicker">
-                                    <input type="text" class="form-control">
+                                    <input type="text" placeholder="MM/DD/YYYY" class="form-control">
                                     <span class="input-group-append">
                                         <span class="input-group-text bg-white d-block">
                                             <i class="fa fa-calendar"></i>
