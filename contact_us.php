@@ -24,29 +24,29 @@ include ('sendEmail.php');
                                             <?php echo $alert; ?>
                                             <!--alert messages end-->
                                         </div>
-                                    <form action="" method="POST">
-                                        <div class="form-floating mb-4 mt-5">
-                                            <input class="form-control" required name="name" id="inputName" type="text" placeholder="Name" />
-                                            <label for="inputName">Name</label>
-                                        </div>
+                                        <form action="" method="POST">
+                                            <div class="form-floating mb-4 mt-5">
+                                                <input class="form-control" required name="name" id="inputName" type="text" placeholder="Name" />
+                                                <label for="inputName">Name</label>
+                                            </div>
 
-                                        <div class="form-floating mb-4">
-                                            <input class="form-control" required name="email" id="inputEmail" type="email" placeholder="name@example.com" />
-                                            <label for="inputEmail">Email address</label>
-                                        </div>
-                                        
-                                    
-                                        <div class="form-floating mb-4">
-                                            <textarea required name="message" class="form-control" id="inputText" style="height: 100%" placeholder="Type your message" rows="10" ></textarea>
-                                            <label for="inputText">Message</label>
-                                        </div>
+                                            <div class="form-floating mb-4">
+                                                <input class="form-control" required name="email" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <label for="inputEmail">Email address</label>
+                                            </div>
                                             
-                                
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="submit" name="submit" value="Send" class="btn btn-primary btn-block">Send</button>
-                                        </div>
                                         
-                                    </form>
+                                            <div class="form-floating mb-4">
+                                                <textarea required name="message" class="form-control" id="inputText" style="height: 100%" placeholder="Type your message" rows="10" ></textarea>
+                                                <label for="inputText">Message</label>
+                                            </div>
+                                                
+                                    
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button type="submit" name="submit" value="Send" class="btn btn-primary btn-block">Send</button>
+                                            </div>
+                                            
+                                        </form>
                                     </div>
                                 </div>
                             </div>

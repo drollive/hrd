@@ -132,7 +132,7 @@ include("includes/header.php");
                     # To fetch data from table bill
                         $user_id = $_SESSION['auth_user']['user_id'];
                         $dash_query = "SELECT *, SUM(payment_total) AS pay, SUM(bill_total) AS bill
-                                        FROM tenant_payments_view 
+                                        FROM tenant_payments_view
                                         WHERE id={$user_id} 
                                         GROUP BY id";
                         $dash_query_run = mysqli_query($con, $dash_query);

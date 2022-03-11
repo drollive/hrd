@@ -23,7 +23,7 @@ include("includes/navbar.php");
 									<img class="d-block w-100" src="images/home5.jpg" alt="First slide">
 									<div class="carousel-caption d-none d-md-block">
 										<h5>ELYSIUM</h5>
-										<p>Be a good neighbor to have a good neighbors</p><br><br><br><br><br><br>
+										<p>BE A GOOD NEIGHBOR</p><br><br><br><br>
 										<div class="slider-btn">
 											<a class="btn btn-1" href="contact_us.php" role="button">Contact Us</a>
 											<a class="btn btn-1" href="house.php" role="button">Learn More</a>
