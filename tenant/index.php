@@ -156,6 +156,74 @@ include("includes/header.php");
             </div>
         </div>
     </div>
+    
+    <!--BASIC INFORMATION-->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-center">Tenant Basic Information</h5>
+                </div>
+                    <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="" class="table table-bordered table-stripe">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Phone Number</th>
+                                    <th class="text-center">House Address</th>
+                                    <th class="text-center">House Monthly Rent</th>
+                            </thead> 
+
+                            <tbody>
+                            <?php
+                                # To fetch data from tables
+                                $tenant = "SELECT * FROM tenant_user_house WHERE id={$user_id} ";
+                                $tenant_run = mysqli_query($con,$tenant);
+                                $row = mysqli_fetch_array($tenant_run);
+                               
+                                #To check each data or table has data
+                            
+                                if(mysqli_num_rows($tenant_run) > 0 )
+                                {
+                                    
+                                    foreach($tenant_run as $tenant)
+                                    { 
+                                    
+                                        ?>
+                                        <tr>
+                                            <td class="text-center"><?= $tenant['name'] ?></td>
+                                            <td class="text-center"><?= $tenant['email'] ?></td>
+                                            <td class="text-center"><?= $tenant['phone'] ?></td>
+                                            <td class="text-center"><?= $tenant['house_address'] ?></td>
+                                            <td class="text-center">₱<?= number_format($tenant['house_price'], 2) ?></td>
+                                            
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                else
+                                {
+                                    ?>
+                                    <tr>
+                                        <td colspan="6"> No Record Found</td>
+                                    </tr>
+                                    <?php
+                                }
+                                
+                            ?>
+                            </tbody>
+
+                        </table>
+                </div>
+
+
+            </div>
+                
+        </div>
+            
+    </div>
        
 </div>
 
