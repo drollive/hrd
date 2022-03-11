@@ -19,7 +19,6 @@ if(isset($_POST['login_btn']))
     #normal user
     if(mysqli_num_rows($login_query_run) > 0)
     {
-
         $query = "SELECT password FROM users WHERE email='$email'";
         $result = mysqli_query($con,$query);
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC); # fetching an associative array,

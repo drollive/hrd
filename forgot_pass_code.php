@@ -36,7 +36,7 @@ function send_password_reset($get_fname, $get_email, $token)
 
     $email_template ="
         <h2> Hello </h2>
-        <h2> You received this email because you are trying to recover your account</h2>
+        <h2> Recover Password</h2>
         <br></br>
         <a href= 'http://localhost/hrd/password_change.php?token=$token&email=$get_email'> Click this!</a>
     ";
