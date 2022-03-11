@@ -6,7 +6,6 @@ include("includes/navbar.php");
 include ('sendEmail.php');
 ?>
 
-
 <div id="intro" class="bg-image shadow-2-strong">
     <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
             <div class="container mt-4">
@@ -35,7 +34,6 @@ include ('sendEmail.php');
                                                 <label for="inputEmail">Email address</label>
                                             </div>
                                             
-                                        
                                             <div class="form-floating mb-4">
                                                 <textarea required name="message" class="form-control" id="inputText" style="height: 100%" placeholder="Type your message" rows="10" ></textarea>
                                                 <label for="inputText">Message</label>

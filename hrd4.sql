@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2022 at 07:02 PM
+-- Generation Time: Mar 12, 2022 at 12:19 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -135,7 +135,7 @@ INSERT INTO `bills` (`bill_id`, `tenant_id`, `house_rent_pay`, `electric_bill`, 
 (35, 40, 10000, 500, 500, 123, '', 0, '2022-04-13', 11123, '2022-03-09 00:28:23'),
 (36, 43, 0, 0, 900, 0, '', 0, '2022-04-01', 900, '2022-03-09 08:39:14'),
 (37, 43, 0, 0, 0, 0, '', 2, '2023-01-01', 0, '2022-03-09 08:39:53'),
-(38, 40, 0, 0, 1345, 0, '', 1, '2022-03-10', 1345, '2022-03-09 08:42:19'),
+(38, 40, 0, 0, 1345, 0, '', 0, '2022-03-10', 1345, '2022-03-09 08:42:19'),
 (39, 43, 0, 0, 0, 1234, '', 2, '1970-01-01', 1234, '2022-03-09 08:44:43'),
 (40, 43, 8000, 2344, 110, 0, '', 0, '2022-03-10', 10454, '2022-03-09 08:45:51'),
 (41, 47, 9499, 2400, 900, 0, '', 0, '2022-03-12', 12799, '2022-03-09 09:19:16');
@@ -325,7 +325,8 @@ INSERT INTO `logs` (`log_id`, `user`, `log_date`, `action`) VALUES
 (144, 'HRD ELYSIUM', '2022-03-11 17:51:20', 'Updated house 16 by HRD ELYSIUM'),
 (145, 'HRD ELYSIUM', '2022-03-11 17:54:44', 'Updated payment 25 by HRD ELYSIUM'),
 (146, 'HRD ELYSIUM', '2022-03-11 17:54:58', 'Updated payment 26 by HRD ELYSIUM'),
-(147, 'HRD ELYSIUM', '2022-03-11 17:55:18', 'Updated payment 27 by HRD ELYSIUM');
+(147, 'HRD ELYSIUM', '2022-03-11 17:55:18', 'Updated payment 27 by HRD ELYSIUM'),
+(148, 'HRD ELYSIUM', '2022-03-11 19:38:55', 'Updated bill for tenant 40 by HRD ELYSIUM');
 
 -- --------------------------------------------------------
 
@@ -897,7 +898,7 @@ ALTER TABLE `house`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `log_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `payments`
