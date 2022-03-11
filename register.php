@@ -40,7 +40,6 @@ include("includes/navbar.php");
                                         <label for="inputLastName">Last name</label>
                                     </div>
                                 </div>
-
                                 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">

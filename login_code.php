@@ -22,7 +22,7 @@ if(isset($_POST['login_btn']))
 
         $query = "SELECT password FROM users WHERE email='$email'";
         $result = mysqli_query($con,$query);
-        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC); # fetching an associative array,
         $hashed_password = $row['password'];
         if(password_verify($password, $hashed_password))
          {

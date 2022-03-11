@@ -1,5 +1,9 @@
 <div id="layoutSidenav_nav">
-    <?php $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1);?>
+    
+    <?php 
+    # $_SERVER['SCRIPT_NAME'] Returns the path of the current script
+    $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+1);
+    ?>
 
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
@@ -75,7 +79,7 @@
 
             </div>
         </div>
-        <!--To determine the name of user in landlord page -->
+        <!--To determine the name of user -->
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
             <?php if(isset($_SESSION['auth_user'])) : ?>
