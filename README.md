@@ -1,4 +1,7 @@
 # hrd
+
+*** fyi: Project Proposal/idea not mine
+
  School Project
 
 Domain Description
