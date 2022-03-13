@@ -1,6 +1,6 @@
 # hrd
 
-*** fyi: Project Proposal/idea not mine
+*** fyi: Project proposal/idea not mine
 
  School Project
 
